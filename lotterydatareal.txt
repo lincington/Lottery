@@ -1,0 +1,15 @@
+CREATE TABLE `lotterydatareal` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `R1` int DEFAULT NULL,
+  `R2` int DEFAULT NULL,
+  `R3` int DEFAULT NULL,
+  `R4` int DEFAULT NULL,
+  `R5` int DEFAULT NULL,
+  `R6` int DEFAULT NULL,
+  `B1` int DEFAULT NULL,
+  `Date` varchar(255) DEFAULT NULL,
+  `CalTime` varchar(255) DEFAULT NULL,
+  `Ticks` bigint DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `select` (`R1`,`R2`,`R3`,`R4`,`R5`,`R6`,`B1`,`Ticks`)
+) ENGINE=InnoDB AUTO_INCREMENT=11431297 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
