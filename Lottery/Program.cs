@@ -24,11 +24,12 @@ namespace Lottery
 
     internal class Program
     {
+      
         static void Main(string[] args)
         {
             // Get();
             //   Avg();
-           // EvUpdate(new int[] { 10,12,14,19,20,21,15},"25075");
+           // EvUpdate(new int[] { 2,6,9,12,14,30,8},"25076");
 
              // StepOne();
             //Parallel.For(1, 50,(i) => { Test(); });
@@ -96,7 +97,6 @@ namespace Lottery
         public static void Check()
         {
             List<Lotterydata> list =  new List<Lotterydata> ();
-
             string connectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
             string sql = @"INSERT INTO lotterydatanow 
                 (R1, R2, R3, R4, R5, R6, B1, Date, CalTime, Ticks) 
@@ -108,8 +108,11 @@ namespace Lottery
                 {
                     connection.Open();
                     list = connection.Query<Lotterydata>(sqlreal).ToList();
+                    int ALL =0;
                     while (true)
                     {
+                        if (ALL> 2000000) break;
+                        ALL++;
                         var rand = new Random();
                         // 红球号码池 1-33
                         var redBalls = Enumerable.Range(1, 33).ToList();
@@ -166,7 +169,7 @@ namespace Lottery
                                                     (SELECT   {param.R1}  AS R1,  {param.R2} AS  R2,  {param.R3} AS R3, 
                                                     {param.R4} AS R4 ,  {param.R5} AS  R5 ,  {param.R6} AS  R6  ,  {param.B1} AS  B1  FROM   `lotterydatareal`  LIMIT 1 )  ) as  t ";
                                   LotterydataAvg listD = connection.Query<LotterydataAvg>(avgData).ToList().FirstOrDefault();
-                                if (listD.R1 + listD.R2+ listD.R3+ listD.R4+ listD.R5+listD.R6+listD.B1 > 109.5613)
+                                if (listD.R1 + listD.R2+ listD.R3+ listD.R4+ listD.R5+listD.R6+listD.B1 > 109.5532)
                                 { 
                                    int rows = connection.Execute(sql, param);
                                 }
