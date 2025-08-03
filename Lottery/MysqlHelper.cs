@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using MySql.Data.MySqlClient;
+using System.Text.Json;
 
 
 namespace Lottery
@@ -146,7 +147,7 @@ namespace Lottery
                         var avgR5 = list.Where(x => x.R5.HasValue).Average(x => x.R5 ?? 0);
                         var avgR6 = list.Where(x => x.R6.HasValue).Average(x => x.R6 ?? 0);
                         var avgB1 = list.Where(x => x.B1.HasValue).Average(x => x.B1 ?? 0);
-                        LotterydataAvg yyu = Newtonsoft.Json.JsonConvert.DeserializeObject<LotterydataAvg>(File.ReadAllText("avg.json"));
+                        LotterydataAvg yyu = JsonSerializer.Deserialize<LotterydataAvg>(File.ReadAllText("avg.json"));
 
                         double davgR1 = (Math.Abs(avgR1 - yyu.R1));
                         double davgR2 = (Math.Abs(avgR2 - yyu.R2));
@@ -192,7 +193,7 @@ namespace Lottery
 
         public static void Get()
         {
-            List<Root> ad = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Root>>(File.ReadAllText("lottery.json"));
+            List<Root> ad = JsonSerializer.Deserialize<List<Root>>(File.ReadAllText("lottery.json"));
             // 替换为你的 MySQL 连接字符串
             string connectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
             string sql = @"INSERT INTO lotterydatareal (R1, R2, R3, R4, R5, R6, B1, Date, CalTime, Ticks) 

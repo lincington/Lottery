@@ -43,6 +43,95 @@ namespace Lottery
             return conn.ExecuteScalar<int>(sql, ball);
         }
 
+
+        public int Add(Dictionary<int,short> Red , Dictionary<int, short> Bule)
+        {
+            DcbSum dcbSum = new DcbSum();
+
+            dcbSum.RN1 = Red[1];
+            dcbSum.RN2 = Red[2];
+            dcbSum.RN3 = Red[3];
+            dcbSum.RN4 = Red[4]; 
+            dcbSum.RN5 = Red[5];
+            dcbSum.RN6 = Red[6];  
+            dcbSum.RN7 = Red[7];
+            dcbSum.RN8 = Red[8];
+            dcbSum.RN9 = Red[9];
+            dcbSum.RN10 = Red[10];
+            dcbSum.RN11 = Red[11];
+            dcbSum.RN12 = Red[12];
+            dcbSum.RN13 = Red[13];
+            dcbSum.RN14 = Red[14];
+            dcbSum.RN15 = Red[15];  
+            dcbSum.RN16 = Red[16];
+            dcbSum.RN17 = Red[17];
+            dcbSum.RN18 = Red[18];
+            dcbSum.RN19 = Red[19];
+            dcbSum.RN20 = Red[20];
+            dcbSum.RN21 = Red[21];
+            dcbSum.RN22 = Red[22];
+            dcbSum.RN23 = Red[23];
+            dcbSum.RN24 = Red[24];
+            dcbSum.RN25 = Red[25];
+            dcbSum.RN26 = Red[26];
+            dcbSum.RN27 = Red[27];
+            dcbSum.RN28 = Red[28];  
+            dcbSum.RN29 = Red[29];
+            dcbSum.RN30 = Red[30];
+            dcbSum.RN31 = Red[31];
+            dcbSum.RN32 = Red[32];
+            dcbSum.RN33 = Red[33];
+
+
+
+            dcbSum.BN1 = Bule[1];
+            dcbSum.BN2 = Bule[2];
+
+
+            dcbSum.BN3 = Bule[3];
+            dcbSum.BN4 = Bule[4];
+            dcbSum.BN5 = Bule[5];
+            dcbSum.BN6 = Bule[6];
+            dcbSum.BN7 = Bule[7];
+            dcbSum.BN8 = Bule[8];
+            dcbSum.BN9 = Bule[9];
+            dcbSum.BN10 = Bule[10];
+            dcbSum.BN11 = Bule[11];
+            dcbSum.BN12 = Bule[12];
+            dcbSum.BN13 = Bule[13];
+            dcbSum.BN14 = Bule[14];
+            dcbSum.BN15 = Bule[15];
+            dcbSum.BN16 = Bule[16];
+
+            InsertDcbSum(dcbSum);
+
+            return 0; // 这里需要实现具体的插入逻辑，可能需要修改表结构以包含 OpenDate 和 IssueNumber 字段
+
+        }
+        public int InsertDcbSum(DcbSum record)
+        {
+           
+                string sql = @"INSERT INTO dcbsum (
+                        RN1, RN2, RN3, RN4, RN5, RN6, RN7, RN8, RN9, RN10,
+                        RN11, RN12, RN13, RN14, RN15, RN16, RN17, RN18, RN19, RN20,
+                        RN21, RN22, RN23, RN24, RN25, RN26, RN27, RN28, RN29, RN30,
+                        RN31, RN32, RN33,
+                        BN1, BN2, BN3, BN4, BN5, BN6, BN7, BN8, BN9, BN10,
+                        BN11, BN12, BN13, BN14, BN15, BN16)
+                      VALUES (
+                        @RN1, @RN2, @RN3, @RN4, @RN5, @RN6, @RN7, @RN8, @RN9, @RN10,
+                        @RN11, @RN12, @RN13, @RN14, @RN15, @RN16, @RN17, @RN18, @RN19, @RN20,
+                        @RN21, @RN22, @RN23, @RN24, @RN25, @RN26, @RN27, @RN28, @RN29, @RN30,
+                        @RN31, @RN32, @RN33,
+                        @BN1, @BN2, @BN3, @BN4, @BN5, @BN6, @BN7, @BN8, @BN9, @BN10,
+                        @BN11, @BN12, @BN13, @BN14, @BN15, @BN16)";
+
+                using var conn = GetConnection();
+                conn.Open();
+                return conn.ExecuteScalar<int>(sql, record);
+        }
+
+
         // 批量添加双色球记录
         public int AddBatch(IEnumerable<DCB> balls)
         {

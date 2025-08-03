@@ -1,5 +1,9 @@
-﻿using System;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using Org.BouncyCastle.Ocsp;
+using System;
 using System.Collections.Generic;
+using System.Formats.Asn1;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +31,54 @@ namespace Lottery
                     });
                 }
             );
-        }   
+        }
+        
+        static object sd = new object();
+        public static void GetTest2()
+        {
+            var repository = new DCBRepository(ConnectionString);
+            Parallel.For
+            (
+                0, 1000,
+                new ParallelOptions { MaxDegreeOfParallelism = 10 },
+                i =>
+                {
+                    for (int k = 0; k < 100; k++)
+                    {
+                        List<int> Red = new();
+                        List<int> Blue = new();
+                        Dictionary<int, short> RedData = new();
+                        Dictionary<int, short> BlueData = new();
+
+                        DoubleColorBallGenerator.GenerateTickets(3332).ToList().ForEach(ticket =>
+                        {
+                            Red.Add(ticket.R1);
+                            Red.Add(ticket.R2);
+                            Red.Add(ticket.R3);
+                            Red.Add(ticket.R4);
+                            Red.Add(ticket.R5);
+                            Red.Add(ticket.R6);
+                            Blue.Add(ticket.B1);
+                        });
+
+
+                        for (int j = 1; j < 34; j++)
+                        {
+                            short jk = (short)Red.Where(x => x == j).Count();
+                            RedData.Add(j, jk);
+                            if (j < 17)
+                            {
+                                short lk = (short)Blue.Where(x => x == j).Count();
+                                BlueData.Add(j, lk);
+                            }
+                        }
+
+                        lock (sd)
+                        {
+                            repository.Add(RedData, BlueData);
+                        }
+                    }
+                });
+        }
     }
 }
