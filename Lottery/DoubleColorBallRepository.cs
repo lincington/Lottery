@@ -132,6 +132,11 @@ namespace Lottery
         }
 
 
+
+
+  
+
+
         // 批量添加双色球记录
         public int AddBatch(IEnumerable<DCB> balls)
         {

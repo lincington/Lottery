@@ -50,7 +50,7 @@ namespace Lottery
                         Dictionary<int, short> RedData = new();
                         Dictionary<int, short> BlueData = new();
 
-                        DoubleColorBallGenerator.GenerateTickets(3332).ToList().ForEach(ticket =>
+                        DoubleColorBallGenerator.GenerateTickets(3334).ToList().ForEach(ticket =>
                         {
                             Red.Add(ticket.R1);
                             Red.Add(ticket.R2);
