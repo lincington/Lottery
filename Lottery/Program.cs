@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Lottery
 {
-    internal class Program
-    {
-      
+    public class Program
+    {     
         static void Main(string[] args)
         {
-            NpgsqlHelper.GetTest2();
+          
+
+            SQLServerHelper.GetTest2();
         } 
     }
 }
