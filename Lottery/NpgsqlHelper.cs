@@ -12,11 +12,10 @@ namespace Lottery
 {
     internal class NpgsqlHelper
     {
-
-        public static string ConnectionString { get; set; } = "Host=localhost;Port=5432;Database=lottery;Username=postgres;Password=201015";
+        public static string ConnectionString { get; set; } 
+            = "Host=localhost;Port=5432;Database=lottery;Username=postgres;Password=201015";
 
         // PostgreSQL 连接字符串
-  
         public static void GetTest ()
         {
            var repository = new DCBRepository(ConnectionString);
@@ -60,8 +59,6 @@ namespace Lottery
                             Red.Add(ticket.R6);
                             Blue.Add(ticket.B1);
                         });
-
-
                         for (int j = 1; j < 34; j++)
                         {
                             short jk = (short)Red.Where(x => x == j).Count();
