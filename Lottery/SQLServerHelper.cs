@@ -13,7 +13,7 @@ namespace Lottery
     public class SQLServerHelper
     {
         public SQLServerHelper() { }
-        static string StrConnectionString  = "Server=192.168.198.129;Database=Lottery;User Id=sa;Password=Zhouenlai@305;TrustServerCertificate=true;";
+        static string StrConnectionString  = "Server=192.168.122.131;Database=Lottery;User Id=sa;Password=Zhouenlai@305;TrustServerCertificate=true;";
         public static void GetTest2()
         {
             using (IDbConnection db = new SqlConnection(StrConnectionString))
