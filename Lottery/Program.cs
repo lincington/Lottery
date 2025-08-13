@@ -10,7 +10,6 @@ namespace Lottery
     {     
         static void Main(string[] args)
         {
-
             SQLServerHelper.GetTest2();
         } 
     }
