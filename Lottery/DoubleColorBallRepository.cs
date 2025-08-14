@@ -10,9 +10,6 @@ using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace Lottery
 {
-
-    
-
     public class DCBRepository
     {
         private readonly string _connectionString;
