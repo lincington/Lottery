@@ -1,12 +1,6 @@
 ﻿using Dapper;
 using Npgsql;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace Lottery
 {
@@ -127,12 +121,6 @@ namespace Lottery
                 conn.Open();
                 return conn.ExecuteScalar<int>(sql, record);
         }
-
-
-
-
-  
-
 
         // 批量添加双色球记录
         public int AddBatch(IEnumerable<DCB> balls)
@@ -277,55 +265,5 @@ namespace Lottery
         public int Sumdata { get; set; }
     }
  
-    public class DoubleColorBallGenerator
-    {
-        private static readonly ThreadLocal<Random>  randomdd =  new ThreadLocal<Random>(() => new Random(Guid.NewGuid().GetHashCode()));
 
-        // 生成一注双色球号码
-        public static DCB GenerateTicket()
-        {
-
-           var  random = randomdd.Value!;
-            // 红球是1-33选6个不重复的数字
-            using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())
-            {
-                HashSet<int> redBalls = new HashSet<int>();
-                byte[] randomBytes = new byte[4];
-
-                while (redBalls.Count < 6)
-                {
-                    rng.GetBytes(randomBytes);
-                    int num = BitConverter.ToInt32(randomBytes, 0) & int.MaxValue;
-                    num = 1 + (num % 33); // 1-33
-                    redBalls.Add(num);
-                }
-
-                var IredBalls = redBalls.OrderBy(x => x);
-                // 蓝球是1-16选1个数字
-                var blueBall = random.Next(1, 17);
-
-                return new DCB()
-                {
-                    B1 = blueBall,
-                    R1 = IredBalls.ElementAt(0),
-                    R2 = IredBalls.ElementAt(1),
-                    R3 = IredBalls.ElementAt(2),
-                    R4 = IredBalls.ElementAt(3),
-                    R5 = IredBalls.ElementAt(4),
-                    R6 = IredBalls.ElementAt(5),
-
-                    Davg = redBalls.Average(),
-                    Sumdata = redBalls.Sum(),
-                };
-            }
-        }
-
-        // 生成多注双色球号码
-        public  static IEnumerable<DCB>  GenerateTickets(int count)
-        {
-            return Enumerable.Range(0, count)
-                .Select(_ => GenerateTicket())
-                .ToArray();
-        }
-    }
 }

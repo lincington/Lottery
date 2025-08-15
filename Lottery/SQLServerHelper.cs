@@ -16,17 +16,18 @@ namespace Lottery
         static string StrConnectionString  = "Server=localhost;Database=Lottery;User Id=sa;Password=Zhouenlai@305;TrustServerCertificate=true;";
         public static void GetTest2()
         {
-            using (IDbConnection db = new SqlConnection(StrConnectionString))
-            {
-                try
-                {
-                    db.Open();
-                }
-                catch (Exception  ex)
-                {
-                    throw new Exception("连接数据库失败，请检查连接字符串", ex);
-                }
-            }
+            Parallel.For
+          (
+              0, 1000,
+              new ParallelOptions { MaxDegreeOfParallelism = 10 },
+              i =>
+              {
+                  for (int k = 0; k < 100; k++)
+                  {
+                   var  datalist =   DoubleColorBallGenerator.GenerateSQLTickets(3339).ToList();
+                      BulkInsertLotteries(datalist);
+                  }
+              });
         }
 
         public void InsertLottery(Lottery lottery)
@@ -53,7 +54,7 @@ namespace Lottery
             }
         }
 
-        public void BulkInsertLotteries(IEnumerable<Lottery> lotteries)
+        public  static void BulkInsertLotteries(IEnumerable<Lottery> lotteries)
         {
             using (var connection = new SqlConnection(StrConnectionString))
             {
@@ -96,8 +97,6 @@ namespace Lottery
                 }
             }
         }
-
-    
         public void UpdateLottery( )
         {
          
@@ -136,8 +135,9 @@ namespace Lottery
             
         }
 
-
     }
+
+
 
     public class Lottery
     {
@@ -158,4 +158,6 @@ namespace Lottery
         public int R6 { get; set; }
         public int B1 { get; set; }
     }
+
+
 }
