@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="136*"/>
+            <RowDefinition Height="299*"/>
+        </Grid.RowDefinitions>
 
+        <Label Content="{Binding WindowTitle}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Height="75" Width="441"/>
+        <Button Content="Click Me" Command="{Binding ShowMessageCommand}" Grid.Row="1"/>
     </Grid>
 </Window>
