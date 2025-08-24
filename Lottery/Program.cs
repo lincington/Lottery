@@ -1,10 +1,4 @@
-﻿using Dapper;
-using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Common;
-using System.Data.SqlTypes;
-using System.Threading.Tasks;
-
-namespace Lottery
+﻿namespace Lottery
 {
     public class Program
     {     
