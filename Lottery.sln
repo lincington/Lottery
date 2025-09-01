@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottery", "Lottery\Lottery.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotteryWPF", "LotteryWPF\LotteryWPF.csproj", "{9E5B3A7C-C5A8-4C68-B4F6-34FA8E6BD460}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D525020A-D7A0-4232-B791-D31B43C2DC06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9E5B3A7C-C5A8-4C68-B4F6-34FA8E6BD460}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E5B3A7C-C5A8-4C68-B4F6-34FA8E6BD460}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E5B3A7C-C5A8-4C68-B4F6-34FA8E6BD460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D525020A-D7A0-4232-B791-D31B43C2DC06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D525020A-D7A0-4232-B791-D31B43C2DC06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D525020A-D7A0-4232-B791-D31B43C2DC06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D525020A-D7A0-4232-B791-D31B43C2DC06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

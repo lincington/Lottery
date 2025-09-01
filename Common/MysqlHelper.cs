@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 using System.Text.Json;
 
 
-namespace Lottery
+namespace Common
 {
     public class Root
     {

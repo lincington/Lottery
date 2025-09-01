@@ -3,16 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ScottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
         xmlns:local="clr-namespace:LotteryWPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="136*"/>
-            <RowDefinition Height="299*"/>
+            <RowDefinition Height="45" />
+            <RowDefinition Height="900" />
         </Grid.RowDefinitions>
-
-        <Label Content="{Binding WindowTitle}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Height="75" Width="441"/>
-        <Button Content="Click Me" Command="{Binding ShowMessageCommand}" Grid.Row="1"/>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <Button  Width="95"   Click="Button_Click">R1</Button>
+                <Button  Width="95"   Click="Button_Click">R2</Button>
+                <Button  Width="95"   Click="Button_Click">R3</Button>
+                <Button  Width="95"   Click="Button_Click">R4</Button>
+                <Button  Width="95"   Click="Button_Click">R5</Button>
+                <Button  Width="95"   Click="Button_Click">R6</Button>
+                <Button  Width="95"   Click="Button_Click">B1</Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1"  >
+            <ScrollViewer   VerticalScrollBarVisibility="Visible"   >
+                <StackPanel Orientation="Vertical" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <ScottPlot:WpfPlot x:Name="WpfPlot1" Height="300" ></ScottPlot:WpfPlot>
+                    <ScottPlot:WpfPlot x:Name="WpfPlot2" Height="300" ></ScottPlot:WpfPlot>
+                    <ScottPlot:WpfPlot x:Name="WpfPlot3" Height="300" ></ScottPlot:WpfPlot>
+                    <ScottPlot:WpfPlot x:Name="WpfPlot4" Height="300" ></ScottPlot:WpfPlot>
+                    <ScottPlot:WpfPlot x:Name="WpfPlot5" Height="300" ></ScottPlot:WpfPlot>
+                    <ScottPlot:WpfPlot x:Name="WpfPlot6" Height="300" ></ScottPlot:WpfPlot>
+                    <ScottPlot:WpfPlot x:Name="WpfPlot7" Height="300" ></ScottPlot:WpfPlot>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Window>

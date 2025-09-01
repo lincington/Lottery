@@ -1,4 +1,6 @@
-﻿namespace Lottery
+﻿using Common;
+
+namespace Lottery
 {
     public class Program
     {     

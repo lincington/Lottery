@@ -1,19 +1,14 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
-using System.Data;
-
-
-using MathNet.Numerics.Distributions;
 using MathNet.Numerics.Statistics;
-using ScottPlot;
 
-namespace Lottery
+namespace Common
 {
     public class SQLServerHelper
     {
         public SQLServerHelper() {
         }
-        static string StrConnectionString  = "Server=192.168.122.131,1433;Database=Lottery;User Id=sa;Password=Zhouenlai@305;" +
+        static string StrConnectionString  = "Server=192.168.122.129,1433;Database=Lottery;User Id=sa;Password=Zhouenlai@305;" +
             "TrustServerCertificate=true;Pooling=true;Max Pool Size=30000;Min Pool Size=300;Connection Lifetime=300;packet size=1000";
         public static void GetTest2()
         {
@@ -54,7 +49,7 @@ namespace Lottery
                 return connection.Query<Lottery>(sql).ToList();
             }
         }
-
+     
         public  static void BulkInsertLotteries(IEnumerable<Lottery> lotteries)
         {
             try
@@ -143,9 +138,6 @@ namespace Lottery
         }
 
     }
-
-
-
     public class Lottery
     {
         public int ID { get; set; }
