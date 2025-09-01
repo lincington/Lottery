@@ -1,5 +1,5 @@
 ﻿
-namespace Lottery
+namespace Common 
 {
     public class DoubleColorBallGenerator
     {
@@ -74,7 +74,7 @@ namespace Lottery
                 // 蓝球是1-16选1个数字
                 var blueBall = random.Next(1, 17);
                 NO++;
-                if (NO > 3339)
+                if (NO > 3344)
                 {
                     NO = 0;
                 }

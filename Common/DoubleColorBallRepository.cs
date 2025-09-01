@@ -2,7 +2,7 @@
 using Npgsql;
 using System.Data;
 
-namespace Lottery
+namespace Common
 {
     public class DCBRepository
     {

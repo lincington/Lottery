@@ -1,30 +1,26 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
-using System.Data;
-
-
-using MathNet.Numerics.Distributions;
 using MathNet.Numerics.Statistics;
-using ScottPlot;
 
-namespace Lottery
+namespace Common
 {
     public class SQLServerHelper
     {
         public SQLServerHelper() {
         }
-        static string StrConnectionString  = "Server=localhost;Database=Lottery;User Id=sa;Password=Zhouenlai@305;TrustServerCertificate=true;";
+        static string StrConnectionString  = "Server=192.168.122.129,1433;Database=Lottery;User Id=sa;Password=Zhouenlai@305;" +
+            "TrustServerCertificate=true;Pooling=true;Max Pool Size=30000;Min Pool Size=300;Connection Lifetime=300;packet size=1000";
         public static void GetTest2()
         {
-            Parallel.For
+          Parallel.For
           (
               0, 1000,
-              new ParallelOptions { MaxDegreeOfParallelism = 10 },
+              new ParallelOptions { MaxDegreeOfParallelism = 3 },
               i =>
               {
                   for (int k = 0; k < 100; k++)
                   {
-                   var  datalist =   DoubleColorBallGenerator.GenerateSQLTickets(3339).ToList();
+                     var  datalist =   DoubleColorBallGenerator.GenerateSQLTickets(3342).ToList();
                       BulkInsertLotteries(datalist);
                   }
               });
@@ -53,18 +49,24 @@ namespace Lottery
                 return connection.Query<Lottery>(sql).ToList();
             }
         }
-
+     
         public  static void BulkInsertLotteries(IEnumerable<Lottery> lotteries)
         {
-            using (var connection = new SqlConnection(StrConnectionString))
+            try
             {
-                string sql = @"INSERT INTO lottery 
+                using (var connection = new SqlConnection(StrConnectionString))
+                {
+                    string sql = @"INSERT INTO lottery 
                       (ID, No, Date, FR1, FR2, FR3, FR4, FR5, FR6, R1, R2, R3, R4, R5, R6, B1) 
                       VALUES 
                       (@ID, @No, @Date, @FR1, @FR2, @FR3, @FR4, @FR5, @FR6, 
                        @R1, @R2, @R3, @R4, @R5, @R6, @B1)";
-                connection.Open();
-                connection.Execute(sql, lotteries);
+                    connection.Open();
+                    connection.Execute(sql, lotteries);
+                }
+            }
+            catch (Exception )
+            {
             }
         }
 
@@ -136,9 +138,6 @@ namespace Lottery
         }
 
     }
-
-
-
     public class Lottery
     {
         public int ID { get; set; }
