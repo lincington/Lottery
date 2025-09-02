@@ -8,7 +8,7 @@ namespace Common
     {
         public SQLServerHelper() {
         }
-        static string StrConnectionString  = "Server=192.168.122.129,1433;Database=Lottery;User Id=sa;Password=Zhouenlai@305;" +
+        static string StrConnectionString  = "Server=192.168.1.70,1433;Database=Lottery;User Id=sa;Password=Zhouenlai@305;" +
             "TrustServerCertificate=true;Pooling=true;Max Pool Size=30000;Min Pool Size=300;Connection Lifetime=300;packet size=1000";
         public static void GetTest2()
         {
@@ -20,7 +20,7 @@ namespace Common
               {
                   for (int k = 0; k < 100; k++)
                   {
-                     var  datalist =   DoubleColorBallGenerator.GenerateSQLTickets(3342).ToList();
+                     var  datalist =   DoubleColorBallGenerator.GenerateSQLTickets(3347).ToList();
                       BulkInsertLotteries(datalist);
                   }
               });
