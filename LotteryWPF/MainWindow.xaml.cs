@@ -1,15 +1,10 @@
 ﻿using Common;
 using ScottPlot;
 using ScottPlot.WPF;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Color = ScottPlot.Color;
 using Colors = ScottPlot.Colors;
-
-
-
 
 namespace LotteryWPF
 {
@@ -18,12 +13,10 @@ namespace LotteryWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-
         /// <summary>
         /// 正态分布类
         /// </summary>
-        StandardDistribution standardDistribution1 = null;
-
+        StandardDistribution? standardDistribution1 = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -104,15 +97,16 @@ namespace LotteryWPF
             WpfPlot.Refresh();
         }
 
+
+        SQLServerHelper sqliteHelper = new SQLServerHelper();
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Button button  = sender as Button;
+            Button? button  = sender as Button;
 
             switch (button.Content)
             {
                 case "R1":
                     {
-                        SqliteHelper sqliteHelper = new SqliteHelper();
                         List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.R1).ToList();
                         //正泰分布类，传入样本数据和要分组的个数
                         standardDistribution1 = new StandardDistribution(doubles, 33 - 6);
@@ -123,7 +117,6 @@ namespace LotteryWPF
 
                 case "R2":
                     {
-                        SqliteHelper sqliteHelper = new SqliteHelper();
                         List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.R2).ToList();
                         //正泰分布类，传入样本数据和要分组的个数
                         standardDistribution1 = new StandardDistribution(doubles, 33-6);
@@ -133,9 +126,7 @@ namespace LotteryWPF
                     break;
                 case "R3":
                     {
-                        SqliteHelper sqliteHelper = new SqliteHelper();
                         List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.R3).ToList();
-
                         //正泰分布类，传入样本数据和要分组的个数
                         standardDistribution1 = new StandardDistribution(doubles, 33 - 6);
                         //显示曲线方法
@@ -144,9 +135,7 @@ namespace LotteryWPF
                     break;
                 case "R4":
                     {
-                        SqliteHelper sqliteHelper = new SqliteHelper();
                         List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.R4).ToList();
-
                         //正泰分布类，传入样本数据和要分组的个数
                         standardDistribution1 = new StandardDistribution(doubles, 33 - 6);
                         //显示曲线方法
@@ -155,9 +144,7 @@ namespace LotteryWPF
                     break;
                 case "R5":
                     {
-                        SqliteHelper sqliteHelper = new SqliteHelper();
                         List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.R5).ToList();
-                
                         //正泰分布类，传入样本数据和要分组的个数
                         standardDistribution1 = new StandardDistribution(doubles, 33 - 6);
                         //显示曲线方法
@@ -166,7 +153,7 @@ namespace LotteryWPF
                     break;
                 case "R6":
                     {
-                        SqliteHelper sqliteHelper = new SqliteHelper();
+                        
                         List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.R6).ToList();
            
                         //正泰分布类，传入样本数据和要分组的个数
@@ -177,8 +164,10 @@ namespace LotteryWPF
                     break;
                 case "B1":
                     {
-                        SqliteHelper sqliteHelper = new SqliteHelper();
+                        
                         List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.B1).ToList();
+
+                        doubles.Sort();
                         //正泰分布类，传入样本数据和要分组的个数
                         standardDistribution1 = new StandardDistribution(doubles, 16);
                         //显示曲线方法
@@ -189,4 +178,8 @@ namespace LotteryWPF
             }
         }
     }
+
+
+  
+
 }

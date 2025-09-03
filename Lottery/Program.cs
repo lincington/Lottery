@@ -6,7 +6,20 @@ namespace Lottery
     {     
         static void Main(string[] args)
         {
-            SQLServerHelper.GetTest2();
+            int a = 0;
+            while (true)
+            {
+                a++;
+                try
+                {
+                     SQLServerHelper.GetAllLotteriesAvg(a);
+                    Console.WriteLine(a);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }          
+            }
         } 
     }
 }

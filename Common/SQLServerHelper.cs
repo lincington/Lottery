@@ -8,7 +8,7 @@ namespace Common
     {
         public SQLServerHelper() {
         }
-        static string StrConnectionString  = "Server=192.168.1.70,1433;Database=Lottery;User Id=sa;Password=Zhouenlai@305;" +
+        static string StrConnectionString  = "Server=localhost;Database=Lottery;User Id=sa;Password=Zhouenlai@305;" +
             "TrustServerCertificate=true;Pooling=true;Max Pool Size=30000;Min Pool Size=300;Connection Lifetime=300;packet size=1000";
         public static void GetTest2()
         {
@@ -44,12 +44,47 @@ namespace Common
         {
             using (var connection = new SqlConnection(StrConnectionString))
             {
-                string sql = "SELECT * FROM lottery";
+                string sql = "SELECT * FROM lotteryreal";
                 connection.Open();
                 return connection.Query<Lottery>(sql).ToList();
             }
         }
-     
+
+
+        public static  bool GetAllLotteriesAvg (int i)
+        {
+            using (var connection = new SqlConnection(StrConnectionString))
+            {
+                string sql = $@"SELECT 
+                ROUND(AVG(FR1 * 1.0), 6)  as FR1 ,
+                ROUND(AVG(FR2 * 1.0), 6)  as FR2,
+                ROUND(AVG(FR3 * 1.0), 6)  as FR3,
+                ROUND(AVG(FR4 * 1.0), 6)  as FR4,
+                ROUND(AVG(FR5 * 1.0), 6)  as FR5,
+                ROUND(AVG(FR6 * 1.0), 6)  as FR6,  
+                ROUND(AVG(R1 * 1.0), 6)  as R1,
+                ROUND(AVG(R2 * 1.0), 6)  as R2,
+                ROUND(AVG(R3 * 1.0), 6)  as R3,
+                ROUND(AVG(R4 * 1.0), 6)  as R4,
+                ROUND(AVG(R5 * 1.0), 6)  as R5,
+                ROUND(AVG(R6 * 1.0), 6)  as R6,
+                ROUND(AVG(B1 * 1.0), 6)  as B1   
+                from Lottery  WHERE id  < 3350*{i+1}  and  id > 3350*{i}";
+                connection.Open();
+
+                LotteryAvg lotteryAvg = connection.Query<LotteryAvg>(sql).FirstOrDefault();
+                string sqlinsert= @"
+            INSERT INTO LotteryAvg
+            (FR1, FR2, FR3, FR4, FR5, FR6, R1, R2, R3, R4, R5, R6, B1)
+            VALUES
+            (@FR1, @FR2, @FR3, @FR4, @FR5, @FR6, @R1, @R2, @R3, @R4, @R5, @R6, @B1);";
+
+                connection.Execute(sqlinsert, lotteryAvg);
+                return true ;
+            }
+        }
+
+
         public  static void BulkInsertLotteries(IEnumerable<Lottery> lotteries)
         {
             try
@@ -158,5 +193,22 @@ namespace Common
         public int B1 { get; set; }
     }
 
-
+    public class LotteryAvg
+    {
+        public int ID { get; set; }
+    
+        public double  FR1 { get; set; }
+        public double  FR2 { get; set; }
+        public double  FR3 { get; set; }
+        public double  FR4 { get; set; }
+        public double  FR5 { get; set; }
+        public double  FR6 { get; set; }
+        public double  R1 { get; set; }
+        public double  R2 { get; set; }
+        public double  R3 { get; set; }
+        public double  R4 { get; set; }
+        public double  R5 { get; set; }
+        public double  R6 { get; set; }
+        public double  B1 { get; set; }
+    }
 }

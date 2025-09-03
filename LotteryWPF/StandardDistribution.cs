@@ -117,5 +117,36 @@ namespace LotteryWPF
             }
 
         }
+
+
+    public class GaussianPlot
+    {
+        public static void PlotGaussian(double[] data)
+        {
+            var (mean, stdDev) = Fit(data);
+
+            // 生成 x 轴数据
+            double min = data.Min();
+            double max = data.Max();
     
+        }
+
+        // 拟合均值和标准差
+        public static (double Mean, double StdDev) Fit(double[] data)
+        {
+            double mean = data.Average();
+            double variance = data.Select(x => Math.Pow(x - mean, 2)).Average();
+            double stdDev = Math.Sqrt(variance);
+            return (mean, stdDev);
+        }
+
+        // 高斯分布概率密度函数
+        public static double GaussianPdf(double x, double mean, double stdDev)
+        {
+            double exponent = -Math.Pow(x - mean, 2) / (2 * Math.Pow(stdDev, 2));
+            return (1.0 / (stdDev * Math.Sqrt(2 * Math.PI))) * Math.Exp(exponent);
+        }
+    }
+
+
 }
