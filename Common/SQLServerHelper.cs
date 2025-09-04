@@ -50,6 +50,26 @@ namespace Common
             }
         }
 
+        public List<double> GetAllLotteriesSum()
+        {
+            using (var connection = new SqlConnection(StrConnectionString))
+            {
+                string sql = "SELECT   FR1+FR2 +FR3+FR4+FR5+FR6  AS SUMDATA  FROM lotteryreal";
+                connection.Open();
+                return connection.Query<double>(sql).ToList();
+            }
+        }
+     
+
+        //public List<LotteryAvg> GetAllLotteries()
+        //{
+        //    using (var connection = new SqlConnection(StrConnectionString))
+        //    {
+        //        string sql = "SELECT FR1+FR2 +FR3+FR4+FR5+FR6  AS SUMDATA  FROM LotteryAvg";
+        //        connection.Open();
+        //        return connection.Query<LotteryAvg>(sql).ToList();
+        //    }
+        //}
 
         public static  bool GetAllLotteriesAvg (int i)
         {

@@ -174,7 +174,18 @@ namespace LotteryWPF
                         PlotData(standardDistribution1, WpfPlot7);
                     }
                     break;
+                case "SUM":
+                    {
 
+                        List<double> doubles = sqliteHelper.GetAllLotteriesSum( );
+
+                        doubles.Sort();
+                        //正泰分布类，传入样本数据和要分组的个数
+                        standardDistribution1 = new StandardDistribution(doubles, 33);
+                        //显示曲线方法
+                        PlotData(standardDistribution1, WpfPlot8);
+                    }
+                    break;
             }
         }
     }

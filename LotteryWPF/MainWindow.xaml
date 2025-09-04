@@ -25,6 +25,7 @@
                 <Button  Width="95"   Click="Button_Click">R5</Button>
                 <Button  Width="95"   Click="Button_Click">R6</Button>
                 <Button  Width="95"   Click="Button_Click">B1</Button>
+                <Button  Width="95"   Click="Button_Click">SUM</Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1"  >
@@ -37,6 +38,7 @@
                     <ScottPlot:WpfPlot x:Name="WpfPlot5" Height="300" ></ScottPlot:WpfPlot>
                     <ScottPlot:WpfPlot x:Name="WpfPlot6" Height="300" ></ScottPlot:WpfPlot>
                     <ScottPlot:WpfPlot x:Name="WpfPlot7" Height="300" ></ScottPlot:WpfPlot>
+                    <ScottPlot:WpfPlot x:Name="WpfPlot8" Height="300" ></ScottPlot:WpfPlot>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

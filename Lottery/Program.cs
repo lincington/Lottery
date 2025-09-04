@@ -6,7 +6,7 @@ namespace Lottery
     {     
         static void Main(string[] args)
         {
-            int a = 0;
+            int a = 4160;
             while (true)
             {
                 a++;
