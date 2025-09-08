@@ -1,6 +1,7 @@
 ﻿using Common;
 using ScottPlot;
 using ScottPlot.WPF;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Color = ScottPlot.Color;
@@ -99,7 +100,7 @@ namespace LotteryWPF
 
 
         SQLServerHelper sqliteHelper = new SQLServerHelper();
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void  Button_Click(object sender, RoutedEventArgs e)
         {
             Button? button  = sender as Button;
 
@@ -107,9 +108,9 @@ namespace LotteryWPF
             {
                 case "R1":
                     {
-                        List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.R1).ToList();
+                        List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.FR1).ToList();
                         //正泰分布类，传入样本数据和要分组的个数
-                        standardDistribution1 = new StandardDistribution(doubles, 33 - 6);
+                        standardDistribution1 = new StandardDistribution(doubles, 33);
                         //显示曲线方法
                         PlotData(standardDistribution1, WpfPlot1);
                     }
@@ -117,36 +118,36 @@ namespace LotteryWPF
 
                 case "R2":
                     {
-                        List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.R2).ToList();
+                        List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.FR2).ToList();
                         //正泰分布类，传入样本数据和要分组的个数
-                        standardDistribution1 = new StandardDistribution(doubles, 33-6);
+                        standardDistribution1 = new StandardDistribution(doubles, 33);
                         //显示曲线方法
                         PlotData(standardDistribution1, WpfPlot2);
                     }
                     break;
                 case "R3":
                     {
-                        List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.R3).ToList();
+                        List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.FR3).ToList();
                         //正泰分布类，传入样本数据和要分组的个数
-                        standardDistribution1 = new StandardDistribution(doubles, 33 - 6);
+                        standardDistribution1 = new StandardDistribution(doubles, 33 );
                         //显示曲线方法
                         PlotData(standardDistribution1, WpfPlot3);
                     }
                     break;
                 case "R4":
                     {
-                        List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.R4).ToList();
+                        List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.FR4).ToList();
                         //正泰分布类，传入样本数据和要分组的个数
-                        standardDistribution1 = new StandardDistribution(doubles, 33 - 6);
+                        standardDistribution1 = new StandardDistribution(doubles, 33);
                         //显示曲线方法
                         PlotData(standardDistribution1, WpfPlot4);
                     }
                     break;
                 case "R5":
                     {
-                        List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.R5).ToList();
+                        List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.FR5).ToList();
                         //正泰分布类，传入样本数据和要分组的个数
-                        standardDistribution1 = new StandardDistribution(doubles, 33 - 6);
+                        standardDistribution1 = new StandardDistribution(doubles, 33);
                         //显示曲线方法
                         PlotData(standardDistribution1, WpfPlot5);
                     }
@@ -154,10 +155,10 @@ namespace LotteryWPF
                 case "R6":
                     {
                         
-                        List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.R6).ToList();
+                        List<double> doubles = sqliteHelper.GetAllLotteries().Select(x => (double)x.FR6).ToList();
            
                         //正泰分布类，传入样本数据和要分组的个数
-                        standardDistribution1 = new StandardDistribution(doubles, 33 - 6);
+                        standardDistribution1 = new StandardDistribution(doubles, 33);
                         //显示曲线方法
                         PlotData(standardDistribution1, WpfPlot6);
                     }
@@ -186,8 +187,36 @@ namespace LotteryWPF
                         PlotData(standardDistribution1, WpfPlot8);
                     }
                     break;
+
+                case "Min":
+                    {
+
+                       List<double> doubles =  sqliteHelper.GetAllAsync().Select(x => (double)x.MinM).ToList();
+
+                        doubles.Sort();
+                        //正泰分布类，传入样本数据和要分组的个数
+                        standardDistribution1 = new StandardDistribution(doubles, 1000);
+                        //显示曲线方法
+                        PlotData(standardDistribution1, WpfPlot9);
+                    }
+                    break;
+
+                case "Max":
+                    {
+
+                        List<double> doubles = sqliteHelper.GetAllAsync().Select(x => (double)x.MaxM).ToList();
+
+                        doubles.Sort();
+                        //正泰分布类，传入样本数据和要分组的个数
+                        standardDistribution1 = new StandardDistribution(doubles, 1000);
+                        //显示曲线方法
+                        PlotData(standardDistribution1, WpfPlot10);
+                    }
+                    break;
             }
         }
+
+     
     }
 
 

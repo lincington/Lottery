@@ -1,25 +1,18 @@
 ﻿using Common;
+using System.Threading.Tasks;
 
 namespace Lottery
 {
     public class Program
     {     
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            int a = 4160;
-            while (true)
-            {
-                a++;
-                try
-                {
-                     SQLServerHelper.GetAllLotteriesAvg(a);
-                    Console.WriteLine(a);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }          
-            }
-        } 
+
+           string json =  File.ReadAllText("A.txt").Replace("\r\n","\t");
+
+            string[] jkl = json.Trim().Split('\t');
+
+            Console.ReadLine();
+        }
     }
 }
