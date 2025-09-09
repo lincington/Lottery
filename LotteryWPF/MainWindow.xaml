@@ -14,7 +14,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="45" />
-            <RowDefinition Height="900" />
+            <RowDefinition Height="1000" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal">
@@ -25,6 +25,10 @@
                 <Button  Width="95"   Click="Button_Click">R5</Button>
                 <Button  Width="95"   Click="Button_Click">R6</Button>
                 <Button  Width="95"   Click="Button_Click">B1</Button>
+                <Button  Width="95"   Click="Button_Click">SUM</Button>
+
+                <Button  Width="95"   Click="Button_Click">Min</Button>
+                <Button  Width="95"   Click="Button_Click">Max</Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1"  >
@@ -36,7 +40,11 @@
                     <ScottPlot:WpfPlot x:Name="WpfPlot4" Height="300" ></ScottPlot:WpfPlot>
                     <ScottPlot:WpfPlot x:Name="WpfPlot5" Height="300" ></ScottPlot:WpfPlot>
                     <ScottPlot:WpfPlot x:Name="WpfPlot6" Height="300" ></ScottPlot:WpfPlot>
+                    <ScottPlot:WpfPlot x:Name="WpfPlot8" Height="300" ></ScottPlot:WpfPlot>
                     <ScottPlot:WpfPlot x:Name="WpfPlot7" Height="300" ></ScottPlot:WpfPlot>
+
+                    <ScottPlot:WpfPlot x:Name="WpfPlot9" Height="300" ></ScottPlot:WpfPlot>
+                    <ScottPlot:WpfPlot x:Name="WpfPlot10" Height="300" ></ScottPlot:WpfPlot>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
