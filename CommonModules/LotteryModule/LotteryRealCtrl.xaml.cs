@@ -23,6 +23,7 @@ namespace CommonModules.LotteryModule
         public LotteryRealCtrl()
         {
             InitializeComponent();
+            this.DataContext = new LotteryRealCtrlViewModel();  
         }
     }
 }

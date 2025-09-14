@@ -51,7 +51,7 @@ namespace Common
                 .ToArray();
         }
         // 生成一注双色球号码
-        static int ID = 139060120;
+        static int ID = 1;
         static int NO  = 0;
         public static Lottery GenerateSQLTicket()
         {
