@@ -1,4 +1,6 @@
 ﻿using Common.Contracts;
+using Common.Models;
+using CommonModules.LotteryModule;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
@@ -20,12 +22,10 @@ namespace CommonLib
         private void DiscoverModules()
         {
             // 通过反射或手动注册发现模块
-            var userModule = _serviceProvider.GetRequiredService<IModule>();
-            AvailableModules.Add(userModule);
-
-            // 可以添加更多模块
-            // var productModule = _serviceProvider.GetRequiredService<ProductModule>();
-            // AvailableModules.Add(productModule);
+            var LotteryCtrl = _serviceProvider.GetRequiredService<LotteryCtrlViewModel>();
+            AvailableModules.Add(LotteryCtrl);
+            var LotteryRealCtrl = _serviceProvider.GetRequiredService<LotteryRealCtrlViewModel>();
+            AvailableModules.Add(LotteryRealCtrl);
         }
 
         public ObservableObject? GetModuleViewModel(string moduleName)

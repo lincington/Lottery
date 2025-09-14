@@ -43,10 +43,13 @@ namespace LotteryWPF
             // 可以注册其他服务
             // services.AddSingleton<IMyService, MyService>();
             // 模块注册
+         
 
             services.AddTransient<IModule, LotteryCtrlViewModel>();
             services.AddTransient<LotteryCtrlViewModel>();
 
+            services.AddTransient<IModule, LotteryRealCtrlViewModel>();
+            services.AddTransient<LotteryRealCtrlViewModel>();
 
 
             //// 其他模块

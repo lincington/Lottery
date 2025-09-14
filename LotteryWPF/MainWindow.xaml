@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ScottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
-        xmlns:modules ="clr-namespace:CommonModules.UserModule;assembly=CommonModules"
         xmlns:lottery ="clr-namespace:CommonModules.LotteryModule;assembly=CommonModules"
         xmlns:local="clr-namespace:LotteryWPF"
         mc:Ignorable="d"
@@ -35,9 +34,11 @@
 
         <ContentControl Grid.Column="1" Content="{Binding CurrentModule}">
             <ContentControl.Resources>
-           
                 <DataTemplate DataType="{x:Type lottery:LotteryCtrlViewModel}">
                     <lottery:LotteryCtrl/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type lottery:LotteryRealCtrlViewModel}">
+                    <lottery:LotteryRealCtrl/>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
