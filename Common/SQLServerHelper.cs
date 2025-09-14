@@ -12,7 +12,7 @@ namespace Common
     {
         public SQLServerHelper() {
         }
-        static string StrConnectionString  = "Server=localhost;Database=Lottery;User Id=sa;Password=Zhouenlai@305;" +
+        static string StrConnectionString  = "Server=192.168.1.70,1433; Database=Lottery;User Id=sa;Password=Zhouenlai@305;" +
             "TrustServerCertificate=true;Pooling=true;Max Pool Size=30000;Min Pool Size=300;Connection Lifetime=300;packet size=1000";
         public static void GetTest2()
         {
@@ -54,18 +54,9 @@ namespace Common
             }
         }
 
-        //public List<double> GetAllLotteriesSum()
-        //{
-        //    using (var connection = new SqlConnection(StrConnectionString))
-        //    {
-        //        string sql = "SELECT   FR1+FR2 +FR3+FR4+FR5+FR6  AS SUMDATA  FROM lotteryreal";
-        //        connection.Open();
-        //        return connection.Query<double>(sql).ToList();
-        //    }
-        //}
+     
         public List<double> GetAllLotteriesSum()
         {
-
             List<double> doubles = new List<double>();
             using (var connection = new SqlConnection(StrConnectionString))
             {
@@ -77,11 +68,9 @@ namespace Common
                     doubles.AddRange(connection.Query<double>(sql).ToList());
                 }
             }
-
             return doubles;
         }
 
-        // 插入单条记录并返回ID
         public int Insert(LotteryMatrix matrix)
         {
             using (IDbConnection connection = new SqlConnection(StrConnectionString))
