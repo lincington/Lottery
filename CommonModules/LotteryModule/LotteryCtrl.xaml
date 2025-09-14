@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="LotteryWPF.LotteryCtrl"
+﻿<UserControl x:Class="CommonModules.LotteryModule.LotteryCtrl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LotteryWPF"
+             xmlns:local="clr-namespace:CommonModules.LotteryModule"
              mc:Ignorable="d" 
              xmlns:ScottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
              d:DesignHeight="450" d:DesignWidth="800">

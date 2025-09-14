@@ -1,19 +1,13 @@
 ﻿using Common;
+using CommonLib;
 using ScottPlot;
 using ScottPlot.WPF;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-
-using System.Windows.Media;
 using Color = ScottPlot.Color;
 using Colors = ScottPlot.Colors;
 
-namespace LotteryWPF
+namespace CommonModules.LotteryModule
 {
     /// <summary>
     /// LotteryCtrl.xaml 的交互逻辑

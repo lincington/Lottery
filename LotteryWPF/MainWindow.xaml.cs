@@ -14,6 +14,10 @@ namespace LotteryWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-   
+        public MainWindow(MainWindowViewModel viewModel)
+        {
+            InitializeComponent();
+            DataContext = viewModel;
+        }
     }
 }

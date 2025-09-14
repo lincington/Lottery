@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 
-namespace LotteryWPF
+namespace CommonLib
 {
     public class ModuleManager
     {

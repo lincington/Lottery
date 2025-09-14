@@ -1,12 +1,15 @@
 ﻿using Common.Contracts;
 using CommunityToolkit.Mvvm.ComponentModel;
+using LotteryWPF;
+using Microsoft.Extensions.DependencyInjection;
+using System.Windows.Controls;
 
-namespace LotteryWPF
+namespace CommonLib
 {
     public class NavigationService : INavigationService
     {
         private ObservableObject? _currentViewModel;
-
+ 
         public ObservableObject? CurrentViewModel
         {
             get => _currentViewModel;
@@ -16,7 +19,7 @@ namespace LotteryWPF
                 CurrentViewModelChanged?.Invoke(this, EventArgs.Empty);
             }
         }
-
+      
         public event EventHandler? CurrentViewModelChanged;
 
         public void NavigateTo<T>() where T : ObservableObject

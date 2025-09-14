@@ -4,10 +4,44 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ScottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
+        xmlns:modules ="clr-namespace:CommonModules.UserModule;assembly=CommonModules"
+        xmlns:lottery ="clr-namespace:CommonModules.LotteryModule;assembly=CommonModules"
         xmlns:local="clr-namespace:LotteryWPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
 
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- 导航菜单 -->
+        <StackPanel Grid.Column="0" Background="#f0f0f0">
+            <Button Command="{Binding ShowDashboardCommand}" Content="仪表板" Margin="10"/>
+
+            <TextBlock Text="模块列表" Margin="10,20,10,5" FontWeight="Bold"/>
+            <ItemsControl ItemsSource="{Binding Modules}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding ModuleName}" 
+                                Command="{Binding DataContext.NavigateToModuleCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                CommandParameter="{Binding}"
+                                Margin="10,2"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <ContentControl Grid.Column="1" Content="{Binding CurrentModule}">
+            <ContentControl.Resources>
+           
+                <DataTemplate DataType="{x:Type lottery:LotteryCtrlViewModel}">
+                    <lottery:LotteryCtrl/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
     </Grid>
+
+
 </Window>

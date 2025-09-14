@@ -1,4 +1,7 @@
 ﻿using Common.Contracts;
+ 
+using CommonLib;
+using CommonModules.LotteryModule;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
@@ -10,10 +13,6 @@ namespace LotteryWPF
     /// </summary>
     public partial class App : Application
     {
-
-        private IHost? _host;
-
-
         public static IServiceProvider ServiceProvider { get; private set; } = null!;
 
         protected override void OnStartup(StartupEventArgs e)
@@ -35,16 +34,20 @@ namespace LotteryWPF
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<ModuleManager>();
 
-            //// 业务服务
-            //services.AddTransient<IUserService, UserService>();
-
+         
             //// 主程序
-            //services.AddTransient<MainViewModel>();
-            //services.AddTransient<MainWindow>();
+            services.AddTransient<MainWindowViewModel>();
+            services.AddSingleton<MainWindow>();
 
-            //// 模块注册
-            //services.AddTransient<IModule, UserListViewModel>();
-            //services.AddTransient<UserListViewModel>();
+
+            // 可以注册其他服务
+            // services.AddSingleton<IMyService, MyService>();
+            // 模块注册
+
+            services.AddTransient<IModule, LotteryCtrlViewModel>();
+            services.AddTransient<LotteryCtrlViewModel>();
+
+
 
             //// 其他模块
             //services.AddTransient<DashboardViewModel>();
