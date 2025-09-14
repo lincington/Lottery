@@ -1,12 +1,23 @@
-﻿using Common;
-using System.Threading.Tasks;
-
-namespace Lottery
+﻿namespace Lottery
 {
     public class Program
     {     
         static async Task Main(string[] args)
         {
+            //var services = new ServiceCollection();
+            //// 注册服务
+            //services.AddTransient<IVehicle, Car>();
+            //services.AddSingleton<IWeapon, Gun>();
+            //// 构建服务提供者
+            //var provider = services.BuildServiceProvider();
+            //// 解析服务
+            //var car = provider.GetService<IVehicle>();
+            //var gun = provider.GetService<IWeapon>();
+            //// 使用服务
+            //car.Run();
+            //gun.Fire();
+
+
             string json =  File.ReadAllText("A.txt").Replace("\r\n","\t");
             string[] jkl = json.Trim().Split('\t');
             while (true)
