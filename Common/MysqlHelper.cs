@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Data.SqlClient;
 using MySql.Data.MySqlClient;
 using System.Text.Json;
 
@@ -24,17 +25,17 @@ namespace Common
     public class MysqlHelper
     {
         List<int> RedCount = new List<int>(32);
+
+       static  string connectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
         public MysqlHelper()
         {
 
         }
         public  bool GeTtest()
         {
-
             // Get();
             //   Avg();
             // EvUpdate(new int[] { 2,6,9,12,14,30,8},"25076");
-
             // StepOne();
             //Parallel.For(1, 50,(i) => { Test(); });
             Check();
@@ -43,9 +44,6 @@ namespace Common
             // Console.WriteLine("Hello, World!");
             return true;
         }
-
-
-
         public static void Cal()
         {
             string connectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
@@ -279,7 +277,7 @@ namespace Common
         public static void Avg()
         {
             // 替换为你的 MySQL 连接字符串
-            string connectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
+     
             string sql = @"INSERT INTO lotterydatarealavg 
                 (R1, R2, R3, R4, R5, R6, B1, Date, CalTime, Ticks) 
                 VALUES (@R1, @R2, @R3, @R4, @R5, @R6, @B1, @Date, @CalTime, @Ticks)";
@@ -341,7 +339,6 @@ namespace Common
                 }
             }
         }
-
         public static void EvUpdate(int[] ints, string No)
         {
             // 替换为你的 MySQL 连接字符串
@@ -442,8 +439,6 @@ namespace Common
 
 
         }
-
-
         public static void StepOne()
         {
 
@@ -499,8 +494,6 @@ namespace Common
                 }
             }
         }
-
-
         public static void StepOne(int ID)
         {
 
@@ -553,6 +546,17 @@ namespace Common
                 {
                     throw;
                 }
+            }
+        }
+
+
+        public List<Lottery> GetAllLotteries()
+        {
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                string sql = "SELECT * FROM lottery";
+                connection.Open();
+                return connection.Query<Lottery>(sql).ToList();
             }
         }
 
