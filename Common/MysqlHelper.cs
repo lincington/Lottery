@@ -272,7 +272,7 @@ namespace Common
 
         }
 
-        static long Num = 11431297;
+        static long Num = 1;
         static int Idex = 1;
         static long[] AvgRData = new long[6] { 3, 5, 15, 21, 25, 31 };
         static long AvgBData = 9;
