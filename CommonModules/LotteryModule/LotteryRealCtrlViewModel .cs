@@ -32,35 +32,75 @@ namespace CommonModules.LotteryModule
         private void ReadDataTimer_Tick(object? sender, EventArgs e)
         {
             List<double> dataX = new List<double>();
-            List<double> dataY = new List<double>();
-            List<double> dataYY = new List<double>();
+            List<double> dataY = new List<double>() {
+
+644 ,
+624 ,
+609 ,
+596 ,
+600 ,
+641 ,
+633 ,
+624 ,
+616 ,
+620 ,
+590 ,
+603 ,
+602 ,
+660 ,
+589 ,
+592 ,
+649 ,
+636 ,
+616 ,
+634 ,
+574 ,
+649 ,
+575 ,
+572 ,
+590 ,
+657 ,
+627 ,
+555 ,
+573 ,
+602 ,
+575 ,
+635 ,
+550 
+
+            };
+            List<double> dataYY = new List<double>()
+            {
+     227 ,   195, 206, 203 ,206 ,212, 209, 193 ,210 ,191, 217 ,217 ,195, 214 ,228, 229 
+
+            };
 
             List<double> dataAVY = new List<double>();
             List<double> dataAVYY = new List<double>();
             for (int i = 1; i < 34; i++)
             {
                 dataX.Add(i);
-                dataY.Add(0);
+                //dataY.Add(0);
                 dataAVY.Add(0);
                 if (i < 17)
                 {
-                    dataYY.Add(0);
+                   // dataYY.Add(0);
                     dataAVYY.Add(0);
                 }
             }
 
-            IEnumerable<Lottery> collection =   DoubleColorBallGenerator.GenerateSQLTickets(3352).ToList();
+            //IEnumerable<Lottery> collection =   DoubleColorBallGenerator.GenerateSQLTickets(3352).ToList();
 
-            foreach (var item in collection)
-            {
-                dataY[item.R1 - 1]++;  
-                dataY[item.R2 - 1]++;
-                dataY[item.R3 - 1]++;
-                dataY[item.R4 - 1]++;
-                dataY[item.R5 - 1]++;
-                dataY[item.R6 - 1]++;
-                dataYY[item.B1 - 1]++;
-            }
+            //foreach (var item in collection)
+            //{
+            //    dataY[item.R1 - 1]++;  
+            //    dataY[item.R2 - 1]++;
+            //    dataY[item.R3 - 1]++;
+            //    dataY[item.R4 - 1]++;
+            //    dataY[item.R5 - 1]++;
+            //    dataY[item.R6 - 1]++;
+            //    dataYY[item.B1 - 1]++;
+            //}
 
             for (int i = 0; i < 33; i++)
             {
