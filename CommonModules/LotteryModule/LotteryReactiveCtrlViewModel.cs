@@ -20,6 +20,8 @@ namespace CommonModules.LotteryModule
         public void SayHello()
         {
             MessageBox.Show("Hello world!");
+         
+
         }
 
         public string ModuleName => "相应数据";

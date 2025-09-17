@@ -15,7 +15,33 @@
         <TextBox Text="{Binding Name, Mode=TwoWay}" Grid.RowSpan="2"/>
             <Button Command="{Binding  SayHelloCommand}" Content="Say Hello" Height="36" Width="337" VerticalAlignment="Top"/>
         </Grid>
- 
-    
+
+        <GroupBox
+       Header="ReactiveUI" 
+       Grid.Row="1"
+       x:Name="reactiveUIContainer">
+            <StackPanel>
+                <Expander
+               IsExpanded="True"
+               Header="Simple Command">
+                    <StackPanel>
+                        <TextBox
+                       Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                        <Button
+                       Command="{Binding DisplayCommand}"
+                       Content="Display" />
+                    </StackPanel>
+                </Expander>
+                <Expander
+               IsExpanded="True"
+               Header="Async Command">
+                    <StackPanel>
+                        <Button Command="{Binding StartAsyncCommand}" Content="Start" />
+                        <ProgressBar Value="{Binding Progress}" Height="20"/>
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </GroupBox>
+
     </Grid>
 </UserControl>
