@@ -18,7 +18,7 @@
         <!-- 导航菜单 -->
         <StackPanel Grid.Column="0" Background="#f0f0f0">
             <Button Command="{Binding ShowDashboardCommand}" Content="仪表板" Margin="10"/>
-
+            <Button  Click="Button_Click" Content="数据板" Margin="10"/>
             <TextBlock Text="模块列表" Margin="10,20,10,5" FontWeight="Bold"/>
             <ItemsControl ItemsSource="{Binding Modules}">
                 <ItemsControl.ItemTemplate>
@@ -40,6 +40,7 @@
                 <DataTemplate DataType="{x:Type lottery:LotteryRealCtrlViewModel}">
                     <lottery:LotteryRealCtrl/>
                 </DataTemplate>
+               
             </ContentControl.Resources>
         </ContentControl>
     </Grid>

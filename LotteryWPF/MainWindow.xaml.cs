@@ -1,4 +1,5 @@
 ﻿using Common;
+using CommonModules.LotteryModule;
 using ScottPlot;
 using ScottPlot.WPF;
 using System.Threading.Tasks;
@@ -18,6 +19,18 @@ namespace LotteryWPF
         {
             InitializeComponent();
             DataContext = viewModel;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            Application.Current.Dispatcher.BeginInvoke(new Action(delegate
+            {
+            LotteryReactiveCtrl lotteryReactiveCtrl = new LotteryReactiveCtrl();
+            lotteryReactiveCtrl.Show();
+
+             }));
+           
         }
     }
 }
