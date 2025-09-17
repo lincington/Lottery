@@ -18,12 +18,13 @@ namespace CommonModules.LotteryModule
 
 
         DispatcherTimer readDataTimer = new  DispatcherTimer();
-  
+      
+   
 
         public LotteryRealCtrlViewModel()
         {
             _red = new WpfPlot();
-           
+       
             readDataTimer.Tick += ReadDataTimer_Tick;
             readDataTimer.Interval = new TimeSpan(0, 0, 0, 1,300);
             readDataTimer.Start();
@@ -32,51 +33,10 @@ namespace CommonModules.LotteryModule
         private void ReadDataTimer_Tick(object? sender, EventArgs e)
         {
             List<double> dataX = new List<double>();
-            List<double> dataY = new List<double>() {
-
-644 ,
-624 ,
-609 ,
-596 ,
-600 ,
-641 ,
-633 ,
-624 ,
-616 ,
-620 ,
-590 ,
-603 ,
-602 ,
-660 ,
-589 ,
-592 ,
-649 ,
-636 ,
-616 ,
-634 ,
-574 ,
-649 ,
-575 ,
-572 ,
-590 ,
-657 ,
-627 ,
-555 ,
-573 ,
-602 ,
-575 ,
-635 ,
-550 
-
-            };
-            List<double> dataYY = new List<double>()
-            {
-     227 ,   195, 206, 203 ,206 ,212, 209, 193 ,210 ,191, 217 ,217 ,195, 214 ,228, 229 
-
-            };
-
-            List<double> dataAVY = new List<double>();
+            List<double> dataY = new List<double>();
+            List<double> dataYY = new List<double>();
             List<double> dataAVYY = new List<double>();
+            List<double> dataAVY = new List<double>();
             for (int i = 1; i < 34; i++)
             {
                 dataX.Add(i);
@@ -115,7 +75,6 @@ namespace CommonModules.LotteryModule
             Red.Plot.Add.Scatter(dataX.ToArray(), dataY.ToArray());
             Red.Plot.Add.Scatter(dataX.ToArray(), dataYY.ToArray());
             Red.Plot.Add.Scatter(dataX.ToArray(), dataAVY.ToArray());
-
             Red.Plot.Add.Scatter(dataX.ToArray(), dataAVYY.ToArray());
             Red.Plot.Axes.AutoScale();
             Red.Refresh();
