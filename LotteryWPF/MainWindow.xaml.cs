@@ -14,23 +14,15 @@ namespace LotteryWPF
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    { 
+        
+        //
         public MainWindow(MainWindowViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = viewModel;
+          DataContext = viewModel;
+
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-            Application.Current.Dispatcher.BeginInvoke(new Action(delegate
-            {
-            LotteryReactiveCtrl lotteryReactiveCtrl = new LotteryReactiveCtrl();
-            lotteryReactiveCtrl.Show();
-
-             }));
-           
-        }
     }
 }

@@ -18,12 +18,13 @@ namespace CommonModules.LotteryModule
     /// <summary>
     /// LotteryReactiveCtrl.xaml 的交互逻辑
     /// </summary>
-    public partial class LotteryReactiveCtrl : Window
+    public partial class LotteryReactiveCtrl : UserControl
     {
         public LotteryReactiveCtrl()
         {
             InitializeComponent();
             this.DataContext = new LotteryReactiveCtrlViewModel();
+
         }
     }
 }

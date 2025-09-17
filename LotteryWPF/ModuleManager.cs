@@ -26,6 +26,9 @@ namespace CommonLib
             AvailableModules.Add(LotteryCtrl);
             var LotteryRealCtrl = _serviceProvider.GetRequiredService<LotteryRealCtrlViewModel>();
             AvailableModules.Add(LotteryRealCtrl);
+
+            var LotteryReactiveCtrl = _serviceProvider.GetRequiredService<LotteryReactiveCtrlViewModel>();
+            AvailableModules.Add(LotteryReactiveCtrl);
         }
 
         public ObservableObject? GetModuleViewModel(string moduleName)

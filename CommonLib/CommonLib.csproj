@@ -15,4 +15,8 @@
     <Folder Include="Messages\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="ReactiveUI" Version="21.0.1" />
+  </ItemGroup>
+
 </Project>
