@@ -8,6 +8,54 @@
               xmlns:ScottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ContentControl Content="{Binding Red}"   Grid.Column="0" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="80*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Margin="10">
+            <StackPanel Orientation="Vertical">
+                <GroupBox Header="红球">
+                    <UniformGrid>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                    </UniformGrid>
+                </GroupBox>
+                <GroupBox>
+                    <UniformGrid>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                        <Button Height="40" Width="40"  >1</Button>
+                    </UniformGrid>
+                </GroupBox>
+            </StackPanel>
+          
+        </Grid>
+        <Grid Grid.Column="1">
+            <ContentControl Content="{Binding Red}" />
+        </Grid>
     </Grid>
 </UserControl>
