@@ -16,10 +16,7 @@
             <Button Command="{Binding  SayHelloCommand}" Content="Say Hello" Height="36" Width="337" VerticalAlignment="Top"/>
         </Grid>
 
-        <GroupBox
-       Header="ReactiveUI" 
-       Grid.Row="1"
-       x:Name="reactiveUIContainer">
+        <GroupBox Header="ReactiveUI"  Grid.Row="1" x:Name="reactiveUIContainer">
             <StackPanel>
                 <Expander
                IsExpanded="True"
