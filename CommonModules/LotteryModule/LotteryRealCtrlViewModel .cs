@@ -2,6 +2,7 @@
 using Common.Contracts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Org.BouncyCastle.Ocsp;
+using ScottPlot;
 using ScottPlot.WPF;
 using System.Windows.Threading;
 
@@ -10,23 +11,16 @@ namespace CommonModules.LotteryModule
     public partial class LotteryRealCtrlViewModel : ObservableObject, IModule
     {
         public string ModuleName => "实时数据";
-
         public ObservableObject GetViewModel() => this;
 
         [ObservableProperty]
         private  WpfPlot _red;
-
-
         DispatcherTimer readDataTimer = new  DispatcherTimer();
-      
-   
-
         public LotteryRealCtrlViewModel()
         {
-            _red = new WpfPlot();
-       
+            _red = new WpfPlot();   
             readDataTimer.Tick += ReadDataTimer_Tick;
-            readDataTimer.Interval = new TimeSpan(0, 0, 0, 1,300);
+            readDataTimer.Interval = new TimeSpan(0, 0, 0, 0,300);
             readDataTimer.Start();
         }
 
@@ -40,42 +34,51 @@ namespace CommonModules.LotteryModule
             for (int i = 1; i < 34; i++)
             {
                 dataX.Add(i);
-                //dataY.Add(0);
+                dataY.Add(0);
                 dataAVY.Add(0);
                 if (i < 17)
                 {
-                   // dataYY.Add(0);
+                    dataYY.Add(0);
                     dataAVYY.Add(0);
                 }
             }
 
-            //IEnumerable<Lottery> collection =   DoubleColorBallGenerator.GenerateSQLTickets(3352).ToList();
+            IEnumerable<Lottery> collection = DoubleColorBallGenerator.GenerateSQLTickets(3352).ToList();
 
-            //foreach (var item in collection)
-            //{
-            //    dataY[item.R1 - 1]++;  
-            //    dataY[item.R2 - 1]++;
-            //    dataY[item.R3 - 1]++;
-            //    dataY[item.R4 - 1]++;
-            //    dataY[item.R5 - 1]++;
-            //    dataY[item.R6 - 1]++;
-            //    dataYY[item.B1 - 1]++;
-            //}
+            foreach (var item in collection)
+            {
+                dataY[item.R1 - 1]++;
+                dataY[item.R2 - 1]++;
+                dataY[item.R3 - 1]++;
+                dataY[item.R4 - 1]++;
+                dataY[item.R5 - 1]++;
+                dataY[item.R6 - 1]++;
+                dataYY[item.B1 - 1]++;
+            }
 
             for (int i = 0; i < 33; i++)
             {
-                dataAVY[i]= (dataY.Sum()/33);
+                //dataAVY[i]= (dataY.Sum()/33);
             }
 
             for (int i = 0; i < 16; i++)
             {
-                dataAVYY[i] = (dataYY.Sum() / 16);
+              //  dataAVYY[i] = (dataYY.Sum() / 16);
             }
             Red.Plot.Clear();
-            Red.Plot.Add.Scatter(dataX.ToArray(), dataY.ToArray());
-            Red.Plot.Add.Scatter(dataX.ToArray(), dataYY.ToArray());
-            Red.Plot.Add.Scatter(dataX.ToArray(), dataAVY.ToArray());
-            Red.Plot.Add.Scatter(dataX.ToArray(), dataAVYY.ToArray());
+
+            var sp1 = Red.Plot.Add.ScatterPoints(dataX.ToArray(), dataY.ToArray()); // markerSize定义marker大小
+            sp1.MarkerShape = MarkerShape.Asterisk; // 空心圆
+            sp1.MarkerSize = 10; // markerSize定义marker大小
+                              
+            sp1= Red.Plot.Add.ScatterPoints(dataX.ToArray(), dataYY.ToArray());
+            sp1.MarkerShape = MarkerShape.Asterisk; // 空心圆
+            sp1.MarkerSize = 10; // markerSize定义marker大小
+
+            Red.Plot.Add.HorizontalLine(dataY.Sum() / 33);
+            Red.Plot.Add.HorizontalLine(dataYY.Sum() / 16);
+            //Red.Plot.Add.Scatter(dataX.ToArray(), dataAVY.ToArray());
+            //Red.Plot.Add.Scatter(dataX.ToArray(), dataAVYY.ToArray());
             Red.Plot.Axes.AutoScale();
             Red.Refresh();
         }
