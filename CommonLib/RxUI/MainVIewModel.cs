@@ -37,6 +37,15 @@ namespace ReactiveUI.Samples.Commands.RxUI
             set { this.RaiseAndSetIfChanged(ref _TextName, value); }
         }
 
+
+
+        private string _Name;
+
+        public string Name
+        {
+            get { return _Name; }
+            set { this.RaiseAndSetIfChanged(ref _Name, value); }
+        }
         public ReactiveCommand<Unit, IObservable<bool>> DisplayCommand { get; protected set; }
 
         private int _Progress;
