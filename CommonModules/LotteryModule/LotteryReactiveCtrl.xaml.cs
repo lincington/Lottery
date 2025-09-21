@@ -24,7 +24,7 @@ namespace CommonModules.LotteryModule
         {
             InitializeComponent();
             this.DataContext = new LotteryReactiveCtrlViewModel();
-            reactiveUIContainer.DataContext = new ReactiveUI.Samples.Commands.RxUI.MainViewModel();
+            reactiveUIContainer.DataContext = new CommonLib.RxUI.MainViewModel();
         }
     }
 }

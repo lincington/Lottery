@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReactiveUI.Samples.Commands.RxUI
+namespace CommonLib.RxUI
 {
-    public struct AsyncVoid
+    public readonly struct AsyncVoid
     {
-        public static readonly AsyncVoid Default = new AsyncVoid();
+        public static readonly AsyncVoid Default = new ();
     }
 }

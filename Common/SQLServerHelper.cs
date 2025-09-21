@@ -2,9 +2,7 @@
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.Statistics;
 using Microsoft.Data.SqlClient;
-using SQLitePCL;
 using System.Data;
-using System.Threading.Tasks;
 
 namespace Common
 {
@@ -259,13 +257,11 @@ namespace Common
 
         public void BulkInsertLotteryNow(List<LotteryNow> lotteries)
         {
-            using (var connection = new SqlConnection(StrConnectionString))
-            {
+                using var connection = new SqlConnection(StrConnectionString);
                 var sql = @"INSERT INTO LotteryNow (numdata, redavg, blueavg) 
                     VALUES (@Numdata, @Redavg, @Blueavg)";
                 connection.Open();
                 connection.Execute(sql, lotteries);
-            }
         }
 
 
@@ -273,23 +269,24 @@ namespace Common
         {
 
             List<double>  doubles = new List<double>();
-            using (var connection = new SqlConnection(StrConnectionString))
-            {
-                connection.Open();
 
-                for (int i = 0; i < 3348; i++)
+            using var connection = new SqlConnection(StrConnectionString);
+            
+            connection.Open();
+
+            for (int i = 0; i < 3348; i++)
+            {
+                for (int j = 1; j < 7; j++)
+            {  
+                string sql = $"SELECT   FR{j}  AS SUMDATA  FROM lotteryreal  WHERE  ID ={i+1}";
+                List<double> DD = connection.Query<double>(sql).ToList();
+                if (DD.Count > 0)
                 {
-                   for (int j = 1; j < 7; j++)
-                {  
-                    string sql = $"SELECT   FR{j}  AS SUMDATA  FROM lotteryreal  WHERE  ID ={i+1}";
-                        List<double> DD = connection.Query<double>(sql).ToList();
-                        if (DD.Count > 0)
-                        {
-                         doubles.AddRange(DD);
-                        }
+                    doubles.AddRange(DD);
                 }
-               }
             }
+            }
+            
             int K = 1 ,J = 1;
             while (true)
             {
@@ -333,7 +330,6 @@ namespace Common
                     lotteryRedSum.Rn33 = (int)doubles[32];
 
                     lotteryRedSum.SumRn =
-
                        +lotteryRedSum.Rn1
                        + lotteryRedSum.Rn2
                        + lotteryRedSum.Rn3
@@ -369,7 +365,6 @@ namespace Common
                        + lotteryRedSum.Rn33;
 
                     lotteryRedSum.AvgRn = lotteryRedSum.SumRn / 33;
-
                     await InsertAsync(lotteryRedSum);
                     doubles.RemoveRange(0, 32);
                 }
@@ -381,13 +376,12 @@ namespace Common
             Console.WriteLine(doubles.Count);
             Console.WriteLine(doubles.ToArray().ToString());
 
-
             List<double> ASdoubles  = new List<double>();
-            using (var connection = new SqlConnection(StrConnectionString))
+            using (var connectiond = new SqlConnection(StrConnectionString))
             {
-                connection.Open();
-                        string sql = $"SELECT   B1  AS SUMDATA  FROM lotteryreal ";
-                        ASdoubles.AddRange(connection.Query<double>(sql).ToList());
+               connectiond.Open();
+               string sql = $"SELECT   B1  AS SUMDATA  FROM lotteryreal ";
+               ASdoubles.AddRange(connection.Query<double>(sql).ToList());
              }
 
             while (true)
@@ -413,12 +407,7 @@ namespace Common
                     lotteryRedSum.Bn15 = (int)ASdoubles[14];
                     lotteryRedSum.Bn16 = (int)ASdoubles[15];
 
-
-
-
                     lotteryRedSum.SumBn =
-
-
                       +lotteryRedSum.Bn1
                       + lotteryRedSum.Bn2
                       + lotteryRedSum.Bn3
@@ -436,11 +425,8 @@ namespace Common
                       + lotteryRedSum.Bn15
                       + lotteryRedSum.Bn16;
 
-
                     lotteryRedSum.AvgBn = lotteryRedSum.SumBn / 16;
-
-                                       await InsertAsync(lotteryRedSum);
-
+                    await InsertAsync(lotteryRedSum);
                     ASdoubles.RemoveRange(0, 15);
                 }
                 else
@@ -539,9 +525,6 @@ namespace Common
             }
         }
 
-
-
-        // Insert single record
         public async Task<int> InsertAsync(LotteryBlueSum entity)
         {
             const string sql = @"
@@ -659,7 +642,7 @@ namespace Common
             }
         }
 
-        public void InsertWithTransaction(Lottery lottery)
+        public static void InsertWithTransaction(Lottery lottery)
         {
             using (var connection = new SqlConnection(StrConnectionString))
             {
@@ -688,7 +671,7 @@ namespace Common
                 }
             }
         }
-        public void UpdateLottery( )
+        public static void UpdateLottery( )
         {
          
                 // 示例数据（替换为你的数据）
