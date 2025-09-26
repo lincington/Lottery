@@ -37,8 +37,7 @@
                               Content="{Binding Num}"   />
                 </StackPanel>
             </DataTemplate>
-
-        </ResourceDictionary >
+       </ResourceDictionary >
     </UserControl.Resources >
 
     <Grid>
