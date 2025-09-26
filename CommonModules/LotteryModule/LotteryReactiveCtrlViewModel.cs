@@ -40,6 +40,11 @@ namespace CommonModules.LotteryModule
     public class TagInfo 
     {
         public string Name { get; set; } = "";
-        public int Num { get; set; }
+        public int Num { get; set; } = 1;
+
+        public RelayCommand<object> SayHelloCommand { get; set; }  = new RelayCommand<object>((ob) => 
+        {
+            MessageBox.Show(ob.ToString());
+        });
     }
 }
