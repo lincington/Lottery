@@ -4,9 +4,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CommonModules.LotteryModule
 {
-    public class LotteryCtrlViewModel : ObservableObject, IModule
+    public class LotteryHistoryCtrlViewModel : ObservableObject, IModule
     {
-        public string ModuleName => "分析数据";
+        public string ModuleName => "历史数据";
 
         public ObservableObject GetViewModel() => this;
     }

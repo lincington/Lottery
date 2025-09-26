@@ -6,31 +6,72 @@
              xmlns:local="clr-namespace:CommonModules.LotteryModule"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources >
+        <ResourceDictionary >
+            <Style x:Key="dgButton" TargetType="Button" >
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="Content" Value="按钮"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="Red"/>
+                <Setter Property="Height" Value="50"></Setter>
+                <Setter Property="Width"  Value="50"></Setter>
+                <Setter Property="Cursor" Value="Hand"></Setter>
+                <Setter Property="Margin" Value="20,5,20,5"></Setter>
+            </Style >
+            <ControlTemplate x:Key="buttonTemplate" TargetType="Button" >
+                <Border BorderThickness="1" CornerRadius="30" Background="{TemplateBinding Background}">
+                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <ControlTemplate.Triggers >
+                    <Trigger Property="Button.IsMouseOver" Value="True">
+                        <Setter Property="Button.Background" Value="blue"/>
+                    </Trigger >
+                </ControlTemplate.Triggers >
+            </ControlTemplate >
+            <DataTemplate x:Key="PersonTemplate">
+                <StackPanel   Orientation="Horizontal">
+                    <Button   Command="{Binding  SayHelloCommand}" 
+                              Style ="{StaticResource dgButton}"   
+                              Template="{StaticResource  buttonTemplate}"
+                              CommandParameter="{Binding Name}"
+                              Content="{Binding Num}"   />
+                </StackPanel>
+            </DataTemplate>
+
+        </ResourceDictionary >
+    </UserControl.Resources >
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="13*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Grid  Grid.Row="0">
-            <TextBox Text="{Binding Name, Mode=TwoWay}" Grid.RowSpan="2"/>
-            <Button Command="{Binding  SayHelloCommand}" Content="Say Hello" Height="36" Width="337" VerticalAlignment="Top"/>
+            <ItemsControl ItemsSource="{Binding SelectedRed}"  >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Button  Command="{Binding  SayHelloCommand}"  Style ="{StaticResource dgButton}"  Template="{StaticResource  buttonTemplate}"
+                                 CommandParameter="{Binding Name}"  Content="{Binding Num}"   />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
         <GroupBox Header="ReactiveUI"  Grid.Row="1" x:Name="reactiveUIContainer">
             <StackPanel>
-                <Expander
-               IsExpanded="True"
-               Header="Simple Command">
+                <Expander IsExpanded="True"   Header="Simple Command">
                     <StackPanel>
-                        <TextBox
-                       Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-                        <Button
-                       Command="{Binding DisplayCommand}"
-                       Content="Display" />
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                        <Button  Command="{Binding DisplayCommand}"  Content="Display" />
                     </StackPanel>
                 </Expander>
-                <Expander
-               IsExpanded="True"
-               Header="Async Command">
+                <Expander IsExpanded="True"  Header="Async Command">
                     <StackPanel>
                         <Button Command="{Binding StartAsyncCommand}" Content="Start" />
                         <ProgressBar Value="{Binding Progress}" Height="20"/>
@@ -38,6 +79,5 @@
                 </Expander>
             </StackPanel>
         </GroupBox>
-
     </Grid>
 </UserControl>

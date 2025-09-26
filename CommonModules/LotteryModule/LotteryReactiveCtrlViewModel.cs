@@ -1,12 +1,10 @@
 ﻿using Common.Contracts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ReactiveUI;
-using ScottPlot.WPF;
-using System.Reactive;
+using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Navigation;
-using System.Windows.Threading;
+using System.Windows.Input;
+ 
 
 namespace CommonModules.LotteryModule
 {
@@ -14,18 +12,34 @@ namespace CommonModules.LotteryModule
     {
         [ObservableProperty]
         private string _name="ffhjj";
-  
+
+
+        [ObservableProperty]
+        private ObservableCollection<TagInfo> _selectedRed;
 
         [RelayCommand]
-        public void SayHello()
+        public void SayHello(object ob)
         {
-            MessageBox.Show("Hello world!");
-         
+            MessageBox.Show(ob.ToString());
+        }
 
+        public LotteryReactiveCtrlViewModel()
+        {
+            _selectedRed = new ObservableCollection<TagInfo>();
+            for (int i = 0; i < 27; i++)
+            {
+                SelectedRed.Add(new TagInfo() { Name = i.ToString(), Num = i });
+            }
         }
 
         public string ModuleName => "相应数据";
 
         public ObservableObject GetViewModel() => this;
+    }
+
+    public class TagInfo 
+    {
+        public string Name { get; set; } = "";
+        public int Num { get; set; }
     }
 }

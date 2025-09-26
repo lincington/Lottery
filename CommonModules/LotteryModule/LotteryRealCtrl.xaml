@@ -15,7 +15,7 @@
 
         <Grid Grid.Column="0" Margin="10">
             <StackPanel Orientation="Vertical">
-                <Expander Header="红球">
+                <Expander Header="红球"  Cursor="Hand">
                     <UniformGrid >
                         <Button Height="40" Width="40"  >1</Button>
                         <Button Height="40" Width="40"  >1</Button>
@@ -37,7 +37,7 @@
                         <Button Height="40" Width="40"  >1</Button>
                     </UniformGrid>
                 </Expander>
-                <Expander Header="蓝球">
+                <Expander Header="蓝球" Cursor="Hand">
                     <UniformGrid>
                         <Button Height="40" Width="40"  >1</Button>
                         <Button Height="40" Width="40"  >1</Button>

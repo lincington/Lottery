@@ -60,7 +60,7 @@
               </GridSplitter>
             <!-- 内容区域 -->
             <Border Grid.Column="2">
-                <ContentControl  Content="{Binding CurrentModule}">
+                <ContentControl  Content="{Binding CurrentModule}" >
                 <ContentControl.Resources>
                     <DataTemplate DataType="{x:Type lottery:LotteryCtrlViewModel}">
                         <lottery:LotteryCtrl/>
@@ -71,7 +71,10 @@
                     <DataTemplate DataType="{x:Type lottery:LotteryReactiveCtrlViewModel}">
                         <lottery:LotteryReactiveCtrl/>
                     </DataTemplate>
-                </ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type lottery:LotteryHistoryCtrlViewModel}">
+                        <lottery:LotteryHistoryCtrl/>
+                    </DataTemplate>
+                    </ContentControl.Resources>
             </ContentControl>
             </Border>
         </Grid>
