@@ -1,10 +1,11 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Reactive;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ReactiveUI.Samples.Commands.RxUI
+namespace CommonLib.RxUI
 {
     public class MainViewModel : ReactiveObject
     {
@@ -29,7 +30,7 @@ namespace ReactiveUI.Samples.Commands.RxUI
             });
         }
 
-        private string _TextName;
+        private string _TextName="";
 
         public string TextName
         {
@@ -37,6 +38,15 @@ namespace ReactiveUI.Samples.Commands.RxUI
             set { this.RaiseAndSetIfChanged(ref _TextName, value); }
         }
 
+
+
+        private string _Name="";
+
+        public string Name
+        {
+            get { return _Name; }
+            set { this.RaiseAndSetIfChanged(ref _Name, value); }
+        }
         public ReactiveCommand<Unit, IObservable<bool>> DisplayCommand { get; protected set; }
 
         private int _Progress;

@@ -138,14 +138,14 @@ namespace Common
                             Ticks = DateTime.Now.Ticks
                         };
                         list.Add(param);
-                        var avgR1 = list.Where(x => x.R1.HasValue).Average(x => x.R1 ?? 0);
-                        var avgR2 = list.Where(x => x.R2.HasValue).Average(x => x.R2 ?? 0);
-                        var avgR3 = list.Where(x => x.R3.HasValue).Average(x => x.R3 ?? 0);
-                        var avgR4 = list.Where(x => x.R4.HasValue).Average(x => x.R4 ?? 0);
-                        var avgR5 = list.Where(x => x.R5.HasValue).Average(x => x.R5 ?? 0);
-                        var avgR6 = list.Where(x => x.R6.HasValue).Average(x => x.R6 ?? 0);
-                        var avgB1 = list.Where(x => x.B1.HasValue).Average(x => x.B1 ?? 0);
-                        LotterydataAvg yyu = JsonSerializer.Deserialize<LotterydataAvg>(File.ReadAllText("avg.json"));
+                        var avgR1 = list .Average(x => x.R1);
+                        var avgR2 = list .Average(x => x.R2);
+                        var avgR3 = list .Average(x => x.R3);
+                        var avgR4 = list .Average(x => x.R4);
+                        var avgR5 = list .Average(x => x.R5);
+                        var avgR6 = list .Average(x => x.R6);
+                        var avgB1 = list .Average(x => x.B1);
+                        LotterydataAvg? yyu = JsonSerializer.Deserialize<LotterydataAvg>(File.ReadAllText("avg.json"));
 
                         double davgR1 = (Math.Abs(avgR1 - yyu.R1));
                         double davgR2 = (Math.Abs(avgR2 - yyu.R2));
@@ -630,52 +630,52 @@ namespace Common
         /// <summary>
         /// 
         /// </summary>
-        public int? R1 { get; set; }
+        public int R1 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public int? R2 { get; set; }
+        public int R2 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public int? R3 { get; set; }
+        public int R3 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public int? R4 { get; set; }
+        public int R4 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public int? R5 { get; set; }
+        public int R5 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public int? R6 { get; set; }
+        public int R6 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public int? B1 { get; set; }
+        public int B1 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string Date { get; set; }
+        public string Date { get; set; } = "";
 
         /// <summary>
         /// 
         /// </summary>
-        public string CalTime { get; set; }
+        public string CalTime { get; set; } = "";
 
         /// <summary>
         /// 
         /// </summary>
-        public long? Ticks { get; set; }
+        public long Ticks { get; set; }
     }
 
 

@@ -12,7 +12,6 @@ namespace Common
         public DCBRepository(string connectionString)
         {
             _connectionString = connectionString;
-          //  GetConnection().Open();
         }
 
         private IDbConnection GetConnection()
@@ -38,7 +37,7 @@ namespace Common
 
         public int Add(Dictionary<int,short> Red , Dictionary<int, short> Bule)
         {
-            DcbSum dcbSum = new DcbSum();
+            DcbSum dcbSum = new ();
 
             dcbSum.RN1 = Red[1];
             dcbSum.RN2 = Red[2];
@@ -137,7 +136,7 @@ namespace Common
         }
 
         // 根据ID获取双色球记录
-        public DCB GetById(int id)
+        public DCB? GetById(int id)
         {
             const string sql = "SELECT * FROM DCB WHERE id = @Id";
 
