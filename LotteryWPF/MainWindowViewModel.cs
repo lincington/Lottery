@@ -3,7 +3,6 @@ using CommonLib;
 using CommonModules.LotteryModule;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MySqlX.XDevAPI;
 using System.Collections.ObjectModel;
 using System.Windows;
 

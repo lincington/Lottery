@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Google.Protobuf.WellKnownTypes;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.Statistics;
 using Microsoft.Data.SqlClient;
@@ -52,7 +53,31 @@ namespace Common
             }
         }
 
-     
+        public static List<(int,double)> GetAverage(int NUM)
+        {  
+            
+            List<(int, double)>  values = new List<(int, double)>();
+            try
+            {
+                using (var connection = new SqlConnection(StrConnectionString))
+                {   
+                    connection.Open();
+                    for (int i = 1; i < NUM; i++)
+                    {
+                        string sql = $@"SELECT ROUND(AVG(B1 * 1.0), 6)   FROM  lotteryreal WHERE    ID > (3357-{NUM-i})";
+                       
+                        values.Add((NUM-i, connection.Query<double>(sql).FirstOrDefault()));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return values;
+        }
+
+
         public List<double> GetAllLotteriesSum()
         {
             List<double> doubles = new List<double>();
