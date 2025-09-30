@@ -1,7 +1,6 @@
 ﻿using Common;
 using Common.Contracts;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Org.BouncyCastle.Ocsp;
 using ScottPlot;
 using ScottPlot.WPF;
 using System.Windows.Threading;
@@ -65,6 +64,9 @@ namespace CommonModules.LotteryModule
             {
               //  dataAVYY[i] = (dataYY.Sum() / 16);
             }
+
+          
+
             Red.Plot.Clear();
 
             var sp1 = Red.Plot.Add.ScatterPoints(dataX.ToArray(), dataY.ToArray()); // markerSize定义marker大小

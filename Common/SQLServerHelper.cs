@@ -53,7 +53,7 @@ namespace Common
             }
         }
 
-        public static List<(int,double)> GetAverage(int NUM)
+        public static List<(int,double)> GetAverage(int NUM,string Numdata,string ThData)
         {  
             
             List<(int, double)>  values = new List<(int, double)>();
@@ -64,9 +64,15 @@ namespace Common
                     connection.Open();
                     for (int i = 1; i < NUM; i++)
                     {
-                        string sql = $@"SELECT ROUND(AVG(B1 * 1.0), 6)   FROM  lotteryreal WHERE    ID > (3357-{NUM-i})";
-                       
-                        values.Add((NUM-i, connection.Query<double>(sql).FirstOrDefault()));
+                        string sql = $@"SELECT ROUND(AVG({Numdata} * 1.0), 6)   FROM  lotteryreal WHERE    ID > (3357-{NUM-i})";
+                        double json = connection.Query<double>(sql).FirstOrDefault();
+
+                        if (json.ToString("0.0")== ThData)
+                        {
+                            Console.WriteLine(Numdata+ "    " + (NUM -i).ToString()  );
+                        }
+
+                         values.Add((NUM-i, json));
                     }
                 }
             }

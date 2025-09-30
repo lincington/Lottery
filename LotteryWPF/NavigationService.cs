@@ -1,8 +1,6 @@
 ﻿using Common.Contracts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using LotteryWPF;
-using Microsoft.Extensions.DependencyInjection;
-using System.Windows.Controls;
 
 namespace CommonLib
 {

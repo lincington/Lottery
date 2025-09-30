@@ -47,7 +47,14 @@ namespace Lottery
             //        Console.WriteLine(datajson);
             //    }
             //}
-           var DAD  =   SQLServerHelper.GetAverage(832);
+
+
+           var DAD  = SQLServerHelper.GetAverage(3357, "FR1", "17.0");
+                DAD = SQLServerHelper.GetAverage(3357, "FR2", "17.0");
+                DAD = SQLServerHelper.GetAverage(3357, "FR3", "17.0");
+                DAD = SQLServerHelper.GetAverage(3357, "FR4", "17.0");
+                DAD = SQLServerHelper.GetAverage(3357, "FR5", "17.0");
+                DAD = SQLServerHelper.GetAverage(3357, "FR6", "17.0");
         }
     }
 }
