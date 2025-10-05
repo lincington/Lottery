@@ -5,7 +5,7 @@ namespace Common
     {
         private static readonly ThreadLocal<Random> randomdd = new ThreadLocal<Random>(() => new Random(Guid.NewGuid().GetHashCode()));
         // 生成一注双色球号码
-        public static DCB GenerateTicket()
+        public static Lottery  GenerateTicket()
         {
 
             var random = randomdd.Value!;
@@ -27,7 +27,7 @@ namespace Common
                 // 蓝球是1-16选1个数字
                 var blueBall = random.Next(1, 17);
 
-                return new DCB()
+                return new Lottery()
                 {
                     B1 = blueBall,
                     R1 = IredBalls.ElementAt(0),
@@ -37,14 +37,23 @@ namespace Common
                     R5 = IredBalls.ElementAt(4),
                     R6 = IredBalls.ElementAt(5),
 
-                    Davg = redBalls.Average(),
-                    Sumdata = redBalls.Sum(),
+                    FR1 = redBalls.ElementAt(0),
+                    FR2 = redBalls.ElementAt(1),
+                    FR3 = redBalls.ElementAt(2),
+                    FR4 = redBalls.ElementAt(3),
+                    FR5 = redBalls.ElementAt(4),
+                    FR6 = redBalls.ElementAt(5),
+
+                    ID = ID++,
+                    No = NO++,
+                    Date = DateTime.Now.AddMicroseconds(ID*2).ToString()
+
                 };
             }
         }
 
         // 生成多注双色球号码
-        public static IEnumerable<DCB> GenerateTickets(int count)
+        public static IEnumerable<Lottery> GenerateTickets(int count)
         {
             return Enumerable.Range(0, count)
                 .Select(_ => GenerateTicket())
@@ -52,7 +61,7 @@ namespace Common
         }
         // 生成一注双色球号码
         static int ID = 1;
-        static int NO  = 0;
+        static int NO  = 3001;
         public static Lottery GenerateSQLTicket()
         {
             var random = randomdd.Value!;

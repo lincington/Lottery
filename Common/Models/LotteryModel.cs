@@ -62,5 +62,9 @@
         /// 
         /// </summary>
         public int R6 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int B1 { get; set; }
     }
 }

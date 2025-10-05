@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Microsoft.Data.SqlClient;
 using MySql.Data.MySqlClient;
 using System.Text.Json;
 
@@ -333,9 +332,8 @@ namespace Common
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception  )
                 {
-                    throw;
                 }
             }
         }

@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using Npgsql;
-using System.Diagnostics;
 
 namespace Common
 {
@@ -8,18 +7,18 @@ namespace Common
     {
         public static string ConnectionString { get; set; } = "Host=localhost;Port=5432;Database=lottery;Username=postgres;Password=201015";
 
-        public static void GetTest ()
+        public static void GetTest()
         {
            var repository = new DCBRepository(ConnectionString);
             Parallel.For
             (
                 0, 1000,
                 new ParallelOptions { MaxDegreeOfParallelism = 10 },
-                i => {                      
-                    DoubleColorBallGenerator.GenerateTickets(3300*5).ToList().ForEach(ticket =>
-                    {
-                        repository.Add(ticket);
-                    });
+                i => {
+                DoubleColorBallGenerator.GenerateTickets(17136).ToList().ForEach(x => { 
+                     BulkInsertLottery(x);
+                }
+                );
                 }
             );
         }
@@ -86,6 +85,27 @@ namespace Common
                 });
         }
 
+
+        public static void BulkInsertLottery(Lottery lotteries)
+        {
+            try
+            {
+                using (var connection = new NpgsqlConnection(ConnectionString))
+                {
+                    string sql = @"INSERT INTO lottery 
+                      (ID, No, Date, FR1, FR2, FR3, FR4, FR5, FR6, R1, R2, R3, R4, R5, R6, B1) 
+                      VALUES 
+                      (@ID, @No, @Date, @FR1, @FR2, @FR3, @FR4, @FR5, @FR6, 
+                       @R1, @R2, @R3, @R4, @R5, @R6, @B1)";
+                    connection.Open();
+                    connection.Execute(sql, lotteries);
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+            }
+        }
 
         public static void BulkInsertLotteries(IEnumerable<Lottery> lotteries)
         {

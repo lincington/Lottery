@@ -4,7 +4,7 @@ namespace Lottery
 {
     public class Program
     {     
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             //var services = new ServiceCollection();
             //// 注册服务
@@ -49,12 +49,16 @@ namespace Lottery
             //}
 
 
-           var DAD  = SQLServerHelper.GetAverage(3357, "FR1", "17.0");
-                DAD = SQLServerHelper.GetAverage(3357, "FR2", "17.0");
-                DAD = SQLServerHelper.GetAverage(3357, "FR3", "17.0");
-                DAD = SQLServerHelper.GetAverage(3357, "FR4", "17.0");
-                DAD = SQLServerHelper.GetAverage(3357, "FR5", "17.0");
-                DAD = SQLServerHelper.GetAverage(3357, "FR6", "17.0");
+            //var DAD  = SQLServerHelper.GetAverage(3359, "FR1", "17.0");
+            //     DAD = SQLServerHelper.GetAverage(3359, "FR2", "17.0");
+            //     DAD = SQLServerHelper.GetAverage(3359, "FR3", "17.0");
+            //     DAD = SQLServerHelper.GetAverage(3359, "FR4", "17.0");
+            //     DAD = SQLServerHelper.GetAverage(3359, "FR5", "17.0");
+            //     DAD = SQLServerHelper.GetAverage(3359, "FR6", "17.0");
+
+
+            NpgsqlHelper.GetTest();
+
         }
     }
 }
