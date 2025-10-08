@@ -11,16 +11,12 @@ namespace Common
         {
            var repository = new DCBRepository(ConnectionString);
             Parallel.For
-            (
-                0, 1000,
+            (  0, 1000,
                 new ParallelOptions { MaxDegreeOfParallelism = 10 },
                 i => {
                 DoubleColorBallGenerator.GenerateTickets(17136).ToList().ForEach(x => { 
                      BulkInsertLottery(x);
-                }
-                );
-                }
-            );
+                });});
         }
         
         static object sd = new object();
@@ -84,7 +80,6 @@ namespace Common
                     }
                 });
         }
-
 
         public static void BulkInsertLottery(Lottery lotteries)
         {
