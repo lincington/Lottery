@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 using System.Text.Json;
 
 
-namespace Common
+namespace Common.DBHelper
 {
     public class Root
     {
@@ -62,13 +62,13 @@ namespace Common
                         var results = connection.Query<Lotterydata>(sqlsel).First();
                         if (results != null)
                         {
-                            AvgRData[0] = ((long)results.R1 + AvgRData[0]);
-                            AvgRData[1] = ((long)results.R2 + AvgRData[1]);
-                            AvgRData[2] = ((long)results.R3 + AvgRData[2]);
-                            AvgRData[3] = ((long)results.R4 + AvgRData[3]);
-                            AvgRData[4] = ((long)results.R5 + AvgRData[4]);
-                            AvgRData[5] = ((long)results.R6 + AvgRData[5]);
-                            AvgBData = ((long)results.B1 + AvgBData);
+                            AvgRData[0] = results.R1 + AvgRData[0];
+                            AvgRData[1] = results.R2 + AvgRData[1];
+                            AvgRData[2] = results.R3 + AvgRData[2];
+                            AvgRData[3] = results.R4 + AvgRData[3];
+                            AvgRData[4] = results.R5 + AvgRData[4];
+                            AvgRData[5] = results.R6 + AvgRData[5];
+                            AvgBData = results.B1 + AvgBData;
 
                             var param = new
                             {
@@ -82,7 +82,7 @@ namespace Common
                                 B1 = (double)((double)AvgBData / Idex),
                                 Date = DateTime.Now.ToString("yyyy-MM-dd"),
                                 CalTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
-                                Ticks = DateTime.Now.Ticks
+                                DateTime.Now.Ticks
                             };
                             int rows = connection.Execute(sql, param);
                             Num = Num + 1;
@@ -146,23 +146,23 @@ namespace Common
                         var avgB1 = list .Average(x => x.B1);
                         LotterydataAvg? yyu = JsonSerializer.Deserialize<LotterydataAvg>(File.ReadAllText("avg.json"));
 
-                        double davgR1 = (Math.Abs(avgR1 - yyu.R1));
-                        double davgR2 = (Math.Abs(avgR2 - yyu.R2));
-                        double davgR3 = (Math.Abs(avgR3 - yyu.R3));
-                        double davgR4 = (Math.Abs(avgR4 - yyu.R4));
-                        double davgR5 = (Math.Abs(avgR5 - yyu.R5));
-                        double davgR6 = (Math.Abs(avgR6 - yyu.R6));
-                        double davgB1 = (Math.Abs(yyu.B1 - avgB1));
+                        double davgR1 = Math.Abs(avgR1 - yyu.R1);
+                        double davgR2 = Math.Abs(avgR2 - yyu.R2);
+                        double davgR3 = Math.Abs(avgR3 - yyu.R3);
+                        double davgR4 = Math.Abs(avgR4 - yyu.R4);
+                        double davgR5 = Math.Abs(avgR5 - yyu.R5);
+                        double davgR6 = Math.Abs(avgR6 - yyu.R6);
+                        double davgB1 = Math.Abs(yyu.B1 - avgB1);
 
                         for (int i = 1; i < 26; i++)
                         {
-                            if (davgR1 < 0.0025 - (i * 0.0001) &&
-                                                   davgR2 < 0.0025 - (i * 0.0001) &&
-                                                   davgR3 < 0.0025 - (i * 0.0001) &&
-                                                   davgR4 < 0.0025 - (i * 0.0001) &&
-                                                   davgR5 < 0.0025 - (i * 0.0001) &&
-                                                   davgR6 < 0.0025 - (i * 0.0001) &&
-                                                   davgB1 < 0.0025 - (i * 0.0001))
+                            if (davgR1 < 0.0025 - i * 0.0001 &&
+                                                   davgR2 < 0.0025 - i * 0.0001 &&
+                                                   davgR3 < 0.0025 - i * 0.0001 &&
+                                                   davgR4 < 0.0025 - i * 0.0001 &&
+                                                   davgR5 < 0.0025 - i * 0.0001 &&
+                                                   davgR6 < 0.0025 - i * 0.0001 &&
+                                                   davgB1 < 0.0025 - i * 0.0001)
                             {
 
                                 string avgData = $@"SELECT AVG(R1) as R1 ,AVG(R2) as R2,AVG(R3) as R3,AVG(R4) as R4,AVG(R5) as R5,AVG(R6) as R6,AVG(B1) as B1     FROM 
@@ -214,7 +214,7 @@ namespace Common
                             B1 = reds[6],
                             Date = DateTime.Now.ToString("yyyy-MM-dd"),
                             CalTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
-                            Ticks = DateTime.Now.Ticks
+                            DateTime.Now.Ticks
                         };
                         int rows = connection.Execute(sql, param);
                     }
@@ -256,7 +256,7 @@ namespace Common
                             B1 = blue,
                             Date = DateTime.Now.ToString("yyyy-MM-dd"),
                             CalTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
-                            Ticks = DateTime.Now.Ticks
+                            DateTime.Now.Ticks
                         };
                         int rows = connection.Execute(sql, param);
                     }
@@ -316,16 +316,16 @@ namespace Common
                         {
                             var param = new
                             {
-                                R1 = results.R1,
-                                R2 = results.R2,
-                                R3 = results.R3,
-                                R4 = results.R4,
-                                R5 = results.R5,
-                                R6 = results.R6,
-                                B1 = results.B1,
+                                results.R1,
+                                results.R2,
+                                results.R3,
+                                results.R4,
+                                results.R5,
+                                results.R6,
+                                results.B1,
                                 Date = DateTime.Now.ToString("yyyy-MM-dd"),
                                 CalTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
-                                Ticks = DateTime.Now.Ticks
+                                DateTime.Now.Ticks
                             };
                             int rows = connection.Execute(sql, param);
                             Idex = Idex + 1;
@@ -373,8 +373,8 @@ namespace Common
                         B1 = ints[6],
                         Date = DateTime.Now.ToString("yyyy-MM-dd"),
                         CalTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
-                        Ticks = DateTime.Now.Ticks,
-                        No = No
+                        DateTime.Now.Ticks,
+                        No
                     };
 
                     int rows = connection.Execute(sqlreal, param);
@@ -407,16 +407,16 @@ namespace Common
                         {
                             var param2 = new
                             {
-                                R1 = results.R1,
-                                R2 = results.R2,
-                                R3 = results.R3,
-                                R4 = results.R4,
-                                R5 = results.R5,
-                                R6 = results.R6,
-                                B1 = results.B1,
+                                results.R1,
+                                results.R2,
+                                results.R3,
+                                results.R4,
+                                results.R5,
+                                results.R6,
+                                results.B1,
                                 Date = DateTime.Now.ToString("yyyy-MM-dd"),
                                 CalTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
-                                Ticks = DateTime.Now.Ticks
+                                DateTime.Now.Ticks
                             };
                             int rows2 = connection.Execute(sql, param2);
                             Idex = Idex + 1;
@@ -470,13 +470,13 @@ namespace Common
                             var param = new
                             {
 
-                                R1 = (DataAvg[1].R1 - DataAvg[0].R1),
-                                R2 = (DataAvg[1].R2 - DataAvg[0].R2),
-                                R3 = (DataAvg[1].R3 - DataAvg[0].R3),
-                                R4 = (DataAvg[1].R4 - DataAvg[0].R4),
-                                R5 = (DataAvg[1].R5 - DataAvg[0].R5),
-                                R6 = (DataAvg[1].R6 - DataAvg[0].R6),
-                                B1 = (DataAvg[1].B1 - DataAvg[0].B1),
+                                R1 = DataAvg[1].R1 - DataAvg[0].R1,
+                                R2 = DataAvg[1].R2 - DataAvg[0].R2,
+                                R3 = DataAvg[1].R3 - DataAvg[0].R3,
+                                R4 = DataAvg[1].R4 - DataAvg[0].R4,
+                                R5 = DataAvg[1].R5 - DataAvg[0].R5,
+                                R6 = DataAvg[1].R6 - DataAvg[0].R6,
+                                B1 = DataAvg[1].B1 - DataAvg[0].B1,
                                 Date = DateTime.Now.ToString("yyyy-MM-dd"),
                                 CalTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
                                 Ticks = ID,
@@ -533,7 +533,7 @@ namespace Common
                                 B1 = Math.Abs(DataAvg[1].B1 - DataAvg[0].B1),
                                 Date = DateTime.Now.ToString("yyyy-MM-dd"),
                                 CalTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
-                                Ticks = DateTime.Now.Ticks,
+                                DateTime.Now.Ticks,
 
                             };
                             int rows = connection.Execute(sql, param);

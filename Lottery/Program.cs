@@ -1,5 +1,4 @@
-﻿using Common;
-
+﻿
 namespace Lottery
 {
     public class Program
@@ -18,8 +17,6 @@ namespace Lottery
             //// 使用服务
             //car.Run();
             //gun.Fire();
-
-
             //string json =  File.ReadAllText("A.txt").Replace("\r\n","\t");
             //string[] jkl = json.Trim().Split('\t');
             //List<int>  jsondata  = new List<int>();
@@ -47,17 +44,13 @@ namespace Lottery
             //        Console.WriteLine(datajson);
             //    }
             //}
-
-
             //var DAD  = SQLServerHelper.GetAverage(3359, "FR1", "17.0");
             //     DAD = SQLServerHelper.GetAverage(3359, "FR2", "17.0");
             //     DAD = SQLServerHelper.GetAverage(3359, "FR3", "17.0");
             //     DAD = SQLServerHelper.GetAverage(3359, "FR4", "17.0");
             //     DAD = SQLServerHelper.GetAverage(3359, "FR5", "17.0");
             //     DAD = SQLServerHelper.GetAverage(3359, "FR6", "17.0");
-
-
-            NpgsqlHelper.GetTest();
+           // NpgsqlHelper.GetCount();
 
         }
     }

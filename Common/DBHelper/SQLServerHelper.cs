@@ -5,7 +5,7 @@ using MathNet.Numerics.Statistics;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
-namespace Common
+namespace Common.DBHelper
 {
     public class SQLServerHelper
     {
@@ -258,9 +258,9 @@ namespace Common
                 }
                 bluesum += ld.B1;
                 
-                   lotteries.Add(new LotteryNow() { Numdata = (ld.R1.ToString("00") + "-" + ld.R2.ToString("00") + "-" + ld.R3.ToString("00") + "-" + ld.R4.ToString("00") + "-" + ld.R5.ToString("00") + "-" + ld.R6.ToString("00") + "-" + ld.B1.ToString("00")),
-                    Blueavg = ((double)bluesum / 16),
-                    Redavg = ((double)redsum / 33)
+                   lotteries.Add(new LotteryNow() { Numdata = ld.R1.ToString("00") + "-" + ld.R2.ToString("00") + "-" + ld.R3.ToString("00") + "-" + ld.R4.ToString("00") + "-" + ld.R5.ToString("00") + "-" + ld.R6.ToString("00") + "-" + ld.B1.ToString("00"),
+                    Blueavg = (double)bluesum / 16,
+                    Redavg = (double)redsum / 33
                 });
              
           

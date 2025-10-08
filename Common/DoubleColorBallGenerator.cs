@@ -1,4 +1,6 @@
 ﻿
+using Common.DBHelper;
+
 namespace Common 
 {
     public class DoubleColorBallGenerator
@@ -60,8 +62,8 @@ namespace Common
                 .ToArray();
         }
         // 生成一注双色球号码
-        static int ID = 1;
-        static int NO  = 3001;
+        public  static int ID = 0;
+        public static int NO  = ID + 3001;
         public static Lottery GenerateSQLTicket()
         {
             var random = randomdd.Value!;

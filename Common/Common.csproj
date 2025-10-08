@@ -22,7 +22,7 @@
     <PackageReference Include="MySql.Data" Version="9.4.0" />
     <PackageReference Include="NLog" Version="6.0.4" />
     <PackageReference Include="NLog.Extensions.Logging" Version="6.0.4" />
-    <PackageReference Include="Npgsql" Version="9.0.3" />
+    <PackageReference Include="Npgsql" Version="9.0.4" />
   </ItemGroup>
 
 </Project>
