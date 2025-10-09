@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Google.Protobuf.WellKnownTypes;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.Statistics;
 using Microsoft.Data.SqlClient;

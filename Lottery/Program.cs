@@ -1,4 +1,6 @@
 ﻿
+using Common.Services;
+
 namespace Lottery
 {
     public class Program
@@ -50,8 +52,20 @@ namespace Lottery
             //     DAD = SQLServerHelper.GetAverage(3359, "FR4", "17.0");
             //     DAD = SQLServerHelper.GetAverage(3359, "FR5", "17.0");
             //     DAD = SQLServerHelper.GetAverage(3359, "FR6", "17.0");
-           // NpgsqlHelper.GetCount();
+            // NpgsqlHelper.GetCount();
+            CommonServices  commonServices = new CommonServices();
 
+ 
+             foreach (var item in commonServices.GetD33().OrderByDescending(x => x.Value))
+             {
+                 Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
+            }
+ 
+             Console.WriteLine("-------------------------------------------------------------------");
+            foreach (var item in commonServices.GetD17().OrderByDescending(x => x.Value))
+            {
+                Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
+            }
         }
     }
 }
