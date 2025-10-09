@@ -54,7 +54,6 @@ namespace Common.DBHelper
 
         public static List<(int,double)> GetAverage(int NUM,string Numdata,string ThData)
         {  
-            
             List<(int, double)>  values = new List<(int, double)>();
             try
             {
@@ -63,7 +62,7 @@ namespace Common.DBHelper
                     connection.Open();
                     for (int i = 1; i < NUM; i++)
                     {
-                        string sql = $@"SELECT ROUND(AVG({Numdata} * 1.0), 6)   FROM  lotteryreal WHERE    ID > (3357-{NUM-i})";
+                        string sql = $@"SELECT ROUND(AVG({Numdata} * 1.0), 6)   FROM  lotteryreal WHERE    ID > (3361-{NUM-i})";
                         double json = connection.Query<double>(sql).FirstOrDefault();
 
                         if (json.ToString("0.0")== ThData)
@@ -81,6 +80,26 @@ namespace Common.DBHelper
             }
             return values;
         }
+
+        public double  GetAverageData(int NUM, string Numdata)
+        {
+            double  values = 0;
+            try
+            {
+                using (var connection = new SqlConnection(StrConnectionString))
+                {
+                    connection.Open();
+                    string sql = $@"SELECT ROUND(AVG({Numdata} * 1.0), 6)   FROM  lotteryreal WHERE    ID > (3361-{NUM})";
+                    values = connection.Query<double>(sql).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return values;
+        }
+
 
 
         public List<double> GetAllLotteriesSum()

@@ -1,4 +1,5 @@
 ﻿
+using Common.DBHelper;
 using Common.Services;
 
 namespace Lottery
@@ -53,19 +54,56 @@ namespace Lottery
             //     DAD = SQLServerHelper.GetAverage(3359, "FR5", "17.0");
             //     DAD = SQLServerHelper.GetAverage(3359, "FR6", "17.0");
             // NpgsqlHelper.GetCount();
-            CommonServices  commonServices = new CommonServices();
 
- 
-             foreach (var item in commonServices.GetD33().OrderByDescending(x => x.Value))
-             {
-                 Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
+
+            //CommonServices  commonServices = new CommonServices();
+
+
+            // foreach (var item in commonServices.GetD33().OrderByDescending(x => x.Value))
+            // {
+            //     Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
+            //}
+
+            // Console.WriteLine("-------------------------------------------------------------------");
+            //foreach (var item in commonServices.GetD17().OrderByDescending(x => x.Value))
+            //{
+            //    Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
+            //}
+
+            SQLServerHelper sQLServerHelper = new SQLServerHelper();
+
+              sQLServerHelper.GetAllLotteries();
+
+            string path = AppDomain.CurrentDomain.BaseDirectory + "data.txt";
+
+            for (int i = 1; i <= 3361; i++) {
+
+                double R1=      sQLServerHelper.GetAverageData(i,"R1");
+                 double R2=       sQLServerHelper.GetAverageData(i, "R2");
+                 double R3=       sQLServerHelper.GetAverageData(i, "R3");
+                 double R4=       sQLServerHelper.GetAverageData(i, "R4");
+                 double R5=       sQLServerHelper.GetAverageData(i, "R5");
+                double R6= sQLServerHelper.GetAverageData(i, "R6");
+                double FR1 = sQLServerHelper.GetAverageData(i, "FR1");
+                double FR2 = sQLServerHelper.GetAverageData(i, "FR2");
+                double FR3 = sQLServerHelper.GetAverageData(i, "FR3");
+                double FR4 = sQLServerHelper.GetAverageData(i, "FR4");
+                double FR5 = sQLServerHelper.GetAverageData(i, "FR5");
+                double FR6 = sQLServerHelper.GetAverageData(i, "FR6");
+          
+
+                double B1 = sQLServerHelper.GetAverageData(i, "B1");
+                string content = i.ToString("0000") + "----" + (
+                 FR1 + FR2 + FR3 +
+                 FR4 + FR5 + FR6
+                 ).ToString("0.0000") + "----" + FR1.ToString("0.0000") + "----" + FR2.ToString("0.0000") + "----" + FR3.ToString("0.0000")
+                 + "----" + FR4.ToString("0.0000") + "----" + FR5.ToString("0.0000") + "----" + FR6.ToString("0.0000") + "----"
+                 + R1.ToString("0.0000") + "----" + R2.ToString("0.0000") + "----" + R3.ToString("0.0000") + "----"
+                 + R4.ToString("0.0000") + "----" + R5.ToString("0.0000") + "----" + R6.ToString("0.0000") + "----" + B1.ToString("0.0000")+"\r\n";
+                File.AppendAllText(path, content);
+
             }
- 
-             Console.WriteLine("-------------------------------------------------------------------");
-            foreach (var item in commonServices.GetD17().OrderByDescending(x => x.Value))
-            {
-                Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
-            }
+
         }
     }
 }

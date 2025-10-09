@@ -12,6 +12,15 @@ namespace Common.Services
 
         ConcurrentDictionary<int,double> D33 = new ConcurrentDictionary<int,double>();
 
+        double[] E6 = new double[6] {
+        (34*1)/7,
+        (34*2)/7,
+        (34*3)/7,
+        (34*4)/7,
+        (34*5)/7,
+        (34*6)/7
+        };
+
         int[] N33 = new int[33] {
             1,2,3,4,5,6,7,8,9,
             10,11,12,13,14,15,16,17,18,19
@@ -59,6 +68,9 @@ namespace Common.Services
                     }
                 }
             });
+
+
+
         }
     
     
