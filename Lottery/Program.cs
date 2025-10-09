@@ -78,12 +78,12 @@ namespace Lottery
 
             for (int i = 1; i <= 3361; i++) {
 
-                double R1=      sQLServerHelper.GetAverageData(i,"R1");
-                 double R2=       sQLServerHelper.GetAverageData(i, "R2");
-                 double R3=       sQLServerHelper.GetAverageData(i, "R3");
-                 double R4=       sQLServerHelper.GetAverageData(i, "R4");
-                 double R5=       sQLServerHelper.GetAverageData(i, "R5");
-                double R6= sQLServerHelper.GetAverageData(i, "R6");
+                 double R1= sQLServerHelper.GetAverageData(i, "R1");
+                 double R2= sQLServerHelper.GetAverageData(i, "R2");
+                 double R3= sQLServerHelper.GetAverageData(i, "R3");
+                 double R4= sQLServerHelper.GetAverageData(i, "R4");
+                 double R5= sQLServerHelper.GetAverageData(i, "R5");
+                 double R6= sQLServerHelper.GetAverageData(i, "R6");
                 double FR1 = sQLServerHelper.GetAverageData(i, "FR1");
                 double FR2 = sQLServerHelper.GetAverageData(i, "FR2");
                 double FR3 = sQLServerHelper.GetAverageData(i, "FR3");
