@@ -782,6 +782,8 @@ namespace Common.DBHelper
     public class LotteryAvg
     {
         public int ID { get; set; }
+
+ 
     
         public double  FR1 { get; set; }
         public double  FR2 { get; set; }
@@ -797,7 +799,10 @@ namespace Common.DBHelper
         public double  R6 { get; set; }
         public double  B1 { get; set; }
     }
-
+    public class LotteryD: LotteryAvg
+    {
+        public double SUM  { get; set; }
+    }
 
     public class LotteryRedSum
     {

@@ -81,6 +81,49 @@ namespace Common.DBHelper
                     }
                 });
         }
+        
+
+     public static void BulkInsertLotteryD(LotteryD lotteries)
+        {
+            try
+            {
+                using (var connection = new NpgsqlConnection(ConnectionString))
+                {
+                    string sql = @"INSERT INTO LotteryD 
+                      (ID, SUM, FR1, FR2, FR3, FR4, FR5, FR6, R1, R2, R3, R4, R5, R6, B1) 
+                      VALUES 
+                      (@ID, @SUM,@FR1, @FR2, @FR3, @FR4, @FR5, @FR6, 
+                       @R1, @R2, @R3, @R4, @R5, @R6, @B1)";
+                    connection.Open();
+                    connection.Execute(sql, lotteries);
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+            }
+        }
+        public static void BulkInsertLotteries(IEnumerable<LotteryD> lotteries)
+        {
+            try
+            {
+                using (var connection = new NpgsqlConnection(ConnectionString))
+                {
+                    string sql = @"INSERT INTO LotteryD 
+                      (ID, SUM, FR1, FR2, FR3, FR4, FR5, FR6, R1, R2, R3, R4, R5, R6, B1) 
+                      VALUES 
+                      (@ID, @SUM,@FR1, @FR2, @FR3, @FR4, @FR5, @FR6, 
+                       @R1, @R2, @R3, @R4, @R5, @R6, @B1)";
+                    connection.Open();
+                    connection.Execute(sql, lotteries);
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+            }
+        }
+
 
 
         public static void BulkInsertLottery(Lottery lotteries)
@@ -123,6 +166,9 @@ namespace Common.DBHelper
                 Trace.WriteLine(ex.Message);
             }
         }
+     
+        
+        
         public static void GetCount()
         {
             try
