@@ -96,8 +96,7 @@ namespace Lottery
                 double FR = FR1 + FR2 + FR3 + FR4 + FR5 + FR6;
 
                 NpgsqlHelper.BulkInsertLotteryD(
-                    new
-                     LotteryD                      {
+                    new LotteryD  {
                          ID = i,
                          SUM = FR,
                          FR1 = FR1,
@@ -113,8 +112,7 @@ namespace Lottery
                          R5 = R5,
                          R6 = R6,
                          B1 = B1
-                    }   
-                    );
+                    }   );
             }
         }
     }
