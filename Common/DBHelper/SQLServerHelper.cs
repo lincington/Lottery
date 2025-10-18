@@ -51,7 +51,6 @@ namespace Common.DBHelper
                 return connection.Query<Lottery>(sql).ToList();
             }
         }
-
         public static List<(int,double)> GetAverage(int NUM,string Numdata,string ThData)
         {  
             List<(int, double)>  values = new List<(int, double)>();
@@ -80,7 +79,6 @@ namespace Common.DBHelper
             }
             return values;
         }
-
         public double  GetAverageData(int NUM, string Numdata)
         {
             double  values = 0;
@@ -99,8 +97,6 @@ namespace Common.DBHelper
             }
             return values;
         }
-
-
 
         public List<double> GetAllLotteriesSum()
         {
@@ -171,7 +167,6 @@ namespace Common.DBHelper
             }
         }
 
-
         public   List<LotteryMatrix>  GetAllAsync()
         {
             using var connection = new SqlConnection(StrConnectionString);
@@ -179,12 +174,8 @@ namespace Common.DBHelper
             connection.Open();
             return connection.Query<LotteryMatrix>(sql).ToList();
         }
-
-
-
         public  async Task MatrixRedBlue()
         {
-
             while (true)
             {
                 Lottery ld = DoubleColorBallGenerator.GenerateSQLTicket();
@@ -215,7 +206,6 @@ namespace Common.DBHelper
                     }
                 }
                 Console.WriteLine(" minnum "+ total1 +  "maxnum  " + tota2);
-
                 await InsertAsync(new LotteryMatrix() { MinM = total1, MaxM = tota2 });
             }
         }
@@ -313,16 +303,11 @@ namespace Common.DBHelper
                 connection.Execute(sql, lotteries);
         }
 
-
         public async Task<List<double>> GetAllLotteriesDealWith()
         {
-
             List<double>  doubles = new List<double>();
-
-            using var connection = new SqlConnection(StrConnectionString);
-            
+            using var connection = new SqlConnection(StrConnectionString);    
             connection.Open();
-
             for (int i = 0; i < 3348; i++)
             {
                 for (int j = 1; j < 7; j++)
@@ -499,9 +484,6 @@ namespace Common.DBHelper
         //        return connection.Query<LotteryAvg>(sql).ToList();
         //    }
         //}
-
-
-
         // Insert single record
         public async Task<int> InsertAsync(LotteryRedSum entity)
         {

@@ -1,32 +1,22 @@
 ﻿
 using Common.DBHelper;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 
 namespace Common.Services
 {
     public class CommonServices
     {
 
-        ConcurrentDictionary<int, double> D17  = new ConcurrentDictionary<int, double>()  ;
-
+        ConcurrentDictionary<int, double> D17  = new ConcurrentDictionary<int, double>();
         ConcurrentDictionary<int,double> D33 = new ConcurrentDictionary<int,double>();
 
         double[] E6 = new double[6] {
-        (34*1)/7,
-        (34*2)/7,
-        (34*3)/7,
-        (34*4)/7,
-        (34*5)/7,
-        (34*6)/7
+        (34*1)/7,(34*2)/7,(34*3)/7,
+        (34*4)/7,(34*5)/7,(34*6)/7
         };
 
         double[] V5  = new double[5] {       
-            33/2,
-            33/4,
-            33/8,
-            33/16,
-            33/32
+            33/2,33/4,33/8,33/16,33/32
         }; 
 
         int[] N33 = new int[33] {
@@ -42,11 +32,8 @@ namespace Common.Services
         public CommonServices() {
 
             SQLServerHelper sQLServerHelper = new SQLServerHelper();
-
             sQLServerHelper.GetAllLotteries().ForEach(lotteries => {
-
                List<int> num33 = N33.ToList();
-
                num33.RemoveAll(x => lotteries.FR1 == x || lotteries.FR2 == x || lotteries.FR3 == x || lotteries.FR4 == x || lotteries.FR5 == x || lotteries.FR6 == x);
 
                 foreach (var item in num33)
@@ -61,9 +48,7 @@ namespace Common.Services
                      }
                 }
                 List<int> num17 = N17.ToList();
-
-                num17.RemoveAll(x => lotteries.B1 == x  );
-
+                num17.RemoveAll(x => lotteries.B1 == x );
                 foreach (var item in num17)
                 {
                     if (D17.ContainsKey(item))

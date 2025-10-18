@@ -8,6 +8,8 @@ namespace Lottery
     {     
         static void Main(string[] args)
         {
+
+            #region =======================================================================
             //var services = new ServiceCollection();
             //// 注册服务
             //services.AddTransient<IVehicle, Car>();
@@ -55,65 +57,57 @@ namespace Lottery
             //     DAD = SQLServerHelper.GetAverage(3359, "FR6", "17.0");
             // NpgsqlHelper.GetCount();
 
+            //SQLServerHelper sQLServerHelper = new SQLServerHelper();
+            //sQLServerHelper.GetAllLotteries();
+            //string path = AppDomain.CurrentDomain.BaseDirectory + "data.txt";
 
-            //CommonServices  commonServices = new CommonServices();
+            //for (int i = 1; i <= 3361; i++) {
+            //    double  R1= sQLServerHelper.GetAverageData(i,"R1");
+            //        double R2= sQLServerHelper.GetAverageData(i, "R2");
+            //        double R3= sQLServerHelper.GetAverageData(i, "R3");
+            //        double R4= sQLServerHelper.GetAverageData(i, "R4");
+            //        double R5= sQLServerHelper.GetAverageData(i, "R5");
+            //    double R6= sQLServerHelper.GetAverageData(i, "R6");
+            //    double FR1 = sQLServerHelper.GetAverageData(i, "FR1");
+            //    double FR2 = sQLServerHelper.GetAverageData(i, "FR2");
+            //    double FR3 = sQLServerHelper.GetAverageData(i, "FR3");
+            //    double FR4 = sQLServerHelper.GetAverageData(i, "FR4");
+            //    double FR5 = sQLServerHelper.GetAverageData(i, "FR5");
+            //    double FR6 = sQLServerHelper.GetAverageData(i, "FR6");
 
-
-            // foreach (var item in commonServices.GetD33().OrderByDescending(x => x.Value))
-            // {
-            //     Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
+            //    double B1 = sQLServerHelper.GetAverageData(i, "B1");
+            //    double FR = FR1 + FR2 + FR3 + FR4 + FR5 + FR6;
+            //    NpgsqlHelper.BulkInsertLotteryD(
+            //        new LotteryD  {
+            //                ID = i,
+            //                SUM = FR,
+            //                FR1 = FR1,
+            //                FR2 = FR2,
+            //                FR3 = FR3,
+            //                FR4 = FR4,
+            //                FR5 = FR5,
+            //                FR6 = FR6,
+            //                R1 = R1,
+            //                R2 = R2,
+            //                R3 = R3,
+            //                R4 = R4,
+            //                R5 = R5,
+            //                R6 = R6,
+            //                B1 = B1
+            //        }   );    
             //}
-
-            // Console.WriteLine("-------------------------------------------------------------------");
-            //foreach (var item in commonServices.GetD17().OrderByDescending(x => x.Value))
-            //{
-            //    Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
-            //}
-
-            SQLServerHelper sQLServerHelper = new SQLServerHelper();
-
-              sQLServerHelper.GetAllLotteries();
-
-            string path = AppDomain.CurrentDomain.BaseDirectory + "data.txt";
-
-            for (int i = 1; i <= 3361; i++) {
-
-                double  R1= sQLServerHelper.GetAverageData(i,"R1");
-                 double R2= sQLServerHelper.GetAverageData(i, "R2");
-                 double R3= sQLServerHelper.GetAverageData(i, "R3");
-                 double R4= sQLServerHelper.GetAverageData(i, "R4");
-                 double R5= sQLServerHelper.GetAverageData(i, "R5");
-                double R6= sQLServerHelper.GetAverageData(i, "R6");
-                double FR1 = sQLServerHelper.GetAverageData(i, "FR1");
-                double FR2 = sQLServerHelper.GetAverageData(i, "FR2");
-                double FR3 = sQLServerHelper.GetAverageData(i, "FR3");
-                double FR4 = sQLServerHelper.GetAverageData(i, "FR4");
-                double FR5 = sQLServerHelper.GetAverageData(i, "FR5");
-                double FR6 = sQLServerHelper.GetAverageData(i, "FR6");
-          
-
-                double B1 = sQLServerHelper.GetAverageData(i, "B1");
-                double FR = FR1 + FR2 + FR3 + FR4 + FR5 + FR6;
-
-                NpgsqlHelper.BulkInsertLotteryD(
-                    new LotteryD  {
-                         ID = i,
-                         SUM = FR,
-                         FR1 = FR1,
-                         FR2 = FR2,
-                         FR3 = FR3,
-                         FR4 = FR4,
-                         FR5 = FR5,
-                         FR6 = FR6,
-                         R1 = R1,
-                         R2 = R2,
-                         R3 = R3,
-                         R4 = R4,
-                         R5 = R5,
-                         R6 = R6,
-                         B1 = B1
-                    }   );
+            #endregion
+  
+            CommonServices commonServices = new CommonServices();
+            foreach (var item in commonServices.GetD33().OrderByDescending(x => x.Value))
+            {
+                Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
             }
+            Console.WriteLine("-------------------------------------------------------------------");
+            foreach (var item in commonServices.GetD17().OrderByDescending(x => x.Value))
+            {
+                Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
+            } 
         }
     }
 }
