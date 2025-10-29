@@ -65,9 +65,6 @@ namespace CommonModules.LotteryModule
             {
               //  dataAVYY[i] = (dataYY.Sum() / 16);
             }
-
-          
-
             Red.Plot.Clear();
 
             var sp1 = Red.Plot.Add.ScatterPoints(dataX.ToArray(), dataY.ToArray()); // markerSize定义marker大小

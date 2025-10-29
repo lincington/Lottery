@@ -10,8 +10,8 @@ namespace Common.DBHelper
     {
         public SQLServerHelper() {
         }
-        static string StrConnectionString  = "Server=192.168.1.70,1433; Database=Lottery;User Id=sa;Password=Zhouenlai@305;" +
-            "TrustServerCertificate=true;Pooling=true;Max Pool Size=30000;Min Pool Size=300;Connection Lifetime=300;packet size=1000";
+        static string StrConnectionString  = "Server=192.168.2.70,1433; Database=Lottery;User Id=sa;Password=Zhouenlai@305;" +
+            "Encrypt=false;TrustServerCertificate=true;Pooling=true; Connect Timeout=30;Max Pool Size=100;";
         public static void GetTest2()
         {
           Parallel.For
@@ -518,7 +518,6 @@ namespace Common.DBHelper
              @Rn11, @Rn12, @Rn13, @Rn14, @Rn15, @Rn16, @Rn17, @Rn18, @Rn19, @Rn20, 
              @Rn21, @Rn22, @Rn23, @Rn24, @Rn25, @Rn26, @Rn27, @Rn28, @Rn29, @Rn30, 
              @Rn31, @Rn32, @Rn33, @SumRn, @AvgRn)";
-
             using var connection = new SqlConnection(StrConnectionString);
             return await connection.ExecuteAsync(sql, entities);
         }
@@ -528,9 +527,7 @@ namespace Common.DBHelper
         {
             using var connection = new SqlConnection(StrConnectionString);
             await connection.OpenAsync();
-
             using var transaction = await connection.BeginTransactionAsync();
-
             try
             {
                 const string sql = @"
@@ -590,9 +587,7 @@ namespace Common.DBHelper
         {
             using var connection = new SqlConnection(StrConnectionString);
             await connection.OpenAsync();
-
             using var transaction = await connection.BeginTransactionAsync();
-
             try
             {
                 const string sql = @"
@@ -607,17 +602,12 @@ namespace Common.DBHelper
                 await transaction.CommitAsync();
                 return result;
             }
-            catch
+            catch(Exception ex)
             {
                 await transaction.RollbackAsync();
                 throw;
             }
         }
-
-
-
-
-
 
         public static  bool GetAllLotteriesAvg (int i)
         {
@@ -651,8 +641,6 @@ namespace Common.DBHelper
                 return true ;
             }
         }
-
-
         public  static void BulkInsertLotteries(IEnumerable<Lottery> lotteries)
         {
             try
@@ -672,7 +660,6 @@ namespace Common.DBHelper
             {
             }
         }
-
         public static void InsertWithTransaction(Lottery lottery)
         {
             using (var connection = new SqlConnection(StrConnectionString))
@@ -739,7 +726,6 @@ namespace Common.DBHelper
                 //Console.WriteLine("图表已保存为 normal_distribution.png");
             
         }
-
     }
     public class Lottery
     {
@@ -760,7 +746,6 @@ namespace Common.DBHelper
         public int R6 { get; set; }
         public int B1 { get; set; }
     }
-
     public class LotteryAvg
     {
         public int ID { get; set; }
@@ -785,7 +770,6 @@ namespace Common.DBHelper
     {
         public double SUM  { get; set; }
     }
-
     public class LotteryRedSum
     {
         public int Id { get; set; }
@@ -825,8 +809,6 @@ namespace Common.DBHelper
         public int? SumRn { get; set; }
         public double? AvgRn { get; set; }
     }
-
-
     public class LotteryBlueSum
     {
         public int? Id { get; set; }
@@ -858,12 +840,10 @@ namespace Common.DBHelper
         public double? Blueavg { get; set; }
     }
 
-
     public class LotteryMatrix
     {
         public int Id { get; set; }
         public int? MinM { get; set; }
         public int? MaxM { get; set; }
     }
-
 }

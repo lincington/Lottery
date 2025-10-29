@@ -104,7 +104,7 @@ namespace Lottery
                 Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
             }
             Console.WriteLine("-------------------------------------------------------------------");
-            foreach (var item in commonServices.GetD17().OrderByDescending(x => x.Value))
+            foreach (var item in commonServices.GetD16().OrderByDescending(x => x.Value))
             {
                 Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
             } 

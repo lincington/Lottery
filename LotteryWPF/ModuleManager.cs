@@ -1,5 +1,4 @@
 ﻿using Common.Contracts;
-using Common.Models;
 using CommonModules.LotteryModule;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
