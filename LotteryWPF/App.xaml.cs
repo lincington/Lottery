@@ -56,6 +56,11 @@ namespace LotteryWPF
             services.AddTransient<IModule, LotteryHistoryCtrlViewModel>();
             services.AddTransient<LotteryHistoryCtrlViewModel>();
 
+            services.AddTransient<IModule, LotteryBuleCtrlViewModel>();
+            services.AddTransient<LotteryBuleCtrlViewModel>();
+
+            services.AddTransient<IModule, LotteryRedCtrlViewModel>();
+            services.AddTransient<LotteryRedCtrlViewModel>();
             //// 其他模块
             //services.AddTransient<DashboardViewModel>();
         }

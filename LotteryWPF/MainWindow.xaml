@@ -74,6 +74,14 @@
                     <DataTemplate DataType="{x:Type lottery:LotteryHistoryCtrlViewModel}">
                         <lottery:LotteryHistoryCtrl/>
                     </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type lottery:LotteryBuleCtrlViewModel}">
+                            <lottery:LotteryBuleCtrl/>
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type lottery:LotteryRedCtrlViewModel}">
+                            <lottery:LotteryRedCtrl/>
+                        </DataTemplate>
                     </ContentControl.Resources>
             </ContentControl>
             </Border>

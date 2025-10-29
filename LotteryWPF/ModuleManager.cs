@@ -29,6 +29,16 @@ namespace CommonLib
             AvailableModules.Add(LotteryReactiveCtrl);
             var LotteryHistoryCtrl = _serviceProvider.GetRequiredService<LotteryHistoryCtrlViewModel>();
             AvailableModules.Add(LotteryHistoryCtrl);
+
+            var LotteryRedCtrl = _serviceProvider.GetRequiredService<LotteryRedCtrlViewModel>();
+            AvailableModules.Add(LotteryRedCtrl);
+
+            var LotteryBuleCtrl = _serviceProvider.GetRequiredService<LotteryBuleCtrlViewModel>();
+            AvailableModules.Add(LotteryBuleCtrl);
+
+
+            
+
         }
 
         public ObservableObject? GetModuleViewModel(string moduleName)

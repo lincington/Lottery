@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="CommonModules.LotteryModule.LotteryBuleCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CommonModules.LotteryModule"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <TabControl>
+            <TabItem Header="蓝球分布图">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Command="{Binding EditCommand}">AA</Button>
+                    <DataGrid  Grid.Row="1"   
+                               ItemsSource="{Binding Avg ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="60" Binding="{Binding ID , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <DataGridTextColumn Header="H" Width="*" Binding="{Binding H , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <DataGridTextColumn Header="L" Width="*" Binding="{Binding L , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <DataGridTextColumn Header="S" Width="*" Binding="{Binding S , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <DataGridTextColumn Header="A" Width="*" Binding="{Binding A , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+               
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
