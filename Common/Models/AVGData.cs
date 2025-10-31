@@ -6,17 +6,42 @@ using System.Threading.Tasks;
 
 namespace Common.Models
 {
-    public class AVGData
+    public class AvgData : ObservableObject
     {
-        public string ID = string.Empty;
+         private string _id = string.Empty;
+        public string ID
+        {
+            get => _id;
+            set => SetProperty(ref _id, value);
+        }
 
-        public int H = 0;
+        private int _h;
+        public int H
+        {
+            get => _h;
+            set => SetProperty(ref _h, value);
+        }
 
-        public int L = 0;
+        private int _l;
+        public int L
+        {
+            get => _l;
+            set => SetProperty(ref _l, value);
+        }
 
-        public int S = 0;
+        private int _s;
+        public int S
+        {
+            get => _s;
+            set => SetProperty(ref _s, value);
+        }
 
-        public float A;
+        private float _a;
+        public float A
+        {
+            get => _a;
+            set => SetProperty(ref _a, value);
+        }
     }
 
 

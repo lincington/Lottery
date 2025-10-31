@@ -4,26 +4,118 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CommonModules.LotteryModule"
+               xmlns:cvt="clr-namespace:Common.Converters;assembly=CommonLib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <cvt:DataGridMultiConverter  x:Key="datagridmulticonverter"></cvt:DataGridMultiConverter>
+    </UserControl.Resources>
     <Grid>
         <TabControl>
             <TabItem Header="蓝球分布图">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="20"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="0" Command="{Binding EditCommand}">AA</Button>
-                    <DataGrid  Grid.Row="1"   
-                               ItemsSource="{Binding Avg ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                    <Button Grid.Row="0" Command="{Binding LoadDataCommand}">Load</Button>
+                    <DataGrid  Grid.Row="1"   AutoGenerateColumns="False"
+                               ItemsSource="{Binding Avg }">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Width="60" Binding="{Binding ID , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <DataGridTextColumn Header="H" Width="*" Binding="{Binding H , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <DataGridTextColumn Header="L" Width="*" Binding="{Binding L , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <DataGridTextColumn Header="S" Width="*" Binding="{Binding S , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <DataGridTextColumn Header="A" Width="*" Binding="{Binding A , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <DataGridTextColumn Header="ID" Width="*" Binding="{Binding   ID }"></DataGridTextColumn>
+                            <DataGridTextColumn Header="L" Width="*" Binding="{Binding    L }">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource datagridmulticonverter}">
+                                                    <Binding Path="L"/>
+                                                    <Binding Path="A"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="A" Width="*" Binding="{Binding    A  }"></DataGridTextColumn>
+                            <DataGridTextColumn Header="H" Width="*" Binding="{Binding   H }">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource datagridmulticonverter}">
+                                                    <Binding Path="H"/>
+                                                    <Binding Path="A"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="S" Width="*" Binding="{Binding    S }"></DataGridTextColumn>
                         </DataGrid.Columns>
+                        
+                        <DataGrid.RowStyle >
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" Value="#F2F2F2" />
+                                    <Setter Property="Height" Value="18"/>
+                                    <Setter Property="Foreground" Value="Black" />
+                                    <Style.Triggers>
+                                        <Trigger Property="AlternationIndex" Value="0" >
+                                            <Setter Property="Background" Value="White" />
+                                        </Trigger>
+                                        <Trigger Property="AlternationIndex" Value="1" >
+                                            <Setter Property="Background" Value="LightGray" />
+                                        </Trigger>
+                                        <Trigger Property="AlternationIndex" Value="2" >
+                                            <Setter Property="Background" Value="LightGoldenrodYellow"/>
+                                        </Trigger>
+                                        <Trigger Property="AlternationIndex" Value="3" >
+                                            <Setter Property="Background" Value="LightGreen" />
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="LightPink"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Foreground" Value="Black"/>
+                                            <Setter Property="Background" Value="LightBlue"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                            <DataGrid.RowHeaderStyle>
+                                <Style  TargetType="{x:Type DataGridRowHeader}">
+                                    <Setter Property="Height" Value="60"></Setter>
+                                </Style>
+                            </DataGrid.RowHeaderStyle>
+                            <DataGrid.CellStyle>
+                                <Style  TargetType="{x:Type DataGridCell}">
+                                    <Setter Property="Height" Value="60"></Setter>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="Height" Value="30"/>
+                                    <Setter Property="Background" Value="LightBlue"/>
+                                    <Setter Property="Foreground" Value="Blue"/>
+                                    <Setter Property="BorderBrush"  Value="Black"></Setter>
+                                    <Setter Property="HorizontalContentAlignment"  Value="Center"></Setter>
+                                    <Setter Property="FontSize" Value="12" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="ToolTip" Value="Click to sort."/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                            <DataGrid.Style>
+                                <Style TargetType="{x:Type DataGrid}">
+                                    <Setter Property="BorderThickness" Value="0"></Setter>
+                                </Style>
+                            </DataGrid.Style>
+
                     </DataGrid>
                 </Grid>
                

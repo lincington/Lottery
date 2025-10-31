@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using Common.Models;
+using Dapper;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.Statistics;
 using Microsoft.Data.SqlClient;
@@ -27,6 +28,43 @@ namespace Common.DBHelper
                   }
               });
         }
+
+        public List<AvgData> avgDatas(int num,int up)
+        {
+            List<AvgData> avgDatas = new List<AvgData>();
+            int Sum = GetAllLotteries().Count;
+
+            using (var connection = new SqlConnection(StrConnectionString))
+            {
+                connection.Open();
+
+
+                for (int i = 1; i <= num; i++)
+                {
+                    string sql = @$"
+                            SELECT  * from (
+                            SELECT COUNT(*) as TT1 FROM lotteryreal  WHERE  B1 <8.5    and ID >= {Sum} -(16*{up}*{i})  and ID < {Sum} -(16*{up}*{i-1}) 
+                            UNION  ALL
+                            SELECT COUNT(*) as TT2  FROM lotteryreal  WHERE  B1 >8.5 and ID >= {Sum} -(16*{up}*{i})  and ID < {Sum} -(16*{up}*{i - 1}) 
+                            UNION  ALL 
+                            SELECT COUNT(*) as TT3  FROM lotteryreal  WHERE ID >= {Sum} -(16*{up}*{i})  and ID < {Sum} -(16*{up}*{i - 1})  
+                            UNION  ALL 
+                            SELECT COUNT(*)/2 as TT4  FROM lotteryreal WHERE ID >= {Sum} -(16*{up}*{i})  and ID < {Sum} -(16*{up}*{i - 1})   ) as fs";
+                    List<double> json = connection.Query<double>(sql).ToList();
+                    avgDatas.Add( new AvgData()
+                    {
+                        ID = (Sum- (16 * up *( i)) ).ToString()  + "~" + (Sum - (16 *up  * (i -1))).ToString(),
+                        H = (int)json[0],
+                        L = (int)json[1],
+                        S = (int)json[2],
+                        A = (float)json[3]
+                    });
+                }
+            }
+             return avgDatas;
+        }
+
+
 
         public void InsertLottery(Lottery lottery)
         {
