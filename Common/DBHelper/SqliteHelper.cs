@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using Common.Models;
+using Dapper;
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;

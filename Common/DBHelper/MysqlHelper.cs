@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using Common.Models;
+using Dapper;
 using MySql.Data.MySqlClient;
 using System.Text.Json;
 

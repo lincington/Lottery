@@ -1,6 +1,8 @@
 ﻿
+using Common;
 using Common.DBHelper;
 using Common.Services;
+using SQLitePCL;
 
 namespace Lottery
 {
@@ -97,17 +99,55 @@ namespace Lottery
             //        }   );    
             //}
             #endregion
-  
-            CommonServices commonServices = new CommonServices();
-            foreach (var item in commonServices.GetD33().OrderByDescending(x => x.Value))
+            int count = 0;
+            int Sum  = 0;
+            double dataList =0;
+            int N  = 0;
+            Dictionary<int,int>  ints = new Dictionary<int,int>();
+            while (true)
             {
-                Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
+                int L = DoubleColorBallGenerator.GenerateBuleBalls();
+                Sum += L; 
+                count++;
+                N++;
+                dataList = (double)Sum / count;
+                if(dataList.ToString("0.#") == "8.5")
+                {
+                   // Console.WriteLine("Count:" + count + "  Sum:" + Sum + "  Avg:" + dataList.ToString("0.##"));
+                    if (ints.ContainsKey(count))
+                    {
+                        ints[count] = ints[count] + 1;
+                    }
+                    else
+                    {
+                        ints.TryAdd(count, 1);
+                    }
+                    count = 0;  
+                    Sum = 0;
+                }
+
+                if (N == 100000000)
+                {
+                    foreach (var item in ints.OrderBy(oaad=>oaad.Key))
+                    {
+                        File.AppendAllText("AAA.txt", item.Key + " : " + item.Value + Environment.NewLine);
+                    }
+                    N = 0;
+                    ints.Clear();
+                }
             }
-            Console.WriteLine("-------------------------------------------------------------------");
-            foreach (var item in commonServices.GetD16().OrderByDescending(x => x.Value))
-            {
-                Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
-            } 
+ 
+
+            //CommonServices commonServices = new CommonServices();
+            //foreach (var item in commonServices.GetD33().OrderByDescending(x => x.Value))
+            //{
+            //    Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
+            //}
+            //Console.WriteLine("-------------------------------------------------------------------");
+            //foreach (var item in commonServices.GetD16().OrderByDescending(x => x.Value))
+            //{
+            //    Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
+            //} 
         }
     }
 }

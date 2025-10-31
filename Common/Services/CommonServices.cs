@@ -1,5 +1,6 @@
 ﻿
 using Common.DBHelper;
+using Common.Models;
 using System.Collections.Concurrent;
 
 namespace Common.Services
