@@ -28,7 +28,6 @@ namespace Common.DBHelper
                   }
               });
         }
-
         public List<AvgData> avgDatas(int num,int up)
         {
             List<AvgData> avgDatas = new List<AvgData>();
@@ -63,9 +62,6 @@ namespace Common.DBHelper
             }
              return avgDatas;
         }
-
-
-
         public void InsertLottery(Lottery lottery)
         {
             using (var connection = new SqlConnection(StrConnectionString))
@@ -79,7 +75,6 @@ namespace Common.DBHelper
                 connection.Execute(sql, lottery);
             }
         }
-
         public List<Lottery> GetAllLotteries()
         {
             using (var connection = new SqlConnection(StrConnectionString))
@@ -106,7 +101,6 @@ namespace Common.DBHelper
                         {
                             Console.WriteLine(Numdata+ "    " + (NUM -i).ToString()  );
                         }
-
                          values.Add((NUM-i, json));
                     }
                 }
@@ -135,7 +129,6 @@ namespace Common.DBHelper
             }
             return values;
         }
-
         public List<double> GetAllLotteriesSum()
         {
             List<double> doubles = new List<double>();
@@ -151,7 +144,6 @@ namespace Common.DBHelper
             }
             return doubles;
         }
-
         public int Insert(LotteryMatrix matrix)
         {
             using (IDbConnection connection = new SqlConnection(StrConnectionString))
@@ -164,7 +156,6 @@ namespace Common.DBHelper
                 return connection.ExecuteScalar<int>(sql, matrix);
             }
         }
-
         // 插入单条记录（异步版本）
         public async Task<int> InsertAsync(LotteryMatrix matrix)
         {
@@ -178,7 +169,6 @@ namespace Common.DBHelper
                 return await connection.ExecuteScalarAsync<int>(sql, matrix);
             }
         }
-
         // 批量插入
         public int InsertBatch(IEnumerable<LotteryMatrix> matrices)
         {
@@ -191,7 +181,6 @@ namespace Common.DBHelper
                 return connection.Execute(sql, matrices);
             }
         }
-
         // 批量插入（异步版本）
         public async Task<int> InsertBatchAsync(IEnumerable<LotteryMatrix> matrices)
         {
@@ -204,7 +193,6 @@ namespace Common.DBHelper
                 return await connection.ExecuteAsync(sql, matrices);
             }
         }
-
         public   List<LotteryMatrix>  GetAllAsync()
         {
             using var connection = new SqlConnection(StrConnectionString);
@@ -247,7 +235,6 @@ namespace Common.DBHelper
                 await InsertAsync(new LotteryMatrix() { MinM = total1, MaxM = tota2 });
             }
         }
-
         public async Task<bool> GetAllLotteriesPrint()
         {
 
@@ -331,7 +318,6 @@ namespace Common.DBHelper
                 return connection.QuerySingle<int>(sql, lottery);
             }
         }
-
         public void BulkInsertLotteryNow(List<LotteryNow> lotteries)
         {
                 using var connection = new SqlConnection(StrConnectionString);
@@ -340,7 +326,6 @@ namespace Common.DBHelper
                 connection.Open();
                 connection.Execute(sql, lotteries);
         }
-
         public async Task<List<double>> GetAllLotteriesDealWith()
         {
             List<double>  doubles = new List<double>();
@@ -541,7 +526,6 @@ namespace Common.DBHelper
             connection.Open();
             return await connection.ExecuteAsync(sql, entity);
         }
-
         // Bulk insert multiple records
         public async Task<int> BulkInsertAsync(IEnumerable<LotteryRedSum> entities)
         {
@@ -559,7 +543,6 @@ namespace Common.DBHelper
             using var connection = new SqlConnection(StrConnectionString);
             return await connection.ExecuteAsync(sql, entities);
         }
-
         // Insert with transaction
         public async Task<int> InsertWithTransactionAsync(LotteryRedSum entity)
         {
@@ -590,7 +573,6 @@ namespace Common.DBHelper
                 throw;
             }
         }
-
         public async Task<int> InsertAsync(LotteryBlueSum entity)
         {
             const string sql = @"
@@ -604,7 +586,6 @@ namespace Common.DBHelper
             using var connection = new SqlConnection(StrConnectionString);
             return await connection.ExecuteAsync(sql, entity);
         }
-
         // Bulk insert multiple records
         public async Task<int> BulkInsertAsync(IEnumerable<LotteryBlueSum> entities)
         {
@@ -619,7 +600,6 @@ namespace Common.DBHelper
             using var connection = new SqlConnection(StrConnectionString);
             return await connection.ExecuteAsync(sql, entities);
         }
-
         // Insert with transaction
         public async Task<int> InsertWithTransactionAsync(LotteryBlueSum entity)
         {
@@ -646,7 +626,6 @@ namespace Common.DBHelper
                 throw;
             }
         }
-
         public static  bool GetAllLotteriesAvg (int i)
         {
             using (var connection = new SqlConnection(StrConnectionString))
@@ -764,124 +743,5 @@ namespace Common.DBHelper
                 //Console.WriteLine("图表已保存为 normal_distribution.png");
             
         }
-    }
-    public class Lottery
-    {
-        public int ID { get; set; }
-        public int No { get; set; }
-        public string Date { get; set; } = "";
-        public int FR1 { get; set; }
-        public int FR2 { get; set; }
-        public int FR3 { get; set; }
-        public int FR4 { get; set; }
-        public int FR5 { get; set; }
-        public int FR6 { get; set; }
-        public int R1 { get; set; }
-        public int R2 { get; set; }
-        public int R3 { get; set; }
-        public int R4 { get; set; }
-        public int R5 { get; set; }
-        public int R6 { get; set; }
-        public int B1 { get; set; }
-    }
-    public class LotteryAvg
-    {
-        public int ID { get; set; }
-
- 
-    
-        public double  FR1 { get; set; }
-        public double  FR2 { get; set; }
-        public double  FR3 { get; set; }
-        public double  FR4 { get; set; }
-        public double  FR5 { get; set; }
-        public double  FR6 { get; set; }
-        public double  R1 { get; set; }
-        public double  R2 { get; set; }
-        public double  R3 { get; set; }
-        public double  R4 { get; set; }
-        public double  R5 { get; set; }
-        public double  R6 { get; set; }
-        public double  B1 { get; set; }
-    }
-    public class LotteryD: LotteryAvg
-    {
-        public double SUM  { get; set; }
-    }
-    public class LotteryRedSum
-    {
-        public int Id { get; set; }
-        public int? Rn1 { get; set; }
-        public int? Rn2 { get; set; }
-        public int? Rn3 { get; set; }
-        public int? Rn4 { get; set; }
-        public int? Rn5 { get; set; }
-        public int? Rn6 { get; set; }
-        public int? Rn7 { get; set; }
-        public int? Rn8 { get; set; }
-        public int? Rn9 { get; set; }
-        public int? Rn10 { get; set; }
-        public int? Rn11 { get; set; }
-        public int? Rn12 { get; set; }
-        public int? Rn13 { get; set; }
-        public int? Rn14 { get; set; }
-        public int? Rn15 { get; set; }
-        public int? Rn16 { get; set; }
-        public int? Rn17 { get; set; }
-        public int? Rn18 { get; set; }
-        public int? Rn19 { get; set; }
-        public int? Rn20 { get; set; }
-        public int? Rn21 { get; set; }
-        public int? Rn22 { get; set; }
-        public int? Rn23 { get; set; }
-        public int? Rn24 { get; set; }
-        public int? Rn25 { get; set; }
-        public int? Rn26 { get; set; }
-        public int? Rn27 { get; set; }
-        public int? Rn28 { get; set; }
-        public int? Rn29 { get; set; }
-        public int? Rn30 { get; set; }
-        public int? Rn31 { get; set; }
-        public int? Rn32 { get; set; }
-        public int? Rn33 { get; set; }
-        public int? SumRn { get; set; }
-        public double? AvgRn { get; set; }
-    }
-    public class LotteryBlueSum
-    {
-        public int? Id { get; set; }
-        public int? Bn1 { get; set; }
-        public int? Bn2 { get; set; }
-        public int? Bn3 { get; set; }
-        public int? Bn4 { get; set; }
-        public int? Bn5 { get; set; }
-        public int? Bn6 { get; set; }
-        public int? Bn7 { get; set; }
-        public int? Bn8 { get; set; }
-        public int? Bn9 { get; set; }
-        public int? Bn10 { get; set; }
-        public int? Bn11 { get; set; }
-        public int? Bn12 { get; set; }
-        public int? Bn13 { get; set; }
-        public int? Bn14 { get; set; }
-        public int? Bn15 { get; set; }
-        public int? Bn16 { get; set; }
-        public int? SumBn { get; set; }
-        public double? AvgBn { get; set; }
-    }
-
-    public class LotteryNow
-    {
-        public int Id { get; set; }
-        public string Numdata { get; set; } = "";
-        public double? Redavg { get; set; }
-        public double? Blueavg { get; set; }
-    }
-
-    public class LotteryMatrix
-    {
-        public int Id { get; set; }
-        public int? MinM { get; set; }
-        public int? MaxM { get; set; }
     }
 }

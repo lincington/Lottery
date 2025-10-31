@@ -11,6 +11,8 @@ namespace CommonModules.LotteryModule
     public partial class LotteryBuleCtrlViewModel : ObservableObject, IModule
     {
         public string ModuleName => "蓝球数据";
+
+        
         public ObservableObject GetViewModel() => this;
 
         [ObservableProperty]
