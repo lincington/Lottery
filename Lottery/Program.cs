@@ -99,6 +99,7 @@ namespace Lottery
             //        }   );    
             //}
             #endregion
+      
             int count = 0;
             int Sum  = 0;
             double dataList =0;
@@ -126,8 +127,10 @@ namespace Lottery
                     Sum = 0;
                 }
 
-                if (N == 100000000)
+                if (N == 3372)
                 {
+                    count = 0;
+                    Sum = 0;
                     foreach (var item in ints.OrderBy(oaad=>oaad.Key))
                     {
                         File.AppendAllText("AAA.txt", item.Key + " : " + item.Value + Environment.NewLine);
