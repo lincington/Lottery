@@ -1,6 +1,7 @@
 ﻿using Common;
 using Common.Contracts;
 using Common.DBHelper;
+using Common.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using ScottPlot;
 using ScottPlot.WPF;

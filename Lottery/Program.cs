@@ -123,17 +123,18 @@ namespace Lottery
                     {
                         ints.TryAdd(count, 1);
                     }
-                    count = 0;  
+                    count = 0;
                     Sum = 0;
                 }
 
-                if (N == 3372)
+                if (N == 17721088)
                 {
                     count = 0;
                     Sum = 0;
                     foreach (var item in ints.OrderBy(oaad=>oaad.Key))
                     {
                         File.AppendAllText("AAA.txt", item.Key + " : " + item.Value + Environment.NewLine);
+                        Console.WriteLine(item.Key + " * " + item.Value+ "="+ item.Key * item.Value );
                     }
                     N = 0;
                     ints.Clear();
