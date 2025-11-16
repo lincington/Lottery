@@ -10,7 +10,6 @@ namespace Lottery
     {     
         static void Main(string[] args)
         {
-
             #region =======================================================================
             //var services = new ServiceCollection();
             //// 注册服务
@@ -58,11 +57,9 @@ namespace Lottery
             //     DAD = SQLServerHelper.GetAverage(3359, "FR5", "17.0");
             //     DAD = SQLServerHelper.GetAverage(3359, "FR6", "17.0");
             // NpgsqlHelper.GetCount();
-
             //SQLServerHelper sQLServerHelper = new SQLServerHelper();
             //sQLServerHelper.GetAllLotteries();
             //string path = AppDomain.CurrentDomain.BaseDirectory + "data.txt";
-
             //for (int i = 1; i <= 3361; i++) {
             //    double  R1= sQLServerHelper.GetAverageData(i,"R1");
             //        double R2= sQLServerHelper.GetAverageData(i, "R2");
@@ -76,7 +73,6 @@ namespace Lottery
             //    double FR4 = sQLServerHelper.GetAverageData(i, "FR4");
             //    double FR5 = sQLServerHelper.GetAverageData(i, "FR5");
             //    double FR6 = sQLServerHelper.GetAverageData(i, "FR6");
-
             //    double B1 = sQLServerHelper.GetAverageData(i, "B1");
             //    double FR = FR1 + FR2 + FR3 + FR4 + FR5 + FR6;
             //    NpgsqlHelper.BulkInsertLotteryD(
@@ -98,60 +94,59 @@ namespace Lottery
             //                B1 = B1
             //        }   );    
             //}
-            #endregion
-      
-            int count = 0;
-            int Sum  = 0;
-            double dataList =0;
-            int N  = 0;
-            Dictionary<int,int>  ints = new Dictionary<int,int>();
-            while (true)
-            {
-                int L = DoubleColorBallGenerator.GenerateBuleBalls();
-                Sum += L; 
-                count++;
-                N++;
-                dataList = (double)Sum / count;
-                if(dataList.ToString("0.#") == "8.5")
-                {
-                   // Console.WriteLine("Count:" + count + "  Sum:" + Sum + "  Avg:" + dataList.ToString("0.##"));
-                    if (ints.ContainsKey(count))
-                    {
-                        ints[count] = ints[count] + 1;
-                    }
-                    else
-                    {
-                        ints.TryAdd(count, 1);
-                    }
-                    count = 0;
-                    Sum = 0;
-                }
-
-                if (N == 17721088)
-                {
-                    count = 0;
-                    Sum = 0;
-                    foreach (var item in ints.OrderBy(oaad=>oaad.Key))
-                    {
-                        File.AppendAllText("AAA.txt", item.Key + " : " + item.Value + Environment.NewLine);
-                        Console.WriteLine(item.Key + " * " + item.Value+ "="+ item.Key * item.Value );
-                    }
-                    N = 0;
-                    ints.Clear();
-                }
-            }
- 
-
-            //CommonServices commonServices = new CommonServices();
-            //foreach (var item in commonServices.GetD33().OrderByDescending(x => x.Value))
+            //int count = 0;
+            //int Sum  = 0;
+            //double dataList =0;
+            //int N  = 0;
+            //Dictionary<int,int>  ints = new Dictionary<int,int>();
+            //while (true)
             //{
-            //    Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
+            //    int L = DoubleColorBallGenerator.GenerateBuleBalls();
+            //    Sum += L; 
+            //    count++;
+            //    N++;
+            //    dataList = (double)Sum / count;
+            //    if(dataList.ToString("0.#") == "8.5")
+            //    {
+            //       // Console.WriteLine("Count:" + count + "  Sum:" + Sum + "  Avg:" + dataList.ToString("0.##"));
+            //        if (ints.ContainsKey(count))
+            //        {
+            //            ints[count] = ints[count] + 1;
+            //        }
+            //        else
+            //        {
+            //            ints.TryAdd(count, 1);
+            //        }
+            //        count = 0;
+            //        Sum = 0;
+            //    }
+
+            //    if (N == 17721088)
+            //    {
+            //        count = 0;
+            //        Sum = 0;
+            //        foreach (var item in ints.OrderBy(oaad=>oaad.Key))
+            //        {
+            //            File.AppendAllText("AAA.txt", item.Key + " : " + item.Value + Environment.NewLine);
+            //            Console.WriteLine(item.Key + " * " + item.Value+ "="+ item.Key * item.Value );
+            //        }
+            //        N = 0;
+            //        ints.Clear();
+            //    }
             //}
-            //Console.WriteLine("-------------------------------------------------------------------");
-            //foreach (var item in commonServices.GetD16().OrderByDescending(x => x.Value))
-            //{
-            //    Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
-            //} 
+
+            #endregion
+       
+            CommonServices commonServices = new CommonServices();
+            foreach (var item in commonServices.GetD33().OrderByDescending(x => x.Value))
+            {
+                Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
+            }
+            Console.WriteLine("-------------------------------------------------------------------");
+            foreach (var item in commonServices.GetD16().OrderByDescending(x => x.Value))
+            {
+                Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
+            }
         }
     }
 }
