@@ -1,8 +1,4 @@
-﻿
-using Common;
-using Common.DBHelper;
-using Common.Services;
-using SQLitePCL;
+﻿using Common.Services;
 
 namespace Lottery
 {

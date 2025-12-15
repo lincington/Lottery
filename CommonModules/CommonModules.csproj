@@ -8,9 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ReactiveUI.WPF" Version="21.0.1" />
-    <PackageReference Include="ScottPlot" Version="5.0.56" />
-    <PackageReference Include="ScottPlot.WPF" Version="5.0.56" />
+    <PackageReference Include="ScottPlot" Version="5.1.57" />
+    <PackageReference Include="ScottPlot.WPF" Version="5.1.57" />
   </ItemGroup>
 
   <ItemGroup>
