@@ -3,7 +3,6 @@ using Dapper;
 using MySql.Data.MySqlClient;
 using System.Text.Json;
 
-
 namespace Common.DBHelper
 {
     public class Root
@@ -33,15 +32,7 @@ namespace Common.DBHelper
         }
         public  bool GeTtest()
         {
-            // Get();
-            //   Avg();
-            // EvUpdate(new int[] { 2,6,9,12,14,30,8},"25076");
-            // StepOne();
-            //Parallel.For(1, 50,(i) => { Test(); });
             Check();
-            // 其他代码逻辑
-            // 例如，调用其他方法或执行其他操作
-            // Console.WriteLine("Hello, World!");
             return true;
         }
         public static void Cal()
@@ -248,13 +239,8 @@ namespace Common.DBHelper
                         int blue = rand.Next(1, 17);
                         var param = new
                         {
-                            R1 = reds[0],
-                            R2 = reds[1],
-                            R3 = reds[2],
-                            R4 = reds[3],
-                            R5 = reds[4],
-                            R6 = reds[5],
-                            B1 = blue,
+                            R1 = reds[0],R2 = reds[1],R3 = reds[2],
+                            R4 = reds[3],R5 = reds[4],R6 = reds[5],B1 = blue,
                             Date = DateTime.Now.ToString("yyyy-MM-dd"),
                             CalTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
                             DateTime.Now.Ticks
@@ -267,7 +253,6 @@ namespace Common.DBHelper
                     throw;
                 }
             }
-
         }
 
         static long Num = 1;
@@ -275,9 +260,7 @@ namespace Common.DBHelper
         static long[] AvgRData = new long[6] { 3, 5, 15, 21, 25, 31 };
         static long AvgBData = 9;
         public static void Avg()
-        {
-            // 替换为你的 MySQL 连接字符串
-     
+        {     
             string sql = @"INSERT INTO lotterydatarealavg 
                 (R1, R2, R3, R4, R5, R6, B1, Date, CalTime, Ticks) 
                 VALUES (@R1, @R2, @R3, @R4, @R5, @R6, @B1, @Date, @CalTime, @Ticks)";
@@ -289,22 +272,13 @@ namespace Common.DBHelper
                 try
                 {
                     connection.Open();
-
                     int count = connection.QuerySingle<int>(sqlall);
-
                     Idex = count;
-
-                    //  while (true)
                     {
                         string sqlsel = $@"
                             SELECT 
-                            AVG(R1) AS R1,
-                            AVG(R2) AS R2,
-                            AVG(R3) AS R3,
-                            AVG(R4) AS R4,
-                            AVG(R5) AS R5,
-                            AVG(R6) AS R6,
-                            AVG(B1) AS B1
+                            AVG(R1) AS R1,AVG(R2) AS R2,AVG(R3) AS R3,
+                            AVG(R4) AS R4,AVG(R5) AS R5,AVG(R6) AS R6,AVG(B1) AS B1
                             FROM (
                             SELECT R1, R2, R3, R4, R5, R6, B1
                             FROM lotterydatareal
@@ -317,13 +291,8 @@ namespace Common.DBHelper
                         {
                             var param = new
                             {
-                                results.R1,
-                                results.R2,
-                                results.R3,
-                                results.R4,
-                                results.R5,
-                                results.R6,
-                                results.B1,
+                                results.R1,results.R2,results.R3,
+                                results.R4,results.R5,results.R6,results.B1,
                                 Date = DateTime.Now.ToString("yyyy-MM-dd"),
                                 CalTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
                                 DateTime.Now.Ticks
@@ -343,49 +312,33 @@ namespace Common.DBHelper
             // 替换为你的 MySQL 连接字符串
             string connectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
 
-
             string sqlreal = @"INSERT INTO lotterydatareal
                 (R1, R2, R3, R4, R5, R6, B1, Date, CalTime, Ticks,No) 
                 VALUES (@R1, @R2, @R3, @R4, @R5, @R6, @B1, @Date, @CalTime, @Ticks,@No)";
-
-
             string sql = @"INSERT INTO lotterydatarealavg 
                 (R1, R2, R3, R4, R5, R6, B1, Date, CalTime, Ticks) 
                 VALUES (@R1, @R2, @R3, @R4, @R5, @R6, @B1, @Date, @CalTime, @Ticks)";
 
             string sqlall = "SELECT COUNT(*) as NUM  from lotterydatareal";
-
-
-
             using (var connection = new MySqlConnection(connectionString))
             {
                 try
                 {
                     connection.Open();
-
                     var param = new
                     {
-                        R1 = ints[0],
-                        R2 = ints[1],
-                        R3 = ints[2],
-                        R4 = ints[3],
-                        R5 = ints[4],
-                        R6 = ints[5],
+                        R1 = ints[0],R2 = ints[1],R3 = ints[2],
+                        R4 = ints[3],R5 = ints[4],R6 = ints[5],
                         B1 = ints[6],
                         Date = DateTime.Now.ToString("yyyy-MM-dd"),
                         CalTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
                         DateTime.Now.Ticks,
                         No
                     };
-
                     int rows = connection.Execute(sqlreal, param);
-
                     Thread.Sleep(500);
                     int count = connection.QuerySingle<int>(sqlall);
-
                     Idex = count;
-
-                    //  while (true)
                     {
                         string sqlsel = $@"
                             SELECT 
@@ -423,10 +376,6 @@ namespace Common.DBHelper
                             Idex = Idex + 1;
                         }
                         StepOne(count - 2);
-                        //if (Idex > count)
-                        //{
-                        //    break;
-                        //}
                     }
                 }
                 catch (Exception)
@@ -434,15 +383,10 @@ namespace Common.DBHelper
                     throw;
                 }
             }
-
-
-
         }
         public static void StepOne()
         {
-
             string sqlall = "SELECT ID as NUM  from lotterydatareal";
-
             string sql = @"INSERT INTO lotterydatarealavgstep
                 (R1, R2, R3, R4, R5, R6, B1, Date, CalTime, Ticks) 
                 VALUES (@R1, @R2, @R3, @R4, @R5, @R6, @B1, @Date, @CalTime, @Ticks)";
@@ -454,9 +398,7 @@ namespace Common.DBHelper
                 try
                 {
                     connection.Open();
-
                     List<int> count = connection.Query<int>(sqlall).ToList();
-
                     foreach (var ID in count)
                     {
                         if (ID < 862)
@@ -470,7 +412,6 @@ namespace Common.DBHelper
                         {
                             var param = new
                             {
-
                                 R1 = DataAvg[1].R1 - DataAvg[0].R1,
                                 R2 = DataAvg[1].R2 - DataAvg[0].R2,
                                 R3 = DataAvg[1].R3 - DataAvg[0].R3,
@@ -481,7 +422,6 @@ namespace Common.DBHelper
                                 Date = DateTime.Now.ToString("yyyy-MM-dd"),
                                 CalTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
                                 Ticks = ID,
-
                             };
                             int rows = connection.Execute(sql, param);
                         }
@@ -495,9 +435,7 @@ namespace Common.DBHelper
         }
         public static void StepOne(int ID)
         {
-
             string sqlall = "SELECT ID as NUM  from lotterydatareal";
-
             string sql = @"INSERT INTO lotterydatarealavgstepabs 
                 (R1, R2, R3, R4, R5, R6, B1, Date, CalTime, Ticks) 
                 VALUES (@R1, @R2, @R3, @R4, @R5, @R6, @B1, @Date, @CalTime, @Ticks)";
@@ -509,15 +447,7 @@ namespace Common.DBHelper
                 try
                 {
                     connection.Open();
-
                     List<int> count = connection.Query<int>(sqlall).ToList();
-
-                    // foreach (var ID in count)
-                    {
-                        //if(ID< 862)
-                        //{
-                        //    continue;
-                        //}
                         string sqlreal = $"SELECT * FROM `lotterydatarealavg` WHERE ID>{ID - 1}  LIMIT 2";
                         List<LotterydataAvg> DataAvg = connection.Query<LotterydataAvg>(sqlreal).ToList();
 
@@ -535,19 +465,16 @@ namespace Common.DBHelper
                                 Date = DateTime.Now.ToString("yyyy-MM-dd"),
                                 CalTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
                                 DateTime.Now.Ticks,
-
                             };
                             int rows = connection.Execute(sql, param);
                         }
-                    }
-                }
+                  }         
                 catch (Exception)
                 {
                     throw;
                 }
             }
         }
-
 
         public List<Lottery> GetAllLotteries()
         {
@@ -558,7 +485,6 @@ namespace Common.DBHelper
                 return connection.Query<Lottery>(sql).ToList();
             }
         }
-
     }
 
     public class LotterydataAvg
@@ -676,6 +602,4 @@ namespace Common.DBHelper
         /// </summary>
         public long Ticks { get; set; }
     }
-
-
 }
