@@ -116,7 +116,6 @@ namespace Lottery
             //        count = 0;
             //        Sum = 0;
             //    }
-
             //    if (N == 17721088)
             //    {
             //        count = 0;
