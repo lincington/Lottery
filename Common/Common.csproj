@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -11,21 +11,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="8.4.0" />
+    <PackageReference Include="Autofac" Version="9.0.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="Dapper" Version="2.1.66" />
     <PackageReference Include="Mapster" Version="9.0.0-pre01" />
     <PackageReference Include="MathNet.Numerics" Version="6.0.0-beta2" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.0-preview1.25257.1" />
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.0-rc.1.25451.107" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0-rc.1.25451.107" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="MySql.Data" Version="9.5.0" />
-    <PackageReference Include="NLog" Version="6.0.5" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="6.0.5" />
-    <PackageReference Include="Npgsql" Version="10.0.0-rc.1" />
+    <PackageReference Include="NLog" Version="6.0.7" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="6.1.0" />
+    <PackageReference Include="Npgsql" Version="10.0.1" />
     <PackageReference Include="NUnit" Version="4.4.0" />
     <PackageReference Include="Shouldly" Version="4.3.0" />
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.207" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.211" />
   </ItemGroup>
 
 </Project>
