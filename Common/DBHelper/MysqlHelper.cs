@@ -10,15 +10,15 @@ namespace Common.DBHelper
         /// <summary>
         /// 
         /// </summary>
-        public string instruction { get; set; } = "";
+        public string Instruction  { get; set; } = "";
         /// <summary>
         /// 
         /// </summary>
-        public string input { get; set; } = "";
+        public string Input { get; set; } = "";
         /// <summary>
         /// 
         /// </summary>
-        public string output { get; set; } = "";
+        public string Output { get; set; } = "";
     }
 
     public class MysqlHelper
