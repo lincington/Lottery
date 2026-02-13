@@ -1,5 +1,4 @@
-﻿
-using Common.DBHelper;
+﻿using Common.DBHelper;
 using Common.Models;
 using System.Collections.Concurrent;
 
@@ -18,8 +17,11 @@ namespace Common.Services
         ConcurrentDictionary<int,double> D33 = new ConcurrentDictionary<int,double>();
 
         public CommonServices() {
-            SQLServerHelper sQLServerHelper = new SQLServerHelper();
-           List<Lottery> SDD  = sQLServerHelper.GetAllLotteries() ;
+           // SQLServerHelper sQLServerHelper = new SQLServerHelper();
+           //List<Lottery> SDD  = sQLServerHelper.GetAllLotteries() ;
+            MysqlHelper mysqlHelper = new MysqlHelper();
+            List<Lottery> SDD = mysqlHelper.GetAllLotteries();
+
             int totalCount = SDD.Count;
             SDD.ForEach(lotteries => {
                List<int> num33 = N33.ToList();

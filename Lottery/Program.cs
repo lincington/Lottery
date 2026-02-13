@@ -4,7 +4,7 @@ namespace Lottery
 {
     public class Program
     {     
-        static void Main(string[] args)
+        static void Main(string[]  args)
         {
             #region =======================================================================
             //var services = new ServiceCollection();
@@ -116,7 +116,6 @@ namespace Lottery
             //        count = 0;
             //        Sum = 0;
             //    }
-
             //    if (N == 17721088)
             //    {
             //        count = 0;
@@ -133,7 +132,6 @@ namespace Lottery
 
             #endregion
        
-
             CommonServices commonServices = new CommonServices();
             foreach (var item in commonServices.GetD33().OrderByDescending(x => x.Value))
             {
