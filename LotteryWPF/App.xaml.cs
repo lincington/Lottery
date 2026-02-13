@@ -1,6 +1,5 @@
 ﻿using Common.Contracts;
- 
-using CommonLib;
+ using CommonLib;
 using CommonModules.LotteryModule;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;

@@ -10,6 +10,7 @@ namespace Common.DBHelper
     public class SQLServerHelper
     {
         public SQLServerHelper() {
+
         }
         static string StrConnectionString  = "Server=192.168.2.70,1433; Database=Lottery;User Id=sa;Password=Zhouenlai@305;" +
             "Encrypt=false;TrustServerCertificate=true;Pooling=true; Connect Timeout=30;Max Pool Size=100;";
@@ -707,8 +708,7 @@ namespace Common.DBHelper
             }
         }
         public static void UpdateLottery( )
-        {
-         
+        {      
                 // 示例数据（替换为你的数据）
                 double[] data = { 227 ,194 ,206, 201 ,205, 212 ,208 ,192, 210, 190 ,217, 217, 195, 212, 227, 225 };
 
