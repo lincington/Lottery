@@ -26,13 +26,11 @@ namespace Common.Services
             SDD.ForEach(lotteries => {
                List<int> num33 = N33.ToList();
                num33.RemoveAll(x => lotteries.FR1 == x || lotteries.FR2 == x || lotteries.FR3 == x || lotteries.FR4 == x || lotteries.FR5 == x || lotteries.FR6 == x);
-                foreach (var item in num33)
-                {
+                foreach (var item in num33){
                      if (D33.ContainsKey(item))
                      {
                           D33[item] = D33[item] + (double) lotteries.ID / totalCount;
-                     }
-                     else
+                     }else
                      {
                           D33.TryAdd(item, (double)lotteries.ID/ totalCount);
                      }
@@ -44,8 +42,7 @@ namespace Common.Services
                     if (D16.ContainsKey(item))
                     {
                         D16[item] = D16[item] + (double)lotteries.ID / totalCount;
-                    }
-                    else
+                    }else
                     {
                         D16.TryAdd(item, (double)lotteries.ID / totalCount);
                     }

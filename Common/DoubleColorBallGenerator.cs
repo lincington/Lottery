@@ -1,6 +1,4 @@
-﻿
-using Common.DBHelper;
-using Common.Models;
+﻿using Common.Models;
 
 namespace Common 
 {
@@ -50,8 +48,6 @@ namespace Common
             }
             return new List<int>(redBalls);
         }
-
-
         public static int GenerateBuleBalls()
         {
             var random = randomdd.Value!;
@@ -76,15 +72,9 @@ namespace Common
                 int number = random.Next(1, 34); // 生成1到33之间的随机数
                 redBalls.Add(number); // HashSet自动去重
             }
-
-            var IredBalls = redBalls.OrderBy(x => x);
+               var IredBalls = redBalls.OrderBy(x => x);
                 // 蓝球是1-16选1个数字
                 var blueBall = random.Next(1, 17);
-                NO++;
-                if (NO > 3370)
-                {
-                    NO = 0;
-                }
                 return new Lottery()
                 {
                     ID = ID++,
@@ -103,10 +93,8 @@ namespace Common
                     R4 = IredBalls.ElementAt(3),
                     R5 = IredBalls.ElementAt(4),
                     R6 = IredBalls.ElementAt(5),
-                };
-            
+                };         
         }
-
         // 生成多注双色球号码
         public static IEnumerable<Lottery> GenerateSQLTickets(int count)
         {
@@ -114,6 +102,5 @@ namespace Common
                 .Select(_ => GenerateSQLTicket())
                 .ToArray();
         }
-
     }
 }

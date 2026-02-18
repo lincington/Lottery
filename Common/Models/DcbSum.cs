@@ -1,5 +1,6 @@
 ﻿namespace Common.Models
-{   public class DcbSum
+{   
+    public class DcbSum
     {
         public int Id { get; set; }  // Auto-generated identity column
         public short RN1 { get; set; }

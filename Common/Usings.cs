@@ -9,5 +9,4 @@ global using System.Text;
 global using System.Windows;
 global using System.Windows.Input;
 global using System.Windows.Markup;
-
 global using CommunityToolkit.Mvvm.ComponentModel;
