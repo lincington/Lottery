@@ -6,7 +6,7 @@ namespace Lottery
     {     
         static void Main(string[]  args)
         {
-            #region =======================================================================
+            #region ================================================================
             //var services = new ServiceCollection();
             //// 注册服务
             //services.AddTransient<IVehicle, Car>();
@@ -58,10 +58,10 @@ namespace Lottery
             //string path = AppDomain.CurrentDomain.BaseDirectory + "data.txt";
             //for (int i = 1; i <= 3361; i++) {
             //    double  R1= sQLServerHelper.GetAverageData(i,"R1");
-            //        double R2= sQLServerHelper.GetAverageData(i, "R2");
-            //        double R3= sQLServerHelper.GetAverageData(i, "R3");
-            //        double R4= sQLServerHelper.GetAverageData(i, "R4");
-            //        double R5= sQLServerHelper.GetAverageData(i, "R5");
+            //    double R2= sQLServerHelper.GetAverageData(i, "R2");
+            //    double R3= sQLServerHelper.GetAverageData(i, "R3");
+            //    double R4= sQLServerHelper.GetAverageData(i, "R4");
+            //    double R5= sQLServerHelper.GetAverageData(i, "R5");
             //    double R6= sQLServerHelper.GetAverageData(i, "R6");
             //    double FR1 = sQLServerHelper.GetAverageData(i, "FR1");
             //    double FR2 = sQLServerHelper.GetAverageData(i, "FR2");
@@ -73,21 +73,21 @@ namespace Lottery
             //    double FR = FR1 + FR2 + FR3 + FR4 + FR5 + FR6;
             //    NpgsqlHelper.BulkInsertLotteryD(
             //        new LotteryD  {
-            //                ID = i,
-            //                SUM = FR,
-            //                FR1 = FR1,
-            //                FR2 = FR2,
-            //                FR3 = FR3,
-            //                FR4 = FR4,
-            //                FR5 = FR5,
-            //                FR6 = FR6,
-            //                R1 = R1,
-            //                R2 = R2,
-            //                R3 = R3,
-            //                R4 = R4,
-            //                R5 = R5,
-            //                R6 = R6,
-            //                B1 = B1
+            //        ID = i,
+            //        SUM = FR,
+            //        FR1 = FR1,
+            //        FR2 = FR2,
+            //        FR3 = FR3,
+            //        FR4 = FR4,
+            //        FR5 = FR5,
+            //        FR6 = FR6,
+            //        R1 = R1,
+            //        R2 = R2,
+            //        R3 = R3,
+            //        R4 = R4,
+            //        R5 = R5,
+            //        R6 = R6,
+            //        B1 = B1
             //        }   );    
             //}
             //int count = 0;
@@ -129,7 +129,6 @@ namespace Lottery
             //        ints.Clear();
             //    }
             //}
-
             #endregion
        
             CommonServices commonServices = new CommonServices();

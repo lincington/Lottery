@@ -190,7 +190,6 @@ namespace Common.DBHelper
                 string sql = @"
                 INSERT INTO LotteryMatrix (minm, maxm)
                 VALUES (@MinM, @MaxM)";
-
                 return await connection.ExecuteAsync(sql, matrices);
             }
         }
