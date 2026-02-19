@@ -33,12 +33,9 @@ namespace Common.DBHelper
         {
             List<AvgData> avgDatas = new List<AvgData>();
             int Sum = GetAllLotteries().Count;
-
             using (var connection = new SqlConnection(StrConnectionString))
             {
                 connection.Open();
-
-
                 for (int i = 1; i <= num; i++)
                 {
                     string sql = @$"
