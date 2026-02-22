@@ -130,13 +130,10 @@ namespace Common.DBHelper
         public List<double> GetAllLotteriesSum()
         {
             List<double> doubles = new List<double>();
-            using (var connection = new SqlConnection(StrConnectionString))
-            {
+            using (var connection = new SqlConnection(StrConnectionString))     {
                 connection.Open();
-
-                for (int J = 1; J < 7; J++)
-                {
-                    string sql = $"SELECT   FR{J}  AS SUMDATA  FROM lotteryreal  ";
+                for (int J = 1; J < 7; J++)   {
+                    string sql = $"SELECT   FR{J}  AS SUMDATA  FROM lotteryreal";
                     doubles.AddRange(connection.Query<double>(sql).ToList());
                 }
             }
@@ -150,7 +147,6 @@ namespace Common.DBHelper
                 INSERT INTO LotteryMatrix (minm, maxm)
                 OUTPUT INSERTED.id
                 VALUES (@MinM, @MaxM)";
-
                 return connection.ExecuteScalar<int>(sql, matrix);
             }
         }
@@ -163,7 +159,6 @@ namespace Common.DBHelper
                 INSERT INTO LotteryMatrix (minm, maxm)
                 OUTPUT INSERTED.id
                 VALUES (@MinM, @MaxM)";
-
                 return await connection.ExecuteScalarAsync<int>(sql, matrix);
             }
         }
@@ -175,7 +170,6 @@ namespace Common.DBHelper
                 string sql = @"
                 INSERT INTO LotteryMatrix (minm, maxm)
                 VALUES (@MinM, @MaxM)";
-
                 return connection.Execute(sql, matrices);
             }
         }
@@ -234,12 +228,10 @@ namespace Common.DBHelper
         }
         public async Task<bool> GetAllLotteriesPrint()
         {
-
             List<double> doubles = new List<double>();
             using (var connection = new SqlConnection(StrConnectionString))
             {
                 connection.Open();
-
                 for (int i = 0; i < 3348; i++)
                 {
                     for (int j = 1; j < 7; j++)
@@ -269,8 +261,6 @@ namespace Common.DBHelper
             while (true)
             {
                Random random = new Random();
-
-
                Lottery ld =  DoubleColorBallGenerator.GenerateSQLTicket();
               int red =  random.Next(doublesdata);
               int blue = random.Next(ASdoublesdata);
@@ -292,16 +282,13 @@ namespace Common.DBHelper
                     Blueavg = (double)bluesum / 16,
                     Redavg = (double)redsum / 33
                 });
-             
-          
+               
                 if (lotteries.Count > 1000)
                 {
                     Console.WriteLine(lotteries.Count);
                     BulkInsertLotteryNow(lotteries);
                     lotteries.Clear();
-                }
-
-                
+                }              
             }
         }
         public int InsertAndReturnId(LotteryNow lottery)
@@ -650,7 +637,6 @@ namespace Common.DBHelper
             (FR1, FR2, FR3, FR4, FR5, FR6, R1, R2, R3, R4, R5, R6, B1)
             VALUES
             (@FR1, @FR2, @FR3, @FR4, @FR5, @FR6, @R1, @R2, @R3, @R4, @R5, @R6, @B1);";
-
                 connection.Execute(sqlinsert, lotteryAvg);
                 return true ;
             }
