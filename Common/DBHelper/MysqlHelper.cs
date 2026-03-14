@@ -485,6 +485,33 @@ namespace Common.DBHelper
                 return connection.Query<Lottery>(sql).ToList();
             }
         }
+
+
+        public LotteryAvg GetAvg()
+        {
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                string sql = $@"SELECT 
+                ROUND(AVG(FR1 * 1.0), 6)  as FR1 ,
+                ROUND(AVG(FR2 * 1.0), 6)  as FR2,
+                ROUND(AVG(FR3 * 1.0), 6)  as FR3,
+                ROUND(AVG(FR4 * 1.0), 6)  as FR4,
+                ROUND(AVG(FR5 * 1.0), 6)  as FR5,
+                ROUND(AVG(FR6 * 1.0), 6)  as FR6,  
+                ROUND(AVG(R1 * 1.0), 6)  as R1,
+                ROUND(AVG(R2 * 1.0), 6)  as R2,
+                ROUND(AVG(R3 * 1.0), 6)  as R3,
+                ROUND(AVG(R4 * 1.0), 6)  as R4,
+                ROUND(AVG(R5 * 1.0), 6)  as R5,
+                ROUND(AVG(R6 * 1.0), 6)  as R6,
+                ROUND(AVG(B1 * 1.0), 6)  as B1   
+                from Lottery   ";        
+                connection.Open();  
+                LotteryAvg lotteryAvg = connection.Query<LotteryAvg>(sql).FirstOrDefault();
+
+                return lotteryAvg;
+              }
+        }
     }
 
     public class LotterydataAvg

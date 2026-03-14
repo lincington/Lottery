@@ -37,6 +37,4 @@
             set => SetProperty(ref _a, value);
         }
     }
-
-
 }

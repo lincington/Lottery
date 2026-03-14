@@ -1,5 +1,4 @@
-﻿
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 
 namespace Common
 {
@@ -31,7 +30,6 @@ namespace Common
             }
         }
 
-
         // 解密文件
         public static void DecryptFile(string inputPath, string outputPath, byte[] key, byte[] iv)
         {
@@ -44,6 +42,4 @@ namespace Common
             }
         }
     }
-
-
 }
