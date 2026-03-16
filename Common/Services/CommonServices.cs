@@ -54,6 +54,11 @@ namespace Common.Services
             return E6;
         }
 
+        public LotteryAvg   GetLotteryAvg()
+        {
+            return lotteryAvg;
+        }
+
         public ConcurrentDictionary<int, double> GetD16()
         {
             return D16;

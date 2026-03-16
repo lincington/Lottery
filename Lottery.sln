@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36127.28
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11520.95 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottery", "Lottery\Lottery.csproj", "{A38A35E9-6D22-4349-A960-B33ABCA38D4C}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLib", "CommonLib\CommonLib.csproj", "{BE00D505-EA7E-40AF-A3AD-DACB2F263266}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonModules", "CommonModules\CommonModules.csproj", "{6D85BFE5-C7E0-4971-A813-B34E6B37FD92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EarthAnalysis", "EarthAnalysis\EarthAnalysis.csproj", "{3A72AEFA-86D5-D966-DC82-0720A5E9A42B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{6D85BFE5-C7E0-4971-A813-B34E6B37FD92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D85BFE5-C7E0-4971-A813-B34E6B37FD92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D85BFE5-C7E0-4971-A813-B34E6B37FD92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A72AEFA-86D5-D966-DC82-0720A5E9A42B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A72AEFA-86D5-D966-DC82-0720A5E9A42B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A72AEFA-86D5-D966-DC82-0720A5E9A42B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A72AEFA-86D5-D966-DC82-0720A5E9A42B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

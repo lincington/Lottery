@@ -7,7 +7,8 @@ namespace Lottery
     {
         static void Main(string[] args)
         {
-            #region =======================================================================
+
+            #region ================================================================
             //var services = new ServiceCollection();
             //// 注册服务
             //services.AddTransient<IVehicle, Car>();
@@ -74,21 +75,21 @@ namespace Lottery
             //    double FR = FR1 + FR2 + FR3 + FR4 + FR5 + FR6;
             //    NpgsqlHelper.BulkInsertLotteryD(
             //        new LotteryD  {
-            //                ID = i,
-            //                SUM = FR,
-            //                FR1 = FR1,
-            //                FR2 = FR2,
-            //                FR3 = FR3,
-            //                FR4 = FR4,
-            //                FR5 = FR5,
-            //                FR6 = FR6,
-            //                R1 = R1,
-            //                R2 = R2,
-            //                R3 = R3,
-            //                R4 = R4,
-            //                R5 = R5,
-            //                R6 = R6,
-            //                B1 = B1
+            //        ID = i,
+            //        SUM = FR,
+            //        FR1 = FR1,
+            //        FR2 = FR2,
+            //        FR3 = FR3,
+            //        FR4 = FR4,
+            //        FR5 = FR5,
+            //        FR6 = FR6,
+            //        R1 = R1,
+            //        R2 = R2,
+            //        R3 = R3,
+            //        R4 = R4,
+            //        R5 = R5,
+            //        R6 = R6,
+            //        B1 = B1
             //        }   );    
             //}
             //int count = 0;
@@ -105,7 +106,8 @@ namespace Lottery
             //    dataList = (double)Sum / count;
             //    if(dataList.ToString("0.#") == "8.5")
             //    {
-            //       // Console.WriteLine("Count:" + count + "  Sum:" + Sum + "  Avg:" + dataList.ToString("0.##"));
+            //       // Console.WriteLine("Count:" + count + "  Sum:" + Sum +
+            //       "  Avg:" + dataList.ToString("0.##"));
             //        if (ints.ContainsKey(count))
             //        {
             //            ints[count] = ints[count] + 1;
@@ -123,7 +125,8 @@ namespace Lottery
             //        Sum = 0;
             //        foreach (var item in ints.OrderBy(oaad=>oaad.Key))
             //        {
-            //            File.AppendAllText("AAA.txt", item.Key + " : " + item.Value + Environment.NewLine);
+            //            File.AppendAllText("AAA.txt", item.Key + " : "
+            //            + item.Value + Environment.NewLine);
             //            Console.WriteLine(item.Key + " * " + item.Value+ "="+ item.Key * item.Value );
             //        }
             //        N = 0;
