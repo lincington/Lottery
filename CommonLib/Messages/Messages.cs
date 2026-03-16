@@ -1,6 +1,6 @@
 ﻿namespace CommonLib.Messages
 {
-    public class Class1
+    public class Messages 
     {
     }
 }
