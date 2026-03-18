@@ -1,10 +1,11 @@
-﻿using Common.Services;
+﻿using Common.Consts;
+using Common.Services;
 
 namespace Lottery
 {
     public class Program
-    {     
-        static void Main(string[]  args)
+    {
+        static void Main(string[] args)
         {
 
             #region ================================================================
@@ -133,7 +134,7 @@ namespace Lottery
             //    }
             //}
             #endregion
-       
+
             CommonServices commonServices = new CommonServices();
             foreach (var item in commonServices.GetD33().OrderByDescending(x => x.Value))
             {
@@ -144,24 +145,21 @@ namespace Lottery
             {
                 Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
             }
-            Console.WriteLine();
-            Console.WriteLine("FR1" + "----       " +(17- commonServices.GetLotteryAvg().FR1));
-            Console.WriteLine("FR2" + "----       " +(17- commonServices.GetLotteryAvg().FR2));
-            Console.WriteLine("FR3" + "----       " +(17- commonServices.GetLotteryAvg().FR3));
-            Console.WriteLine("FR4" + "----       " +(17- commonServices.GetLotteryAvg().FR4));
-            Console.WriteLine("FR5" + "----       " +(17- commonServices.GetLotteryAvg().FR5));
-            Console.WriteLine("FR6" + "----       " +(17- commonServices.GetLotteryAvg().FR6));
-            Console.WriteLine();
-            Console.WriteLine("R1" + "----      " + ( 4.855883788-commonServices.GetLotteryAvg().R1));
-            Console.WriteLine("R2" + "----      " + ( 9.716648983-commonServices.GetLotteryAvg().R2));
-            Console.WriteLine("R3" + "----      " + ( 14.57501839-commonServices.GetLotteryAvg().R3));
-            Console.WriteLine("R4" + "----      " + ( 19.43288703-commonServices.GetLotteryAvg().R4));
-            Console.WriteLine("R5" + "----      " + ( 24.29393144-commonServices.GetLotteryAvg().R5));
-            Console.WriteLine("R6" + "----      " + ( 29.15008352-commonServices.GetLotteryAvg().R6));
-            Console.WriteLine();
-            Console.WriteLine("B1" + "----      " + (8.500204555 -commonServices.GetLotteryAvg().B1));
-            Console.WriteLine();
-    
+            {
+                Console.WriteLine($"FR1   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR1 }");
+                Console.WriteLine($"FR2   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR2 }");
+                Console.WriteLine($"FR3   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR3 }");
+                Console.WriteLine($"FR4   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR4 }");
+                Console.WriteLine($"FR5   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR5 }");
+                Console.WriteLine($"FR6   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR6 }");
+                Console.WriteLine($"R1    {Consts.FRRB[1] }---------{ commonServices.GetLotteryAvgV5().R1}");
+                Console.WriteLine($"R2    {Consts.FRRB[2] }---------{ commonServices.GetLotteryAvgV5().R2}");
+                Console.WriteLine($"R3    {Consts.FRRB[3] }---------{ commonServices.GetLotteryAvgV5().R3}");
+                Console.WriteLine($"R4    {Consts.FRRB[4] }---------{ commonServices.GetLotteryAvgV5().R4}"); 
+                Console.WriteLine($"R5    {Consts.FRRB[5] }---------{ commonServices.GetLotteryAvgV5().R5}");
+                Console.WriteLine($"R6    {Consts.FRRB[6] }---------{ commonServices.GetLotteryAvgV5().R6}");
+                Console.WriteLine($"B1    {Consts.FRRB[7] }---------{ commonServices.GetLotteryAvgV5().B1}");
+            }
         }
     }
 }

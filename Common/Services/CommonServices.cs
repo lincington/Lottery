@@ -14,14 +14,12 @@ namespace Common.Services
         private int[] N16 = Consts.Consts.N16;
 
         ConcurrentDictionary<int, double> D16  = new ConcurrentDictionary<int, double>();
-        ConcurrentDictionary<int,double> D33 = new ConcurrentDictionary<int,double>();
-        LotteryAvg lotteryAvg = new LotteryAvg ();  
+        ConcurrentDictionary<int,double>  D33 = new ConcurrentDictionary<int,double>();
+        LotteryAvg lotteryAvg = new LotteryAvg();   
         public CommonServices() {
-           // SQLServerHelper sQLServerHelper = new SQLServerHelper();
-           //List<Lottery> SDD  = sQLServerHelper.GetAllLotteries() ;
             MysqlHelper mysqlHelper = new MysqlHelper();
             List<Lottery> SDD = mysqlHelper.GetAllLotteries();
-            lotteryAvg = mysqlHelper.GetAvg();
+              lotteryAvg = mysqlHelper.GetAllLotteriesAvg();
             int totalCount = SDD.Count;
             SDD.ForEach(lotteries => {
                List<int> num33 = N33.ToList();
@@ -48,6 +46,7 @@ namespace Common.Services
                     }
                 }
             });
+        
         }
     
         public double[] GetE6()
@@ -67,6 +66,11 @@ namespace Common.Services
         public ConcurrentDictionary<int, double> GetD33()
         {
             return D33;
+        }
+
+        public  LotteryAvg GetLotteryAvgV5()
+        {
+            return   lotteryAvg;
         }
     }
 }

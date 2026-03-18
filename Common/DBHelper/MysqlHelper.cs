@@ -1,6 +1,8 @@
 ﻿using Common.Models;
 using Dapper;
+using Microsoft.Data.SqlClient;
 using MySql.Data.MySqlClient;
+using NUnit.Framework.Internal;
 using System.Text.Json;
 
 namespace Common.DBHelper
@@ -486,31 +488,37 @@ namespace Common.DBHelper
             }
         }
 
-
-        public LotteryAvg GetAvg()
+        public   LotteryAvg GetAllLotteriesAvg()
         {
             using (var connection = new MySqlConnection(connectionString))
             {
-                string sql = $@"SELECT 
-                ROUND(AVG(FR1 * 1.0), 6)  as FR1 ,
-                ROUND(AVG(FR2 * 1.0), 6)  as FR2,
-                ROUND(AVG(FR3 * 1.0), 6)  as FR3,
-                ROUND(AVG(FR4 * 1.0), 6)  as FR4,
-                ROUND(AVG(FR5 * 1.0), 6)  as FR5,
-                ROUND(AVG(FR6 * 1.0), 6)  as FR6,  
-                ROUND(AVG(R1 * 1.0), 6)  as R1,
-                ROUND(AVG(R2 * 1.0), 6)  as R2,
-                ROUND(AVG(R3 * 1.0), 6)  as R3,
-                ROUND(AVG(R4 * 1.0), 6)  as R4,
-                ROUND(AVG(R5 * 1.0), 6)  as R5,
-                ROUND(AVG(R6 * 1.0), 6)  as R6,
-                ROUND(AVG(B1 * 1.0), 6)  as B1   
-                from Lottery   ";        
-                connection.Open();  
-                LotteryAvg lotteryAvg = connection.Query<LotteryAvg>(sql).FirstOrDefault();
+                string sql = @"SELECT  
+ROUND(AVG(FR1 * 1.0), 6)  as FR1 ,
+ROUND(AVG(FR2 * 1.0), 6)  as FR2,
+ROUND(AVG(FR3 * 1.0), 6)  as FR3,
+ROUND(AVG(FR4 * 1.0), 6)  as FR4,
+ROUND(AVG(FR5 * 1.0), 6)  as FR5,
+ROUND(AVG(FR6 * 1.0), 6)  as FR6,  
+ROUND(AVG(R1 * 1.0), 6)  as R1,
+ROUND(AVG(R2 * 1.0), 6)  as R2,
+ROUND(AVG(R3 * 1.0), 6)  as R3,
+ROUND(AVG(R4 * 1.0), 6)  as R4,
+ROUND(AVG(R5 * 1.0), 6)  as R5,
+ROUND(AVG(R6 * 1.0), 6)  as R6,
+ROUND(AVG(B1 * 1.0), 6)  as B1   
+FROM lottery";
+                connection.Open();
 
-                return lotteryAvg;
-              }
+              LotteryAvg? lotteryAvg = connection.Query<LotteryAvg>(sql).FirstOrDefault();
+            //    string sqlinsert = @"
+            //INSERT INTO LotteryAvg
+            //(FR1, FR2, FR3, FR4, FR5, FR6, R1, R2, R3, R4, R5, R6, B1)
+            //VALUES
+            //(@FR1, @FR2, @FR3, @FR4, @FR5, @FR6, @R1, @R2, @R3, @R4, @R5, @R6, @B1);";
+
+            //    connection.Execute(sqlinsert, lotteryAvg);
+           return lotteryAvg;
+            }
         }
     }
 

@@ -15,5 +15,17 @@
         public static readonly int[] N33 = new int[33] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
         public static readonly int[] N16 = new int[16] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
 
+        public static readonly double[] FRRB = new double[9] 
+        {   
+            17.0000,
+            4.855883788 ,  9.716648983 ,14.57501839, 
+            19.43288703 ,24.29393144, 29.15008352 ,
+            8.500204555 ,
+            110.52
+        };
+
+        public static readonly double RedTheoValue =6/33;
+        public static readonly double BlueTheoValue = 1 / 16;
+
     }
 }
