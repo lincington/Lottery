@@ -20,17 +20,19 @@ namespace Common.Services
             MysqlHelper mysqlHelper = new MysqlHelper();
             List<Lottery> SDD = mysqlHelper.GetAllLotteries();
               lotteryAvg = mysqlHelper.GetAllLotteriesAvg();
-            int totalCount = SDD.Count;
+            int totalCount = SDD.Count;     
+   
             SDD.ForEach(lotteries => {
-               List<int> num33 = N33.ToList();
-               num33.RemoveAll(x => lotteries.FR1 == x || lotteries.FR2 == x || lotteries.FR3 == x || lotteries.FR4 == x || lotteries.FR5 == x || lotteries.FR6 == x);
+                 List<int> num33 = N33.ToList();
+                num33.RemoveAll(x => lotteries.FR1 == x || lotteries.FR2 == x || lotteries.FR3 == x || lotteries.FR4 == x || lotteries.FR5 == x || lotteries.FR6 == x);
                 foreach (var item in num33){
                      if (D33.ContainsKey(item))
                      {
-                          D33[item] = D33[item] + (double) lotteries.ID / totalCount;
-                     }else
+                          D33[item] = D33[item] +((double) lotteries.ID / totalCount  *(lotteries.ID/33)) ;
+                     }
+                    else
                      {
-                          D33.TryAdd(item, (double)lotteries.ID/ totalCount);
+                          D33.TryAdd(item, ((double)lotteries.ID / totalCount * (lotteries.ID / 33)));
                      }
                 }
                 List<int> num16 = N16.ToList();
@@ -39,10 +41,10 @@ namespace Common.Services
                 {
                     if (D16.ContainsKey(item))
                     {
-                        D16[item] = D16[item] + (double)lotteries.ID / totalCount;
+                        D16[item] = D16[item] + ((double)lotteries.ID / totalCount * (lotteries.ID / 16));
                     }else
                     {
-                        D16.TryAdd(item, (double)lotteries.ID / totalCount);
+                        D16.TryAdd(item, ((double)lotteries.ID / totalCount * (lotteries.ID / 16)));
                     }
                 }
             });
