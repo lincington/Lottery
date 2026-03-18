@@ -88,6 +88,9 @@ namespace EarthAnalysis
         public static extern int ReturnValue(byte r1, byte r2, byte r3, byte r4, byte r5, byte r6, byte b1);
 
     }
+    
+    
+    
     public class Program
     {
        public  static  void  Main(string[] args)
