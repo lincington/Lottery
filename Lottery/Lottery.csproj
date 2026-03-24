@@ -9,10 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="3D.txt" />
+    <None Remove="7D.txt" />
+    <None Remove="lottery.txt" />
     <None Remove="SuperLotto.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="3D.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="7D.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lottery.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SuperLotto.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

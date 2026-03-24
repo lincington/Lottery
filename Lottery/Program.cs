@@ -136,18 +136,18 @@ namespace Lottery
             //}
             #endregion
 
-    
+
+            MysqlHelper.SevenLotteryParseFile();
+            MysqlHelper.Welfare3dParseFile();
             // 读取并解析所有行
             var records = MysqlHelper.ParseFile("SuperLotto.txt");
-
             if (records.Count == 0)
             {
                 Console.WriteLine("没有有效数据，退出。");
                 return;
             }
-
             // 批量插入
-            MysqlHelper. InsertRecords( records);
+            MysqlHelper.InsertRecords(records);
 
             Console.ReadLine(); 
 
