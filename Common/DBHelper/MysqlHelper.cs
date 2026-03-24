@@ -32,7 +32,127 @@ namespace Common.DBHelper
         {
 
         }
-        public  bool GeTtest()
+
+
+
+        /// <summary>
+        /// 解析文本文件，返回 SuperLotto 对象列表
+        /// </summary>
+        public static List<SuperLotto> ParseFile(string filePath)
+        {
+            var list = new List<SuperLotto>();
+            int lineNo = 0;
+
+            using (var reader = new StreamReader(filePath, Encoding.UTF8))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    lineNo++;
+                    line = line.Trim();
+                    if (string.IsNullOrEmpty(line)) continue;
+
+                    // 按制表符分割
+                    string[] parts = line.Split('\t');
+                    if (parts.Length < 3)
+                    {
+                        Console.WriteLine($"第{lineNo}行格式错误（字段数不足）: {line}");
+                        continue;
+                    }
+
+                    // 1. 期号
+                    if (!int.TryParse(parts[0].Trim(), out int no))
+                    {
+                        Console.WriteLine($"第{lineNo}行期号无效: {parts[0]}");
+                        continue;
+                    }
+
+                    // 2. 前区 5 个号码
+                    string frontStr = parts[1].Trim();
+                    string[] frontNums = frontStr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (frontNums.Length != 5)
+                    {
+                        Console.WriteLine($"第{lineNo}行前区号码数量不正确: {frontStr}");
+                        continue;
+                    }
+                    if (!int.TryParse(frontNums[0], out int b1) ||
+                        !int.TryParse(frontNums[1], out int b2) ||
+                        !int.TryParse(frontNums[2], out int b3) ||
+                        !int.TryParse(frontNums[3], out int b4) ||
+                        !int.TryParse(frontNums[4], out int b5))
+                    {
+                        Console.WriteLine($"第{lineNo}行前区号码解析失败: {frontStr}");
+                        continue;
+                    }
+
+                    // 3. 后区 2 个号码
+                    string backStr = parts[2].Trim();
+                    string[] backNums = backStr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (backNums.Length != 2)
+                    {
+                        Console.WriteLine($"第{lineNo}行后区号码数量不正确: {backStr}");
+                        continue;
+                    }
+                    if (!int.TryParse(backNums[0], out int a1) ||
+                        !int.TryParse(backNums[1], out int a2))
+                    {
+                        Console.WriteLine($"第{lineNo}行后区号码解析失败: {backStr}");
+                        continue;
+                    }
+
+                    list.Add(new SuperLotto
+                    {
+                        NO = no,
+                        B1 = b1,
+                        B2 = b2,
+                        B3 = b3,
+                        B4 = b4,
+                        B5 = b5,
+                        A1 = a1,
+                        A2 = a2
+                    });
+                }
+            }
+
+            Console.WriteLine($"共解析 {list.Count} 条有效数据。");
+            return list;
+        }
+
+        /// <summary>
+        /// 使用 Dapper 将数据插入数据库（带事务）
+        /// </summary>
+        public static void InsertRecords( List<SuperLotto> records)
+        {
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        string sql = @"INSERT INTO superlotto (NO, B1, B2, B3, B4, B5, A1, A2) 
+                                   VALUES (@NO, @B1, @B2, @B3, @B4, @B5, @A1, @A2)";
+
+                        int affected = connection.Execute(sql, records, transaction);
+                        transaction.Commit();
+
+                        Console.WriteLine($"成功插入 {affected} 条记录。");
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        Console.WriteLine($"插入失败: {ex.Message}");
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+        public bool GeTtest()
         {
             Check();
             return true;

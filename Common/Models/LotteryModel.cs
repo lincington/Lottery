@@ -182,4 +182,18 @@
         public int? MaxM { get; set; }
     }
 
+    public class SuperLotto
+    {
+        public int Id { get; set; }           // 自增主键，插入时忽略
+        public int NO { get; set; }
+        public int B1 { get; set; }
+        public int B2 { get; set; }
+        public int B3 { get; set; }
+        public int B4 { get; set; }
+        public int B5 { get; set; }
+        public int A1 { get; set; }
+        public int A2 { get; set; }
+    }
+
+
 }
