@@ -1,10 +1,5 @@
-﻿using Common;
-using Common.Contracts;
-using Common.DBHelper;
+﻿using Common.Contracts;
 using CommunityToolkit.Mvvm.ComponentModel;
-using ScottPlot;
-using ScottPlot.WPF;
-using System.Windows.Threading;
 
 namespace CommonModules.LotteryModule
 {

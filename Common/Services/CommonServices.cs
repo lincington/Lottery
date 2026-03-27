@@ -48,7 +48,6 @@ namespace Common.Services
                     }
                 }
             });
-        
         }
     
         public double[] GetE6()

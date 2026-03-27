@@ -1,5 +1,4 @@
 ﻿using Common.Consts;
-using Common.DBHelper;
 using Common.Services;
 
 namespace Lottery
@@ -136,20 +135,19 @@ namespace Lottery
             //}
             #endregion
 
-
-            MysqlHelper.SevenLotteryParseFile();
-            MysqlHelper.Welfare3dParseFile();
-            // 读取并解析所有行
-            var records = MysqlHelper.ParseFile("SuperLotto.txt");
-            if (records.Count == 0)
-            {
-                Console.WriteLine("没有有效数据，退出。");
-                return;
-            }
-            // 批量插入
-            MysqlHelper.InsertRecords(records);
-
-            Console.ReadLine(); 
+           // MysqlHelper.LotteryParseFile();
+            //MysqlHelper.SevenLotteryParseFile();
+            //MysqlHelper.Welfare3dParseFile();
+            //// 读取并解析所有行
+            //var records = MysqlHelper.ParseFile("SuperLotto.txt");
+            //if (records.Count == 0)
+            //{
+            //    Console.WriteLine("没有有效数据，退出。");
+            //    return;
+            //}
+            //// 批量插入
+            //MysqlHelper.InsertRecords(records);
+           //   Console.ReadLine(); 
 
             CommonServices commonServices = new CommonServices();
             foreach (var item in commonServices.GetD33().OrderByDescending(x => x.Value))
@@ -161,21 +159,20 @@ namespace Lottery
             {
                 Console.WriteLine(item.Key.ToString("00") + "----" + item.Value.ToString("0.0000"));
             }
-            {
-                Console.WriteLine($"FR1   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR1 }");
-                Console.WriteLine($"FR2   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR2 }");
-                Console.WriteLine($"FR3   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR3 }");
-                Console.WriteLine($"FR4   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR4 }");
-                Console.WriteLine($"FR5   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR5 }");
-                Console.WriteLine($"FR6   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR6 }");
-                Console.WriteLine($"R1    {Consts.FRRB[1] }---------{ commonServices.GetLotteryAvgV5().R1}");
-                Console.WriteLine($"R2    {Consts.FRRB[2] }---------{ commonServices.GetLotteryAvgV5().R2}");
-                Console.WriteLine($"R3    {Consts.FRRB[3] }---------{ commonServices.GetLotteryAvgV5().R3}");
-                Console.WriteLine($"R4    {Consts.FRRB[4] }---------{ commonServices.GetLotteryAvgV5().R4}"); 
-                Console.WriteLine($"R5    {Consts.FRRB[5] }---------{ commonServices.GetLotteryAvgV5().R5}");
-                Console.WriteLine($"R6    {Consts.FRRB[6] }---------{ commonServices.GetLotteryAvgV5().R6}");
-                Console.WriteLine($"B1    {Consts.FRRB[7] }---------{ commonServices.GetLotteryAvgV5().B1}");
-            }
+            Console.WriteLine($"FR1   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR1 }");
+            Console.WriteLine($"FR2   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR2 }");
+            Console.WriteLine($"FR3   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR3 }");
+            Console.WriteLine($"FR4   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR4 }");
+            Console.WriteLine($"FR5   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR5 }");
+            Console.WriteLine($"FR6   {Consts.FRRB[0] }---------{ commonServices.GetLotteryAvgV5().FR6 }");
+            Console.WriteLine($"R1    {Consts.FRRB[1] }---------{ commonServices.GetLotteryAvgV5().R1}");
+            Console.WriteLine($"R2    {Consts.FRRB[2] }---------{ commonServices.GetLotteryAvgV5().R2}");
+            Console.WriteLine($"R3    {Consts.FRRB[3] }---------{ commonServices.GetLotteryAvgV5().R3}");
+            Console.WriteLine($"R4    {Consts.FRRB[4] }---------{ commonServices.GetLotteryAvgV5().R4}"); 
+            Console.WriteLine($"R5    {Consts.FRRB[5] }---------{ commonServices.GetLotteryAvgV5().R5}");
+            Console.WriteLine($"R6    {Consts.FRRB[6] }---------{ commonServices.GetLotteryAvgV5().R6}");
+            Console.WriteLine($"B1    {Consts.FRRB[7] }---------{ commonServices.GetLotteryAvgV5().B1}");
+            
         }
     }
 }

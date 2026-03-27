@@ -26,14 +26,10 @@ namespace Common.DBHelper
     public class MysqlHelper
     {
         List<int> RedCount = new List<int>(32);
-
-       static  string connectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
+        private  static  string connectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
         public MysqlHelper()
         {
-
         }
-
-
         /// <summary>
         /// 解析文本文件，返回 SuperLotto 对象列表
         /// </summary>
@@ -87,18 +83,13 @@ namespace Common.DBHelper
                     int affectedRows = conn.Execute(insertSql, records);
                     Console.WriteLine($"成功插入 {affectedRows} 条记录。");
                 }
-
             }
             catch (Exception ex)
             {
                 Console.WriteLine("错误: " + ex.Message);
             }
-
             Console.WriteLine("按任意键退出...");
-
         }
-
-
 
         /// <summary>
         /// 解析文本文件，返回 SuperLotto 对象列表
@@ -245,27 +236,19 @@ namespace Common.DBHelper
             Console.WriteLine("按任意键退出...");         
         }
         
-
-      
-
         /// <summary>
         /// 解析文本文件，返回 SuperLotto 对象列表
         /// </summary>
         public static List<SuperLotto> ParseFile(string filePath)
         {
             var list = new List<SuperLotto>();
-            int lineNo = 0;
-
             using (var reader = new StreamReader(filePath, Encoding.UTF8))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    string[] lines = File.ReadAllLines(filePath);
-                    int successCount = 0;
-
-                        if (string.IsNullOrWhiteSpace(line)) continue;
-
+                        string[] lines = File.ReadAllLines(filePath);
+                       if (string.IsNullOrWhiteSpace(line)) continue;
                         string[] parts = line.Split('\t');
                         if (parts.Length < 14) // 共14列（含期号和日期）
                         {
@@ -287,17 +270,16 @@ namespace Common.DBHelper
                         if (!int.TryParse(parts[11], out int b5)) continue;
                         if (!int.TryParse(parts[12], out int a1)) continue;
                         if (!int.TryParse(parts[13], out int a2)) continue;
-
-
-                        list.Add(new SuperLotto
+                       
+                    list.Add(new SuperLotto
                     {
                         NO = no,
-                            FB1 = fb1,
-                            FB2 = fb2,
-                            FB3 = fb3,
-                            FB4 = fb4,
-                            FB5 = fb5,
-                            B1 = b1,
+                        FB1 = fb1,
+                        FB2 = fb2,
+                        FB3 = fb3,
+                        FB4 = fb4,
+                        FB5 = fb5,
+                        B1 = b1,
                         B2 = b2,
                         B3 = b3,
                         B4 = b4,
