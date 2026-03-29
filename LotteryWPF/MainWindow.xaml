@@ -65,8 +65,8 @@
                     <DataTemplate DataType="{x:Type lottery:LotteryCtrlViewModel}">
                         <lottery:LotteryCtrl/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type lottery:LotteryRealCtrlViewModel}">
-                        <lottery:LotteryRealCtrl/>
+                    <DataTemplate DataType="{x:Type lottery:lotteryCtrlViewModel}">
+                        <lottery:lotteryCtrl/>
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type lottery:LotteryReactiveCtrlViewModel}">
                         <lottery:LotteryReactiveCtrl/>

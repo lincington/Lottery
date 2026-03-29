@@ -12,7 +12,7 @@ namespace Common.DBHelper
         public SQLServerHelper() {
 
         }
-        static string StrConnectionString  = "Server=192.168.2.70,1433; Database=Lottery;User Id=sa;Password=Zhouenlai@305;" +
+        static string StrConnectionString  = "Server=192.168.198.129,1433; Database=Lottery;User Id=sa;Password=Zhouenlai@305;" +
             "Encrypt=false;TrustServerCertificate=true;Pooling=true; Connect Timeout=30;Max Pool Size=100;";
         public static void GetTest2()
         {
@@ -40,13 +40,13 @@ namespace Common.DBHelper
                 {
                     string sql = @$"
                             SELECT  * from (
-                            SELECT COUNT(*) as TT1 FROM lotteryreal  WHERE  B1 <8.5    and ID >= {Sum} -(16*{up}*{i})  and ID < {Sum} -(16*{up}*{i-1}) 
+                            SELECT COUNT(*) as TT1 FROM lottery  WHERE  B1 <8.5    and ID >= {Sum} -(16*{up}*{i})  and ID < {Sum} -(16*{up}*{i-1}) 
                             UNION  ALL
-                            SELECT COUNT(*) as TT2  FROM lotteryreal  WHERE  B1 >8.5 and ID >= {Sum} -(16*{up}*{i})  and ID < {Sum} -(16*{up}*{i - 1}) 
+                            SELECT COUNT(*) as TT2  FROM lottery  WHERE  B1 >8.5 and ID >= {Sum} -(16*{up}*{i})  and ID < {Sum} -(16*{up}*{i - 1}) 
                             UNION  ALL 
-                            SELECT COUNT(*) as TT3  FROM lotteryreal  WHERE ID >= {Sum} -(16*{up}*{i})  and ID < {Sum} -(16*{up}*{i - 1})  
+                            SELECT COUNT(*) as TT3  FROM lottery  WHERE ID >= {Sum} -(16*{up}*{i})  and ID < {Sum} -(16*{up}*{i - 1})  
                             UNION  ALL 
-                            SELECT COUNT(*)/2 as TT4  FROM lotteryreal WHERE ID >= {Sum} -(16*{up}*{i})  and ID < {Sum} -(16*{up}*{i - 1})   ) as fs";
+                            SELECT COUNT(*)/2 as TT4  FROM lottery WHERE ID >= {Sum} -(16*{up}*{i})  and ID < {Sum} -(16*{up}*{i - 1})   ) as fs";
                     List<double> json = connection.Query<double>(sql).ToList();
                     avgDatas.Add( new AvgData()
                     {
@@ -77,7 +77,7 @@ namespace Common.DBHelper
         {
             using (var connection = new SqlConnection(StrConnectionString))
             {
-                string sql = "SELECT * FROM lotteryreal";
+                string sql = "SELECT * FROM lottery";
                 connection.Open();
                 return connection.Query<Lottery>(sql).ToList();
             }
@@ -92,7 +92,7 @@ namespace Common.DBHelper
                     connection.Open();
                     for (int i = 1; i < NUM; i++)
                     {
-                        string sql = $@"SELECT ROUND(AVG({Numdata} * 1.0), 6)   FROM  lotteryreal WHERE    ID > (3361-{NUM-i})";
+                        string sql = $@"SELECT ROUND(AVG({Numdata} * 1.0), 6)   FROM  lottery WHERE    ID > (3361-{NUM-i})";
                         double json = connection.Query<double>(sql).FirstOrDefault();
 
                         if (json.ToString("0.0")== ThData)
@@ -117,7 +117,7 @@ namespace Common.DBHelper
                 using (var connection = new SqlConnection(StrConnectionString))
                 {
                     connection.Open();
-                    string sql = $@"SELECT ROUND(AVG({Numdata} * 1.0), 6)   FROM  lotteryreal WHERE    ID > (3361-{NUM})";
+                    string sql = $@"SELECT ROUND(AVG({Numdata} * 1.0), 6)   FROM  lottery WHERE    ID > (3361-{NUM})";
                     values = connection.Query<double>(sql).FirstOrDefault();
                 }
             }
@@ -133,7 +133,7 @@ namespace Common.DBHelper
             using (var connection = new SqlConnection(StrConnectionString))     {
                 connection.Open();
                 for (int J = 1; J < 7; J++)   {
-                    string sql = $"SELECT   FR{J}  AS SUMDATA  FROM lotteryreal";
+                    string sql = $"SELECT   FR{J}  AS SUMDATA  FROM lottery";
                     doubles.AddRange(connection.Query<double>(sql).ToList());
                 }
             }
@@ -236,7 +236,7 @@ namespace Common.DBHelper
                 {
                     for (int j = 1; j < 7; j++)
                     {
-                        string sql = $"SELECT   FR{j}  AS SUMDATA  FROM lotteryreal  WHERE  ID ={i + 1}";
+                        string sql = $"SELECT   FR{j}  AS SUMDATA  FROM lottery  WHERE  ID ={i + 1}";
                         List<double> DD = connection.Query<double>(sql).ToList();
                         if (DD.Count > 0)
                         {
@@ -250,7 +250,7 @@ namespace Common.DBHelper
             using (var connection = new SqlConnection(StrConnectionString))
             {
                 connection.Open();
-                string sql = $"SELECT   B1  AS SUMDATA  FROM lotteryreal ";
+                string sql = $"SELECT   B1  AS SUMDATA  FROM lottery ";
                 ASdoubles.AddRange(connection.Query<double>(sql).ToList());
             } 
             
@@ -319,7 +319,7 @@ namespace Common.DBHelper
             {
                 for (int j = 1; j < 7; j++)
             {  
-                string sql = $"SELECT   FR{j}  AS SUMDATA  FROM lotteryreal  WHERE  ID ={i+1}";
+                string sql = $"SELECT   FR{j}  AS SUMDATA  FROM lottery  WHERE  ID ={i+1}";
                 List<double> DD = connection.Query<double>(sql).ToList();
                 if (DD.Count > 0)
                 {
@@ -421,7 +421,7 @@ namespace Common.DBHelper
             using (var connectiond = new SqlConnection(StrConnectionString))
             {
                connectiond.Open();
-               string sql = $"SELECT   B1  AS SUMDATA  FROM lotteryreal ";
+               string sql = $"SELECT   B1  AS SUMDATA  FROM lottery ";
                ASdoubles.AddRange(connection.Query<double>(sql).ToList());
              }
 

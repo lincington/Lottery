@@ -20,11 +20,10 @@ namespace CommonLib
 
         private void DiscoverModules()
         {
-            // 通过反射或手动注册发现模块
             var LotteryCtrl = _serviceProvider.GetRequiredService<LotteryCtrlViewModel>();
             AvailableModules.Add(LotteryCtrl);
-            var LotteryRealCtrl = _serviceProvider.GetRequiredService<LotteryRealCtrlViewModel>();
-            AvailableModules.Add(LotteryRealCtrl);
+            var lotteryCtrl = _serviceProvider.GetRequiredService<lotteryCtrlViewModel>();
+            AvailableModules.Add(lotteryCtrl);
             var LotteryReactiveCtrl = _serviceProvider.GetRequiredService<LotteryReactiveCtrlViewModel>();
             AvailableModules.Add(LotteryReactiveCtrl);
             var LotteryHistoryCtrl = _serviceProvider.GetRequiredService<LotteryHistoryCtrlViewModel>();
@@ -32,9 +31,9 @@ namespace CommonLib
 
             var LotteryRedCtrl = _serviceProvider.GetRequiredService<LotteryRedCtrlViewModel>();
             AvailableModules.Add(LotteryRedCtrl);
-
             var LotteryBuleCtrl = _serviceProvider.GetRequiredService<LotteryBuleCtrlViewModel>();
             AvailableModules.Add(LotteryBuleCtrl);
+
         }
 
         public ObservableObject? GetModuleViewModel(string moduleName)

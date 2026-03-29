@@ -12,7 +12,6 @@ namespace CommonModules.LotteryModule
     {
         public string ModuleName => "蓝球数据";
 
-        
         public ObservableObject GetViewModel() => this;
 
         [ObservableProperty]
@@ -21,7 +20,6 @@ namespace CommonModules.LotteryModule
         public LotteryBuleCtrlViewModel()
         {
             LoadDataCommand = new AsyncRelayCommand(LoadDataAsync);
-
             _avg = new ObservableCollection<AvgData>();
 
         }

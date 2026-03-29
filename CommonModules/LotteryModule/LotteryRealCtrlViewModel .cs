@@ -9,7 +9,7 @@ using System.Windows.Threading;
 
 namespace CommonModules.LotteryModule
 {
-    public partial class LotteryRealCtrlViewModel : ObservableObject, IModule
+    public partial class lotteryCtrlViewModel : ObservableObject, IModule
     {
         public string ModuleName => "实时数据";
         public ObservableObject GetViewModel() => this;
@@ -17,7 +17,7 @@ namespace CommonModules.LotteryModule
         [ObservableProperty]
         private  WpfPlot _red;
         DispatcherTimer readDataTimer = new  DispatcherTimer();
-        public LotteryRealCtrlViewModel()
+        public lotteryCtrlViewModel()
         {
             _red = new WpfPlot();   
             readDataTimer.Tick += ReadDataTimer_Tick;

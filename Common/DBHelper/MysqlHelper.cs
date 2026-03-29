@@ -1,8 +1,8 @@
 ﻿using Common.Models;
 using Dapper;
-using Microsoft.Data.SqlClient;
 using MySql.Data.MySqlClient;
-using NUnit.Framework.Internal;
+using Org.BouncyCastle.Asn1.Pkcs;
+using System.Data;
 using System.Text.Json;
 
 namespace Common.DBHelper
@@ -26,83 +26,259 @@ namespace Common.DBHelper
     public class MysqlHelper
     {
         List<int> RedCount = new List<int>(32);
-
-       static  string connectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
+        private  static  string connectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
         public MysqlHelper()
         {
+        }
+        /// <summary>
+        /// 解析文本文件，返回 SuperLotto 对象列表
+        /// </summary>
+        public static void LotteryParseFile()
+        {
+            try
+            {
+                var records = new List<Lottery>();
+                string[] lines = File.ReadAllLines("lottery.txt");
+                foreach (var line in lines)
+                {
+                    string[] parts = line.Split('\t');
+                    if (parts.Length != 15)
+                    {
+                        Console.WriteLine($"字段数不正确，实际 {parts.Length}，期望 15");
+                        return;
+                    }
+                    records.Add(new  Lottery
+                    {
+                        No = int.Parse(parts[0]),
+                        Date = parts[1],
+                        FR1 = int.Parse(parts[2]),
+                        FR2 = int.Parse(parts[3]),
+                        FR3 = int.Parse(parts[4]),
+                        FR4 = int.Parse(parts[5]),
+                        FR5 = int.Parse(parts[6]),
+                        FR6 = int.Parse(parts[7]),
+                        R1 = int.Parse(parts[8]),
+                        R2 = int.Parse(parts[9]),
+                        R3 = int.Parse(parts[10]),
+                        R4 = int.Parse(parts[11]),
+                        R5 = int.Parse(parts[12]),
+                        R6 = int.Parse(parts[13]),
+                        B1 = int.Parse(parts[14])
+                    });
+                }
+                records.Reverse();
 
+                // 批量插入
+                string insertSql = @"
+            INSERT INTO lottery 
+            (No, Date, FR1, FR2, FR3, FR4, FR5, FR6,
+             R1, R2, R3, R4, R5, R6, B1)
+            VALUES 
+            (@No, @Date, @FR1, @FR2, @FR3, @FR4, @FR5, @FR6,
+             @R1, @R2, @R3, @R4, @R5, @R6,  @B1)";
+
+                using (var conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    int affectedRows = conn.Execute(insertSql, records);
+                    Console.WriteLine($"成功插入 {affectedRows} 条记录。");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("错误: " + ex.Message);
+            }
+            Console.WriteLine("按任意键退出...");
         }
 
+        /// <summary>
+        /// 解析文本文件，返回 SuperLotto 对象列表
+        /// </summary>
+        public static void SevenLotteryParseFile()
+        {
+            try
+            {
+                var records = new List<SevenLottery>();
 
+                string[] lines = File.ReadAllLines("7D.txt");
+                foreach (var line in lines)
+                {
+                    string[] parts = line.Split('\t');
+                    if (parts.Length != 17) continue; // 确保字段数正确
 
+                    records.Add(new SevenLottery
+                    {
+                        No = int.Parse(parts[0]),
+                        Date = parts[1],
+                        FR1 = int.Parse(parts[2]),
+                        FR2 = int.Parse(parts[3]),
+                        FR3 = int.Parse(parts[4]),
+                        FR4 = int.Parse(parts[5]),
+                        FR5 = int.Parse(parts[6]),
+                        FR6 = int.Parse(parts[7]),
+                        FR7 = int.Parse(parts[8]),
+                        R1 = int.Parse(parts[9]),
+                        R2 = int.Parse(parts[10]),
+                        R3 = int.Parse(parts[11]),
+                        R4 = int.Parse(parts[12]),
+                        R5 = int.Parse(parts[13]),
+                        R6 = int.Parse(parts[14]),
+                        R7 = int.Parse(parts[15]),
+                        B1 = int.Parse(parts[16])
+                    });
+                }
+               records.Reverse(); 
+
+                // 批量插入
+                string insertSql = @"
+            INSERT INTO sevenlottery 
+            (No, Date, FR1, FR2, FR3, FR4, FR5, FR6, FR7, 
+             R1, R2, R3, R4, R5, R6, R7, B1)
+            VALUES 
+            (@No, @Date, @FR1, @FR2, @FR3, @FR4, @FR5, @FR6, @FR7,
+             @R1, @R2, @R3, @R4, @R5, @R6, @R7, @B1)";
+
+                using (var conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    int affectedRows = conn.Execute(insertSql, records);
+                    Console.WriteLine($"成功插入 {affectedRows} 条记录。");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("错误: " + ex.Message);
+            }
+
+            Console.WriteLine("按任意键退出...");
+         
+        }
+
+        /// <summary>
+        /// 解析文本文件，返回 SuperLotto 对象列表
+        /// </summary>
+        public static void Welfare3dParseFile()
+        {    
+            try
+            {
+                using (IDbConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    Console.WriteLine("数据库连接成功。");
+                    var records = new List<Welfare3d>();
+                    string[] lines = File.ReadAllLines("3D.txt");
+                    int successCount = 0;
+
+                    foreach (string line in lines)
+                    {
+                        if (string.IsNullOrWhiteSpace(line)) continue;
+                        string[] parts = line.Split('\t');
+                        if (parts.Length < 3)
+                        {
+                            Console.WriteLine($"格式错误，跳过: {line}");
+                            continue;
+                        }
+                        // 期号
+                        if (!int.TryParse(parts[0], out int no))
+                        {
+                            Console.WriteLine($"期号解析失败: {parts[0]}");
+                            continue;
+                        }
+                        // 开奖号码（例如 "1 4 4"）
+                        string[] digits = parts[1].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (digits.Length != 3)
+                        {
+                            Console.WriteLine($"开奖号码格式错误: {parts[1]}");
+                            continue;
+                        }
+                        if (!int.TryParse(digits[0], out int d1) ||
+                            !int.TryParse(digits[1], out int d2) ||
+                            !int.TryParse(digits[2], out int d3))
+                        {
+                            Console.WriteLine($"开奖号码数字解析失败: {parts[1]}");
+                            continue;
+                        }
+
+                        // 和值
+                        if (!int.TryParse(parts[2], out int sum))
+                        {
+                            Console.WriteLine($"和值解析失败: {parts[2]}");
+                            continue;
+                        }
+
+                        records.Add(new Welfare3d
+                        {
+                            NO = no,
+                            D1 = d1,
+                            D2 = d2,
+                            D3 = d3,
+                            S = sum
+                        });
+                        successCount++;
+                    }
+
+                    records.Reverse();
+
+                    // 插入数据（假设 ID 为自增列，因此不插入 ID）
+                    string sql = @"
+                            INSERT INTO welfare3d (NO, D1, D2, D3, S)
+                            VALUES (@No, @D1, @D2, @D3, @S)";
+
+                    conn.Execute(sql, records);
+                    Console.WriteLine($"导入完成，成功插入 {successCount} 条记录。");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("错误: " + ex.Message);
+            }
+            Console.WriteLine("按任意键退出...");         
+        }
+        
         /// <summary>
         /// 解析文本文件，返回 SuperLotto 对象列表
         /// </summary>
         public static List<SuperLotto> ParseFile(string filePath)
         {
             var list = new List<SuperLotto>();
-            int lineNo = 0;
-
             using (var reader = new StreamReader(filePath, Encoding.UTF8))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    lineNo++;
-                    line = line.Trim();
-                    if (string.IsNullOrEmpty(line)) continue;
+                        string[] lines = File.ReadAllLines(filePath);
+                       if (string.IsNullOrWhiteSpace(line)) continue;
+                        string[] parts = line.Split('\t');
+                        if (parts.Length < 14) // 共14列（含期号和日期）
+                        {
+                            Console.WriteLine($"格式错误，跳过: {line}");
+                            continue;
+                        }
 
-                    // 按制表符分割
-                    string[] parts = line.Split('\t');
-                    if (parts.Length < 3)
-                    {
-                        Console.WriteLine($"第{lineNo}行格式错误（字段数不足）: {line}");
-                        continue;
-                    }
-
-                    // 1. 期号
-                    if (!int.TryParse(parts[0].Trim(), out int no))
-                    {
-                        Console.WriteLine($"第{lineNo}行期号无效: {parts[0]}");
-                        continue;
-                    }
-
-                    // 2. 前区 5 个号码
-                    string frontStr = parts[1].Trim();
-                    string[] frontNums = frontStr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    if (frontNums.Length != 5)
-                    {
-                        Console.WriteLine($"第{lineNo}行前区号码数量不正确: {frontStr}");
-                        continue;
-                    }
-                    if (!int.TryParse(frontNums[0], out int b1) ||
-                        !int.TryParse(frontNums[1], out int b2) ||
-                        !int.TryParse(frontNums[2], out int b3) ||
-                        !int.TryParse(frontNums[3], out int b4) ||
-                        !int.TryParse(frontNums[4], out int b5))
-                    {
-                        Console.WriteLine($"第{lineNo}行前区号码解析失败: {frontStr}");
-                        continue;
-                    }
-
-                    // 3. 后区 2 个号码
-                    string backStr = parts[2].Trim();
-                    string[] backNums = backStr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    if (backNums.Length != 2)
-                    {
-                        Console.WriteLine($"第{lineNo}行后区号码数量不正确: {backStr}");
-                        continue;
-                    }
-                    if (!int.TryParse(backNums[0], out int a1) ||
-                        !int.TryParse(backNums[1], out int a2))
-                    {
-                        Console.WriteLine($"第{lineNo}行后区号码解析失败: {backStr}");
-                        continue;
-                    }
-
+                        // 解析各字段（注意：文件中的列顺序）
+                        if (!int.TryParse(parts[0], out int no)) continue;
+                        if (!int.TryParse(parts[2], out int fb1)) continue;
+                        if (!int.TryParse(parts[3], out int fb2)) continue;
+                        if (!int.TryParse(parts[4], out int fb3)) continue;
+                        if (!int.TryParse(parts[5], out int fb4)) continue;
+                        if (!int.TryParse(parts[6], out int fb5)) continue;
+                        if (!int.TryParse(parts[7], out int b1)) continue;
+                        if (!int.TryParse(parts[8], out int b2)) continue;
+                        if (!int.TryParse(parts[9], out int b3)) continue;
+                        if (!int.TryParse(parts[10], out int b4)) continue;
+                        if (!int.TryParse(parts[11], out int b5)) continue;
+                        if (!int.TryParse(parts[12], out int a1)) continue;
+                        if (!int.TryParse(parts[13], out int a2)) continue;
+                       
                     list.Add(new SuperLotto
                     {
                         NO = no,
+                        FB1 = fb1,
+                        FB2 = fb2,
+                        FB3 = fb3,
+                        FB4 = fb4,
+                        FB5 = fb5,
                         B1 = b1,
                         B2 = b2,
                         B3 = b3,
@@ -125,13 +301,14 @@ namespace Common.DBHelper
         {
             using (var connection = new MySqlConnection(connectionString))
             {
+                records.Reverse();
                 connection.Open();
                 using (var transaction = connection.BeginTransaction())
                 {
                     try
                     {
-                        string sql = @"INSERT INTO superlotto (NO, B1, B2, B3, B4, B5, A1, A2) 
-                                   VALUES (@NO, @B1, @B2, @B3, @B4, @B5, @A1, @A2)";
+                        string sql = @"INSERT INTO superlotto (NO, FB1, FB2, FB3, FB4, FB5,B1, B2, B3, B4, B5, A1, A2) 
+                                   VALUES (@NO, @FB1, @FB2, @FB3, @FB4, @FB5, @B1, @B2, @B3, @B4, @B5, @A1, @A2)";
 
                         int affected = connection.Execute(sql, records, transaction);
                         transaction.Commit();
@@ -146,9 +323,6 @@ namespace Common.DBHelper
                 }
             }
         }
-
-
-
 
 
 

@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace CommonModules.LotteryModule
 {
     /// <summary>
-    /// LotteryRealCtrl.xaml 的交互逻辑
+    /// lotteryCtrl.xaml 的交互逻辑
     /// </summary>
-    public partial class LotteryRealCtrl : UserControl
+    public partial class lotteryCtrl : UserControl
     {
-        public LotteryRealCtrl()
+        public lotteryCtrl()
         {
             InitializeComponent();
-            this.DataContext = new LotteryRealCtrlViewModel();  
+            this.DataContext = new lotteryCtrlViewModel();  
         }
     }
 }

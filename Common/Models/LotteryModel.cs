@@ -186,6 +186,11 @@
     {
         public int Id { get; set; }           // 自增主键，插入时忽略
         public int NO { get; set; }
+        public int FB1 { get; set; }
+        public int FB2 { get; set; }
+        public int FB3 { get; set; }
+        public int FB4 { get; set; }
+        public int FB5 { get; set; }
         public int B1 { get; set; }
         public int B2 { get; set; }
         public int B3 { get; set; }
@@ -195,5 +200,37 @@
         public int A2 { get; set; }
     }
 
+    public class Welfare3d
+    {
+        public int Id { get; set; }           // 自增主键，插入时忽略
+        public int NO { get; set; }
+        public int D1 { get; set; }
+        public int D2 { get; set; }
+        public int D3 { get; set; }
+        public int S { get; set; }
+    
+    }
+
+    public class SevenLottery
+    {
+        public int ID { get; set; }
+        public int No { get; set; }
+        public string Date { get; set; } = "";
+        public int   FR1 { get; set; }
+        public int   FR2 { get; set; }
+        public int   FR3 { get; set; }
+        public int   FR4 { get; set; }
+        public int   FR5 { get; set; }
+        public int   FR6 { get; set; }
+        public int   FR7 { get; set; }
+        public int   R1 { get; set; }
+        public int   R2 { get; set; }
+        public int   R3 { get; set; }
+        public int   R4 { get; set; }
+        public int   R5 { get; set; }
+        public int   R6 { get; set; }
+        public int    R7 { get; set; }
+        public int    B1 { get; set; }
+    }
 
 }
