@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EarthAnalysis
 {
-    public class Class1
+    public class LockTask 
     {
 
       private readonly  object lockA = new object();
