@@ -1,4 +1,5 @@
 ﻿using Common.Consts;
+using Common.DBHelper;
 using Common.Services;
 
 namespace Lottery
@@ -135,7 +136,7 @@ namespace Lottery
             //}
             #endregion
 
-           // MysqlHelper.LotteryParseFile();
+             MysqlHelper.LotteryParseFile();
             //MysqlHelper.SevenLotteryParseFile();
             //MysqlHelper.Welfare3dParseFile();
             //// 读取并解析所有行
