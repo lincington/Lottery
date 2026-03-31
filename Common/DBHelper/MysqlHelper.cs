@@ -68,8 +68,6 @@ namespace Common.DBHelper
                 records.Reverse();
            
                 // 2. 如果不存在，则执行插入
-              
-                  
                 // 批量插入
                 string insertSql = @"
             INSERT INTO lottery 
@@ -86,7 +84,6 @@ namespace Common.DBHelper
                     foreach (var record in records)
                     {
                         int id = record.No; // 假设 No 是唯一标识
-
                         // 1. 检查记录是否存在
                         string checkSql = "SELECT COUNT(1) FROM lottery WHERE Id = @Id";
                         int count = conn.ExecuteScalar<int>(checkSql, new { Id = id });
