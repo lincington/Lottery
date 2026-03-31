@@ -66,10 +66,6 @@ namespace Common.DBHelper
                     });
                 }
                 records.Reverse();
-           
-                // 2. 如果不存在，则执行插入
-              
-                  
                 // 批量插入
                 string insertSql = @"
             INSERT INTO lottery 
@@ -81,21 +77,19 @@ namespace Common.DBHelper
 
                 using (var conn = new MySqlConnection(connectionString))
                 {
-                    conn.Open();
-
-                    foreach (var record in records)
+                     conn.Open();
+                     foreach (var record in records.ToList())
                     {
-                        int id = record.No; // 假设 No 是唯一标识
-
-                        // 1. 检查记录是否存在
-                        string checkSql = "SELECT COUNT(1) FROM lottery WHERE Id = @Id";
+                         int id = record.No; // 假设 No 是唯一标识
+                        string checkSql = "SELECT COUNT(1) FROM lottery WHERE No = @Id";      // 1. 检查记录是否存在
                         int count = conn.ExecuteScalar<int>(checkSql, new { Id = id });
-                        if (count == 0)
+                        if (count != 0)
                         {
-                            int affectedRows = conn.Execute(insertSql, records);
-                            Console.WriteLine($"成功插入 {affectedRows} 条记录。");
+                            records.Remove(record);
                         }
                     }
+                      int affectedRows = conn.Execute(insertSql, records);
+                          Console.WriteLine($"成功插入 {affectedRows} 条记录。");
                    }
             }
             catch (Exception ex)
