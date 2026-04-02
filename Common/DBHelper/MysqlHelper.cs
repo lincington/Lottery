@@ -48,33 +48,19 @@ namespace Common.DBHelper
                     }
                     records.Add(new  Lottery
                     {
-                        No = int.Parse(parts[0]),
-                        Date = parts[1],
-                        FR1 = int.Parse(parts[2]),
-                        FR2 = int.Parse(parts[3]),
-                        FR3 = int.Parse(parts[4]),
-                        FR4 = int.Parse(parts[5]),
-                        FR5 = int.Parse(parts[6]),
-                        FR6 = int.Parse(parts[7]),
-                        R1 = int.Parse(parts[8]),
-                        R2 = int.Parse(parts[9]),
-                        R3 = int.Parse(parts[10]),
-                        R4 = int.Parse(parts[11]),
-                        R5 = int.Parse(parts[12]),
-                        R6 = int.Parse(parts[13]),
-                        B1 = int.Parse(parts[14])
+                        No = int.Parse(parts[0]),Date = parts[1],
+                        FR1 = int.Parse(parts[2]),FR2 = int.Parse(parts[3]),FR3 = int.Parse(parts[4]),FR4 = int.Parse(parts[5]),
+                        FR5 = int.Parse(parts[6]),FR6 = int.Parse(parts[7]),
+                        R1 = int.Parse(parts[8]),R2 = int.Parse(parts[9]),R3 = int.Parse(parts[10]),R4 = int.Parse(parts[11]),
+                        R5 = int.Parse(parts[12]),R6 = int.Parse(parts[13]),B1 = int.Parse(parts[14])
                     });
                 }
                 records.Reverse();
                 // 批量插入
                 string insertSql = @"
-            INSERT INTO lottery 
-            (No, Date, FR1, FR2, FR3, FR4, FR5, FR6,
-             R1, R2, R3, R4, R5, R6, B1)
-            VALUES 
-            (@No, @Date, @FR1, @FR2, @FR3, @FR4, @FR5, @FR6,
-             @R1, @R2, @R3, @R4, @R5, @R6,  @B1)";
-
+                     INSERT INTO lottery 
+                                (No, Date, FR1, FR2, FR3, FR4, FR5, FR6,R1, R2, R3, R4, R5, R6, B1)
+                                VALUES (@No, @Date, @FR1, @FR2, @FR3, @FR4, @FR5, @FR6,@R1, @R2, @R3, @R4, @R5, @R6,  @B1)";
                 using (var conn = new MySqlConnection(connectionString))
                 {
                      conn.Open();
@@ -107,31 +93,17 @@ namespace Common.DBHelper
             try
             {
                 var records = new List<SevenLottery>();
-
                 string[] lines = File.ReadAllLines("7D.txt");
                 foreach (var line in lines)
                 {
                     string[] parts = line.Split('\t');
                     if (parts.Length != 17) continue; // 确保字段数正确
-
                     records.Add(new SevenLottery
                     {
-                        No = int.Parse(parts[0]),
-                        Date = parts[1],
-                        FR1 = int.Parse(parts[2]),
-                        FR2 = int.Parse(parts[3]),
-                        FR3 = int.Parse(parts[4]),
-                        FR4 = int.Parse(parts[5]),
-                        FR5 = int.Parse(parts[6]),
-                        FR6 = int.Parse(parts[7]),
-                        FR7 = int.Parse(parts[8]),
-                        R1 = int.Parse(parts[9]),
-                        R2 = int.Parse(parts[10]),
-                        R3 = int.Parse(parts[11]),
-                        R4 = int.Parse(parts[12]),
-                        R5 = int.Parse(parts[13]),
-                        R6 = int.Parse(parts[14]),
-                        R7 = int.Parse(parts[15]),
+                        No = int.Parse(parts[0]),Date = parts[1],FR1 = int.Parse(parts[2]),FR2 = int.Parse(parts[3]),FR3 = int.Parse(parts[4]),
+                        FR4 = int.Parse(parts[5]),FR5 = int.Parse(parts[6]),FR6 = int.Parse(parts[7]),FR7 = int.Parse(parts[8]),
+                        R1 = int.Parse(parts[9]),R2 = int.Parse(parts[10]),R3 = int.Parse(parts[11]),R4 = int.Parse(parts[12]),R5 = int.Parse(parts[13]),
+                        R6 = int.Parse(parts[14]),R7 = int.Parse(parts[15]),
                         B1 = int.Parse(parts[16])
                     });
                 }
@@ -140,11 +112,8 @@ namespace Common.DBHelper
                 // 批量插入
                 string insertSql = @"
             INSERT INTO sevenlottery 
-            (No, Date, FR1, FR2, FR3, FR4, FR5, FR6, FR7, 
-             R1, R2, R3, R4, R5, R6, R7, B1)
-            VALUES 
-            (@No, @Date, @FR1, @FR2, @FR3, @FR4, @FR5, @FR6, @FR7,
-             @R1, @R2, @R3, @R4, @R5, @R6, @R7, @B1)";
+            (No, Date, FR1, FR2, FR3, FR4, FR5, FR6, FR7, R1, R2, R3, R4, R5, R6, R7, B1)
+            VALUES  (@No, @Date, @FR1, @FR2, @FR3, @FR4, @FR5, @FR6, @FR7,@R1, @R2, @R3, @R4, @R5, @R6, @R7, @B1)";
 
                 using (var conn = new MySqlConnection(connectionString))
                 {
@@ -152,15 +121,12 @@ namespace Common.DBHelper
                     int affectedRows = conn.Execute(insertSql, records);
                     Console.WriteLine($"成功插入 {affectedRows} 条记录。");
                 }
-
             }
             catch (Exception ex)
             {
                 Console.WriteLine("错误: " + ex.Message);
             }
-
             Console.WriteLine("按任意键退出...");
-         
         }
 
         /// <summary>
@@ -331,8 +297,6 @@ namespace Common.DBHelper
                 }
             }
         }
-
-
 
         public bool GeTtest()
         {
