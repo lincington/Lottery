@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using IndustrialTools.Lib;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Tesseract;
 
 namespace EarthAnalysis
 {
@@ -89,46 +91,96 @@ namespace EarthAnalysis
 
     }
     
-    
-    
     public class Program
     {
        public  static  void  Main(string[] args)
+        {
+         string json =   ImageToText();
+            Console.WriteLine(json);
+
+             json = ImageToText(path2);
+            Console.WriteLine(json);
+
+            PaddleOCRSharpHelper paddleOCRSharpHelper = new PaddleOCRSharpHelper();
+
+            json = paddleOCRSharpHelper.GetPaddleOCREngine(path1);
+            Console.WriteLine(json);
+            json = paddleOCRSharpHelper.GetPaddleOCREngine(path2);
+            Console.WriteLine(json);
+            Console.ReadLine();
+        }
+
+        static string path1 = AppDomain.CurrentDomain.BaseDirectory + "\\2026-03-26-0200.png";
+        static string path2 = AppDomain.CurrentDomain.BaseDirectory + "\\2026-04-07-0400.png";
+        public static string ImageToText(string imgPath = "")
+        {
+            try
+            {
+                 if (!File.Exists(imgPath))  {      imgPath = path1;    }
+                using (var engine = new TesseractEngine("tessdata", "eng", EngineMode.Default))
+                {
+                    using (var img = Pix.LoadFromFile(imgPath))
+                    {
+                        using (var page = engine.Process(img))
+                        {
+                            string jk = page.GetText();
+                            return jk;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static bool IsImageSizeLessThan500KB(string imagePath)
+        {
+            try
+            {
+                var fileInfo = new FileInfo(imagePath);
+                return fileInfo.Exists && fileInfo.Length < 500 * 1024;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+
+        public static void AnalyzeLottery( )
         {
             try
             {
                 Console.WriteLine("Calling LotteryImageslibNative from C#");
                 LotteryImageslibNative.csharp_process();
-              for (int i = 0; i < 100000; i++)
-               {
-                Stopwatch stopwatch = Stopwatch.StartNew();
-                 Task task=   Task.Run( () =>    { 
-                              int JKL = LotteryNative.ReturnValue(1, 2, 3, 4, 5, 6, 7);
-                     Console.WriteLine($"Result from Rust: {JKL}");
-                 } );
-                    Task.WaitAll(task); 
+                for (int i = 0; i < 100000; i++)
+                {
+                    Stopwatch stopwatch = Stopwatch.StartNew();
+                    Task task = Task.Run(() => {
+                        int JKL = LotteryNative.ReturnValue(1, 2, 3, 4, 5, 6, 7);
+                        Console.WriteLine($"Result from Rust: {JKL}");
+                    });
+                    Task.WaitAll(task);
                     stopwatch.Stop();
                     string path = @"Lottery.txt";
                     string content = stopwatch.ElapsedMilliseconds + Environment.NewLine;
-                    Console.WriteLine(stopwatch.ElapsedMilliseconds);             
+                    Console.WriteLine(stopwatch.ElapsedMilliseconds);
                     File.AppendAllText(path, content);
 
                     stopwatch.Reset();
-                 }
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error calling Rust library: {ex.Message}");
-            }   
-            finally
-            {        
             }
-           
-            AnalyzeLottery(20);
-        }
-       public  static void AnalyzeLottery(int generateCount)
-        {
-            
+            finally
+            {
+            }
+
         }
     }
 }

@@ -8,11 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="2026-03-26-0200.png" />
+    <None Remove="2026-04-07-0400.png" />
     <None Remove="imageslib.dll" />
     <None Remove="Rust.dll" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="2026-03-26-0200.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="2026-04-07-0400.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="imageslib.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -22,7 +30,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Paddle.Runtime.win_x64" Version="3.3.0.2" />
+    <PackageReference Include="PaddleOCRSharp" Version="6.1.0" />
     <PackageReference Include="PuppeteerSharp" Version="24.40.0" />
+    <PackageReference Include="Tesseract" Version="5.2.0" />
+    <PackageReference Include="TesseractOCR" Version="5.5.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="tessdata\script\" />
   </ItemGroup>
 
 </Project>
