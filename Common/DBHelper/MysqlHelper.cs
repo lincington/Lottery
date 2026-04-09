@@ -25,7 +25,8 @@ namespace Common.DBHelper
     public class MysqlHelper
     {
         List<int> RedCount = new List<int>(32);
-        private  static  string connectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
+    //    private static string connectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
+        private static  string connectionString = "Server=192.168.0.109;Port=3306;Database=lottery;User ID=root;Password=201015;";
         public MysqlHelper()
         {
         }
@@ -64,18 +65,16 @@ namespace Common.DBHelper
                 using (var conn = new MySqlConnection(connectionString))
                 {
                      conn.Open();
-                     foreach (var record in records.ToList())
-                    {
+                     foreach (var record in records.ToList())   {
                          int id = record.No; // 假设 No 是唯一标识
                         string checkSql = "SELECT COUNT(1) FROM lottery WHERE No = @Id";      // 1. 检查记录是否存在
                         int count = conn.ExecuteScalar<int>(checkSql, new { Id = id });
-                        if (count != 0)
-                        {
+                        if (count != 0)     {
                             records.Remove(record);
                         }
                     }
                       int affectedRows = conn.Execute(insertSql, records);
-                          Console.WriteLine($"成功插入 {affectedRows} 条记录。");
+                      Console.WriteLine($"成功插入 {affectedRows} 条记录。");
                    }
             }
             catch (Exception ex)
@@ -108,13 +107,11 @@ namespace Common.DBHelper
                     });
                 }
                records.Reverse(); 
-
                 // 批量插入
                 string insertSql = @"
             INSERT INTO sevenlottery 
             (No, Date, FR1, FR2, FR3, FR4, FR5, FR6, FR7, R1, R2, R3, R4, R5, R6, R7, B1)
             VALUES  (@No, @Date, @FR1, @FR2, @FR3, @FR4, @FR5, @FR6, @FR7,@R1, @R2, @R3, @R4, @R5, @R6, @R7, @B1)";
-
                 using (var conn = new MySqlConnection(connectionString))
                 {
                     conn.Open();
@@ -143,7 +140,6 @@ namespace Common.DBHelper
                     var records = new List<Welfare3d>();
                     string[] lines = File.ReadAllLines("3D.txt");
                     int successCount = 0;
-
                     foreach (string line in lines)
                     {
                         if (string.IsNullOrWhiteSpace(line)) continue;
@@ -191,14 +187,11 @@ namespace Common.DBHelper
                         });
                         successCount++;
                     }
-
                     records.Reverse();
-
                     // 插入数据（假设 ID 为自增列，因此不插入 ID）
                     string sql = @"
                             INSERT INTO welfare3d (NO, D1, D2, D3, S)
                             VALUES (@No, @D1, @D2, @D3, @S)";
-
                     conn.Execute(sql, records);
                     Console.WriteLine($"导入完成，成功插入 {successCount} 条记录。");
                 }
