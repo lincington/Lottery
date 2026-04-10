@@ -74,9 +74,7 @@
             public double GetGaussianDistributionY(double x)
             {
                 double Pow = -(Math.Pow(Math.Abs(x - Average), 2) / (2 * Variance));
-
                 double result = (InverseSqrt2PI / StandardVariance) * Math.Pow(Math.E, Pow);
-
                 return result;
             }
 
@@ -87,9 +85,7 @@
             public List<Tuple<double, double>> GetGaussianDistributionYs()
             {
                 List<Tuple<double, double>> XYs = new List<Tuple<double, double>>();
-
                 Tuple<double, double> xy = null;
-
                 foreach (double x in XDatas)
                 {
                     xy = new Tuple<double, double>(x, GetGaussianDistributionY(x));
@@ -109,20 +105,16 @@
                 src.ForEach(x => { SumOfSquares += Math.Pow(x - average, 2); });
                 return SumOfSquares / src.Count;//方差
             }
-
         }
-
 
     public class GaussianPlot
     {
         public static void PlotGaussian(double[] data)
         {
             var (mean, stdDev) = Fit(data);
-
             // 生成 x 轴数据
             double min = data.Min();
             double max = data.Max();
-    
         }
 
         // 拟合均值和标准差
@@ -141,6 +133,4 @@
             return (1.0 / (stdDev * Math.Sqrt(2 * Math.PI))) * Math.Exp(exponent);
         }
     }
-
-
 }

@@ -1,7 +1,6 @@
 ﻿using Common.Consts;
 using Common.DBHelper;
 using Common.Services;
-using System.Globalization;
 
 namespace Lottery
 {
@@ -10,7 +9,7 @@ namespace Lottery
         static void Main(string[] args)
         {
 
-            #region ================================================================
+            #region ======================================
             //var services = new ServiceCollection();
             //// 注册服务
             //services.AddTransient<IVehicle, Car>();
@@ -174,7 +173,6 @@ namespace Lottery
             Console.WriteLine($"R5    {Consts.FRRB[5] }---------{ commonServices.GetLotteryAvgV5().R5}");
             Console.WriteLine($"R6    {Consts.FRRB[6] }---------{ commonServices.GetLotteryAvgV5().R6}");
             Console.WriteLine($"B1    {Consts.FRRB[7] }---------{ commonServices.GetLotteryAvgV5().B1}");
-            
         }
     }
 }

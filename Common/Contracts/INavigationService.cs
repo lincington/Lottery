@@ -4,7 +4,7 @@
     {
         void NavigateTo<T>() where T : ObservableObject;
         void NavigateTo(ObservableObject viewModel);
-        ObservableObject? CurrentViewModel { get; }
-        event EventHandler? CurrentViewModelChanged;
+        ObservableObject?       CurrentViewModel { get; }
+        event EventHandler?     CurrentViewModelChanged;
     }
 }
