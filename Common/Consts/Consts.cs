@@ -2,8 +2,8 @@
 {
     public class Consts
     {
-        public   static readonly string DateTimeFormat = "yyyy-MM-dd HH:mm:ss";
-        public static readonly string SQLServerConnectionString = @"Server=192.168.2.70,1433; Database=Lottery;User Id=sa;Password=Zhouenlai@305;Encrypt=false;TrustServerCertificate=true;Pooling=true; Connect Timeout=30;Max Pool Size=100;";
+        public static readonly string  DateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+        public static readonly string  SQLServerConnectionString = @"Server=192.168.2.70,1433; Database=Lottery;User Id=sa;Password=Zhouenlai@305;Encrypt=false;TrustServerCertificate=true;Pooling=true; Connect Timeout=30;Max Pool Size=100;";
         public static readonly string  SQLiteConnectionString = "Data Source=Lottery.db;Version=3;Pooling=True;Max Pool Size=100;";
         public static readonly string  MysqlconnectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
         public static readonly string  NpgsqlConnectionString = "Host=localhost;Port=5432;Database=lottery;Username=postgres;Password=201015";
@@ -15,17 +15,14 @@
         public static readonly int[] N33 = new int[33] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
         public static readonly int[] N16 = new int[16] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
 
-        public static readonly double[] FRRB = new double[9] 
-        {   
+        public static readonly double[] FRRB = new double[9]   {   
             17.0000,
             4.855883788 ,  9.716648983 ,14.57501839, 
             19.43288703 ,24.29393144, 29.15008352 ,
             8.500204555 ,
             110.52
         };
-
         public static readonly double RedTheoValue =6/33;
         public static readonly double BlueTheoValue = 1 / 16;
-
     }
 }

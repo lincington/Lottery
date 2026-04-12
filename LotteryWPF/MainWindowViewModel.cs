@@ -24,8 +24,6 @@ namespace LotteryWPF
         [ObservableProperty]
         private string currentPhoneInfo = "";
 
-
-
         [RelayCommand]
         public void ShowMessage()
         {
@@ -47,7 +45,6 @@ namespace LotteryWPF
         {
             _navigationService = navigationService;
             _moduleManager = moduleManager;
-
             _navigationService.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
 

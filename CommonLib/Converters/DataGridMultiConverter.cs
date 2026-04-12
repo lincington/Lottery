@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
-
 namespace Common.Converters
 {
     public class DataGridMultiConverter : IMultiValueConverter
@@ -13,34 +12,23 @@ namespace Common.Converters
             {
                 if (values == null || values.Length < 2)
                     return DependencyProperty.UnsetValue;
-
                 if (values[0] == DependencyProperty.UnsetValue || values[1] == DependencyProperty.UnsetValue)
                     return DependencyProperty.UnsetValue;
-
                 if (!TryToInt(values[0], out int H) || !TryToInt(values[1], out int S))
                     return DependencyProperty.UnsetValue;
-
-                if (H > S )
-                {
+                if (H > S )     {
                     return new SolidColorBrush(Colors.Red);
-                }
-                else
-                {
-                    if (H == S)
-                    {
-                        return new SolidColorBrush(Colors.Yellow);
-                    }
-                    else
-                    {
-                        return new SolidColorBrush(Colors.Green);
-                    }
+                }   else     {
+                    if (H == S)    {
+                        return new SolidColorBrush(Colors.Yellow);     }
+                    else     {
+                        return new SolidColorBrush(Colors.Green);       }
                 }
             }
             catch (Exception)
             {
                 throw;
             }
-           
         }
         private bool TryToInt(object v, out int result)
         {
