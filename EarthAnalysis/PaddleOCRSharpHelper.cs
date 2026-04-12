@@ -11,7 +11,6 @@ namespace IndustrialTools.Lib
         public PaddleOCRSharpHelper()
         {
         }
-  
         private PaddleOCREngine engine;
         OCRModelConfig? config = null;
         public string GetPaddleOCREngine(string path)
@@ -29,19 +28,14 @@ namespace IndustrialTools.Lib
                oCRParameter.rec_img_w = 320;
                oCRParameter.det_db_thresh = 0.3f;
                oCRParameter.det_db_box_thresh = 0.618f;
-
             engine = new PaddleOCREngine(config, oCRParameter);
-
             StructureModelConfig? structureModelConfig = null;
             StructureParameter structureParameter = new StructureParameter();
             var   structengine = new PaddleStructureEngine(structureModelConfig, structureParameter);
-
 
              Bitmap defImage = new  Bitmap (path);
               OCRResult ocrResult = engine.DetectText(defImage);
              return ocrResult.Text;          
         }
-    
-    
-    }
+      }
 }
