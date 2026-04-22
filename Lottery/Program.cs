@@ -1,6 +1,7 @@
 ﻿using Common.Consts;
 using Common.DBHelper;
 using Common.Services;
+using SkiaSharp;
 
 namespace Lottery
 {
@@ -173,6 +174,38 @@ namespace Lottery
             Console.WriteLine($"R5    {Consts.FRRB[5] }---------{ commonServices.GetLotteryAvgV5().R5}");
             Console.WriteLine($"R6    {Consts.FRRB[6] }---------{ commonServices.GetLotteryAvgV5().R6}");
             Console.WriteLine($"B1    {Consts.FRRB[7] }---------{ commonServices.GetLotteryAvgV5().B1}");
+
+            Test();
         }
+
+
+        public static void Test()
+        {
+            using (var surface = SKSurface.Create(new SKImageInfo(400, 300)))
+            {
+                var canvas = surface.Canvas;
+                canvas.Clear(SKColors.White);
+                // 绘制文字
+                using (var paint = new SKPaint())
+                {
+                    paint.Color = SKColors.Blue;
+
+                    SKFont fontStyle = new SKFont(SKTypeface.FromFamilyName("Arial", SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright), 24);
+                  
+                    canvas.DrawText("Hello SkiaSharp", 50, 100, paint);
+
+                }
+
+                // 保存为 PNG
+                using (var image = surface.Snapshot())
+                using (var data = image.Encode(SKEncodedImageFormat.Png, 100))
+                using (var stream = File.OpenWrite("output_skia.png"))
+                {
+                    data.SaveTo(stream);
+                }
+            }
+
+        }
+
     }
 }

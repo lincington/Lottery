@@ -25,8 +25,8 @@ namespace Common.DBHelper
     public class MysqlHelper
     {
         List<int> RedCount = new List<int>(32);
-    //    private static string connectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
-        private static  string connectionString = "Server=192.168.0.109;Port=3306;Database=lottery;User ID=root;Password=201015;";
+       private static string connectionString = "Server=localhost;Port=3306;Database=lottery;User ID=root;Password=201015;";
+        //    private static  string connectionString = "Server=192.168.0.109;Port=3306;Database=lottery;User ID=root;Password=201015;";
         public MysqlHelper()
         {
         }
