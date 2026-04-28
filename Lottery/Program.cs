@@ -139,9 +139,6 @@ namespace Lottery
 
             MysqlHelper.LotteryParseFile();
 
-
-
-
             //MysqlHelper.SevenLotteryParseFile();
             //MysqlHelper.Welfare3dParseFile();
             //// 读取并解析所有行
